@@ -1,0 +1,25 @@
+{
+  "name": "adaptive-ui-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Adaptive Accessibility System - Master's Thesis Project",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run start:dev --workspace=backend",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "test:e2e": "playwright test --config=e2e/playwright.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
