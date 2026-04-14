@@ -21,7 +21,7 @@ describe('SUSQuestionnaire', () => {
 
   it('renders the title', () => {
     renderWithProvider();
-    expect(screen.getByText(/system usability scale/i)).toBeDefined();
+    expect(screen.getByText(/scala de utilizabilitate/i)).toBeDefined();
   });
 
   it('renders all 10 questions as fieldsets', () => {
@@ -38,12 +38,12 @@ describe('SUSQuestionnaire', () => {
 
   it('renders submit button', () => {
     renderWithProvider();
-    expect(screen.getByRole('button', { name: /continue to nasa-tlx/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /continua la nasa-tlx/i })).toBeDefined();
   });
 
   it('shows error when not all questions answered', async () => {
     const { container } = renderWithProvider();
-    const submitBtn = screen.getByRole('button', { name: /continue to nasa-tlx/i });
+    const submitBtn = screen.getByRole('button', { name: /continua la nasa-tlx/i });
 
     // Simulate click on form submit
     const form = container.querySelector('form')!;

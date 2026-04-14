@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SessionList } from '../components/dashboard/SessionList';
 import { SessionDetail } from '../components/dashboard/SessionDetail';
 import { ComparisonView } from '../components/dashboard/ComparisonView';
 import { SummaryStats } from '../components/dashboard/SummaryStats';
+import { LanguageSelector } from '../components/LanguageSelector';
 
 type DashboardView = 'sessions' | 'detail' | 'comparison' | 'summary';
 
@@ -20,6 +22,7 @@ interface Session {
 }
 
 export function Dashboard() {
+  const { t } = useTranslation();
   const [authenticated, setAuthenticated] = useState(false);
   const [passphrase, setPassphrase] = useState('');
   const [view, setView] = useState<DashboardView>('sessions');
@@ -61,9 +64,9 @@ export function Dashboard() {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
         <form onSubmit={handleAuth} className="border-2 border-accent border-opacity-30 rounded-lg p-8 max-w-sm w-full">
-          <h1 className="text-xl font-bold mb-4 text-accent">Researcher Dashboard</h1>
+          <h1 className="text-xl font-bold mb-4 text-accent">{t('dashboard.title')}</h1>
           <label htmlFor="passphrase" className="block mb-2 text-sm">
-            Enter passphrase
+            {t('dashboard.enterPassphrase')}
           </label>
           <input
             id="passphrase"
@@ -77,7 +80,7 @@ export function Dashboard() {
             type="submit"
             className="w-full bg-accent text-bg py-2 rounded font-semibold hover:opacity-90"
           >
-            Enter
+            {t('common.enter')}
           </button>
         </form>
       </div>
@@ -89,12 +92,12 @@ export function Dashboard() {
       <div className="flex">
         {/* Sidebar */}
         <nav className="w-48 min-h-screen border-r border-accent border-opacity-20 p-4 flex-shrink-0">
-          <h1 className="text-lg font-bold text-accent mb-6">Dashboard</h1>
+          <h1 className="text-lg font-bold text-accent mb-6">{t('dashboard.title')}</h1>
           <ul className="space-y-2">
             {[
-              { key: 'sessions' as const, label: 'Sessions' },
-              { key: 'comparison' as const, label: 'Compare' },
-              { key: 'summary' as const, label: 'Summary' },
+              { key: 'sessions' as const, label: t('dashboard.sessions') },
+              { key: 'comparison' as const, label: t('dashboard.compare') },
+              { key: 'summary' as const, label: t('dashboard.summary') },
             ].map((item) => (
               <li key={item.key}>
                 <button
@@ -116,8 +119,11 @@ export function Dashboard() {
               className="w-full text-left px-3 py-2 rounded text-sm hover:bg-accent hover:bg-opacity-10"
               disabled={loading}
             >
-              {loading ? 'Loading...' : 'Refresh'}
+              {loading ? t('common.loading') : t('common.refresh')}
             </button>
+          </div>
+          <div className="mt-4">
+            <LanguageSelector />
           </div>
         </nav>
 

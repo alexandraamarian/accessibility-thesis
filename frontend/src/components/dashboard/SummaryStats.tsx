@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 interface Session {
@@ -15,6 +16,7 @@ interface SummaryStatsProps {
 }
 
 export function SummaryStats({ sessions }: SummaryStatsProps) {
+  const { t } = useTranslation();
   const adaptive = sessions.filter((s) => s.condition === 'adaptive');
   const control = sessions.filter((s) => s.condition === 'control');
 
@@ -62,30 +64,30 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-accent">Summary Statistics</h2>
+        <h2 className="text-xl font-bold text-accent">{t('dashboard.summaryStats.heading')}</h2>
         <button
           onClick={handleExportCSV}
           className="px-4 py-2 bg-accent text-bg rounded font-semibold text-sm hover:opacity-90"
         >
-          Export CSV
+          {t('common.exportCsv')}
         </button>
       </div>
 
       <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">Total Sessions</div>
+          <div className="text-xs opacity-60">{t('dashboard.summaryStats.totalSessions')}</div>
           <div className="text-2xl font-bold text-accent">{sessions.length}</div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">Adaptive</div>
+          <div className="text-xs opacity-60">{t('common.adaptive')}</div>
           <div className="text-2xl font-bold text-accent">{adaptive.length}</div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">Control</div>
+          <div className="text-xs opacity-60">{t('common.control')}</div>
           <div className="text-2xl font-bold text-accent">{control.length}</div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">Completed</div>
+          <div className="text-xs opacity-60">{t('dashboard.summaryStats.completed')}</div>
           <div className="text-2xl font-bold text-accent">
             {sessions.filter((s) => s.endedAt).length}
           </div>
@@ -94,9 +96,9 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
 
       {/* SUS Scores */}
       <div className="mb-8">
-        <h3 className="font-semibold text-accent mb-3">Mean SUS Score by Condition</h3>
+        <h3 className="font-semibold text-accent mb-3">{t('dashboard.summaryStats.meanSusByCondition')}</h3>
         {adaptiveSUS.length === 0 && controlSUS.length === 0 ? (
-          <p className="opacity-50 text-sm">No SUS scores recorded yet.</p>
+          <p className="opacity-50 text-sm">{t('dashboard.summaryStats.noSusScores')}</p>
         ) : (
           <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
@@ -114,9 +116,9 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
 
       {/* NASA-TLX */}
       <div className="mb-8">
-        <h3 className="font-semibold text-accent mb-3">NASA-TLX by Dimension</h3>
+        <h3 className="font-semibold text-accent mb-3">{t('dashboard.summaryStats.nasaTlxByDimension')}</h3>
         {nasaData.every((d) => d.Adaptive === 0 && d.Control === 0) ? (
-          <p className="opacity-50 text-sm">No NASA-TLX data recorded yet.</p>
+          <p className="opacity-50 text-sm">{t('dashboard.summaryStats.noNasaTlxData')}</p>
         ) : (
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>

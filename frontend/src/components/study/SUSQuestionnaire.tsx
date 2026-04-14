@@ -1,28 +1,9 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useStudyContext } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
 import { Button } from '../Button';
 
-const SUS_QUESTIONS = [
-  'I think that I would like to use this system frequently.',
-  'I found the system unnecessarily complex.',
-  'I thought the system was easy to use.',
-  'I think that I would need the support of a technical person to be able to use this system.',
-  'I found the various functions in this system were well integrated.',
-  'I thought there was too much inconsistency in this system.',
-  'I would imagine that most people would learn to use this system very quickly.',
-  'I found the system very cumbersome to use.',
-  'I felt very confident using the system.',
-  'I needed to learn a lot of things before I could get going with this system.',
-];
-
-const LIKERT_LABELS = [
-  'Strongly Disagree',
-  'Disagree',
-  'Neutral',
-  'Agree',
-  'Strongly Agree',
-];
 
 function calculateSUSScore(responses: number[]): number {
   // SUS scoring: odd questions (1,3,5,7,9) subtract 1; even questions (2,4,6,8,10) subtract from 5
@@ -41,7 +22,10 @@ function calculateSUSScore(responses: number[]): number {
 }
 
 export function SUSQuestionnaire() {
+  const { t } = useTranslation();
   const { state, dispatch } = useStudyContext();
+  const questions = t('sus.questions', { returnObjects: true }) as string[];
+  const likertLabels = t('sus.likert', { returnObjects: true }) as string[];
   const [responses, setResponses] = useState<number[]>(new Array(10).fill(0));
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -58,7 +42,7 @@ export function SUSQuestionnaire() {
 
     const unanswered = responses.findIndex((r) => r === 0);
     if (unanswered !== -1) {
-      setError(`Please answer question ${unanswered + 1}.`);
+      setError(t('sus.errorUnanswered', { n: unanswered + 1 }));
       return;
     }
 
@@ -83,7 +67,7 @@ export function SUSQuestionnaire() {
       dispatch({ type: 'SET_SUS_RESPONSES', payload: responses });
       dispatch({ type: 'SET_STEP', payload: 'nasatlx' });
     } catch {
-      setError('Failed to save responses. Please try again.');
+      setError(t('sus.errorSaveFailed'));
     } finally {
       setSubmitting(false);
     }
@@ -95,21 +79,21 @@ export function SUSQuestionnaire() {
         className="font-bold mb-2 adaptive-transition"
         style={{ fontSize: 'calc(var(--font-size-base) * 1.5)', lineHeight: 'var(--line-height)' }}
       >
-        System Usability Scale (SUS)
+        {t('sus.heading')}
       </h2>
       <p className="mb-6 opacity-75" style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height)' }}>
-        Please rate your agreement with each statement about the system you just used.
+        {t('sus.instructions')}
       </p>
 
       <form onSubmit={handleSubmit} noValidate>
         <div className="space-y-6">
-          {SUS_QUESTIONS.map((question, qIndex) => (
+          {questions.map((question, qIndex) => (
             <fieldset key={qIndex} className="border-2 border-accent border-opacity-20 rounded-lg p-4">
               <legend className="font-medium px-2">
                 {qIndex + 1}. {question}
               </legend>
               <div className="flex justify-between mt-3 gap-2">
-                {LIKERT_LABELS.map((label, lIndex) => {
+                {likertLabels.map((label, lIndex) => {
                   const value = lIndex + 1;
                   return (
                     <label
@@ -145,7 +129,7 @@ export function SUSQuestionnaire() {
 
         <div className="mt-6">
           <Button type="submit" disabled={submitting}>
-            {submitting ? 'Saving...' : 'Continue to NASA-TLX'}
+            {submitting ? t('common.saving') : t('sus.continueToNasaTlx')}
           </Button>
         </div>
       </form>

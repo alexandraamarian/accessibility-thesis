@@ -5,23 +5,23 @@ import { ProgressTracker } from '../components/study/ProgressTracker';
 describe('ProgressTracker', () => {
   it('renders all 6 steps', () => {
     render(<ProgressTracker currentStep="consent" />);
-    expect(screen.getByText('Consent')).toBeDefined();
-    expect(screen.getByText('Warm-up')).toBeDefined();
-    expect(screen.getByText('Tasks')).toBeDefined();
+    expect(screen.getByText('Consimtamant')).toBeDefined();
+    expect(screen.getByText('Incalzire')).toBeDefined();
+    expect(screen.getByText('Sarcini')).toBeDefined();
     expect(screen.getByText('SUS')).toBeDefined();
     expect(screen.getByText('NASA-TLX')).toBeDefined();
-    expect(screen.getByText('Summary')).toBeDefined();
+    expect(screen.getByText('Sumar')).toBeDefined();
   });
 
   it('marks current step with aria-current="step"', () => {
     render(<ProgressTracker currentStep="tasks" />);
-    const currentStep = screen.getByText('Tasks').closest('li');
+    const currentStep = screen.getByText('Sarcini').closest('li');
     expect(currentStep?.getAttribute('aria-current')).toBe('step');
   });
 
   it('does not mark non-current steps with aria-current', () => {
     render(<ProgressTracker currentStep="tasks" />);
-    const consentStep = screen.getByText('Consent').closest('li');
+    const consentStep = screen.getByText('Consimtamant').closest('li');
     expect(consentStep?.getAttribute('aria-current')).toBeNull();
   });
 

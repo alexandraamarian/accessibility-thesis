@@ -32,12 +32,12 @@ describe('NASATLXQuestionnaire', () => {
 
   it('renders Mental Demand dimension', () => {
     renderWithProvider();
-    expect(screen.getByText('Mental Demand')).toBeDefined();
+    expect(screen.getByText('Cerinta Mentala')).toBeDefined();
   });
 
   it('renders Physical Demand dimension', () => {
     renderWithProvider();
-    expect(screen.getByText('Physical Demand')).toBeDefined();
+    expect(screen.getByText('Cerinta Fizica')).toBeDefined();
   });
 
   it('renders 7 radio buttons per dimension (42 total)', () => {
@@ -48,6 +48,6 @@ describe('NASATLXQuestionnaire', () => {
 
   it('renders submit button', () => {
     renderWithProvider();
-    expect(screen.getByRole('button', { name: /continue to summary/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /continua la sumar/i })).toBeDefined();
   });
 });

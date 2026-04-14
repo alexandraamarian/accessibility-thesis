@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useStudyContext, TaskResult } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
 import { getArticleSetForParticipant } from '../../data/articles';
@@ -9,9 +10,15 @@ import { Button } from '../Button';
 
 export function TaskRunner() {
   const { state, dispatch } = useStudyContext();
+  const { t } = useTranslation();
   const articleSet = getArticleSetForParticipant(state.participantId);
   const allTasks = getTasksForArticleSet(articleSet.id);
   const currentTask = allTasks[state.currentTaskIndex];
+
+  const translatedArticles = t('articles.sets', { returnObjects: true }) as any[];
+  const translatedArticleSet = translatedArticles?.find((a: any) => a.id === articleSet.id) || articleSet;
+  const translatedTaskData = t(`taskData.${articleSet.id}`, { returnObjects: true }) as any[];
+  const translatedTask = translatedTaskData?.[state.currentTaskIndex];
 
   if (!currentTask) {
     // All tasks done, move to SUS
@@ -26,14 +33,15 @@ export function TaskRunner() {
           className="font-bold adaptive-transition"
           style={{ fontSize: 'calc(var(--font-size-base) * 1.5)', lineHeight: 'var(--line-height)' }}
         >
-          Task {state.currentTaskIndex + 1} of {allTasks.length}
+          {t('tasks.heading', { current: state.currentTaskIndex + 1, total: allTasks.length })}
         </h2>
-        <span className="text-sm opacity-60">Article: {articleSet.title}</span>
+        <span className="text-sm opacity-60">{t('tasks.article', { title: translatedArticleSet.title })}</span>
       </div>
 
       <TaskView
         key={currentTask.id}
         task={currentTask}
+        translatedTask={translatedTask}
         taskIndex={state.currentTaskIndex}
         onComplete={(result) => {
           dispatch({ type: 'ADD_TASK_RESULT', payload: result });
@@ -42,7 +50,7 @@ export function TaskRunner() {
       />
 
       <div className="mt-8 space-y-8">
-        <Article sections={articleSet.sections} />
+        <Article sections={translatedArticleSet.sections} />
         <InteractionTestZone />
       </div>
     </div>
@@ -51,13 +59,16 @@ export function TaskRunner() {
 
 function TaskView({
   task,
+  translatedTask,
   taskIndex,
   onComplete,
 }: {
   task: StudyTask;
+  translatedTask: any;
   taskIndex: number;
   onComplete: (result: TaskResult) => void;
 }) {
+  const { t } = useTranslation();
   const startTime = useRef(Date.now());
   const [errors, setErrors] = useState(0);
   const [answer, setAnswer] = useState('');
@@ -123,7 +134,7 @@ function TaskView({
           className="font-semibold adaptive-transition"
           style={{ fontSize: 'calc(var(--font-size-base) * 1.25)', lineHeight: 'var(--line-height)' }}
         >
-          {task.title}
+          {translatedTask?.title || task.title}
         </h3>
         <span className="text-accent font-mono text-sm" aria-live="polite">
           {Math.floor(elapsed / 60)}:{(elapsed % 60).toString().padStart(2, '0')}
@@ -131,13 +142,13 @@ function TaskView({
       </div>
 
       <p className="mb-6" style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height)' }}>
-        {task.instruction}
+        {translatedTask?.instruction || task.instruction}
       </p>
 
       {task.type === 'find_answer' && (
         <div className="mb-4">
           <label htmlFor="task-answer" className="block mb-2 font-medium">
-            Your Answer
+            {t('tasks.yourAnswer')}
           </label>
           <input
             id="task-answer"
@@ -145,17 +156,17 @@ function TaskView({
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             className="w-full px-4 py-2 rounded border-2 border-gray-600 bg-transparent text-inherit focus:border-accent"
-            placeholder="Type your answer here..."
+            placeholder={t('tasks.answerPlaceholder')}
           />
         </div>
       )}
 
       {task.type === 'form_completion' && task.formFields && (
         <div className="space-y-4 mb-4">
-          {task.formFields.map((field) => (
+          {task.formFields.map((field, index) => (
             <div key={field.id}>
               <label htmlFor={`field-${field.id}`} className="block mb-2 font-medium">
-                {field.label} {field.required && <span className="text-red-400">*</span>}
+                {translatedTask?.fields?.[index]?.label || field.label} {field.required && <span className="text-red-400">*</span>}
               </label>
               {field.type === 'text' ? (
                 <input
@@ -174,7 +185,7 @@ function TaskView({
                   className="w-full px-4 py-2 rounded border-2 border-gray-600 bg-transparent text-inherit focus:border-accent"
                   required={field.required}
                 >
-                  <option value="">Select...</option>
+                  <option value="">{t('common.select')}</option>
                   {field.options?.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
@@ -187,12 +198,12 @@ function TaskView({
 
       {task.type === 'navigation' && (
         <p className="mb-4 text-sm opacity-75">
-          Scroll down to find the referenced section, then interact with the test area.
+          {t('tasks.navigationHint')}
         </p>
       )}
 
       <Button onClick={handleSubmit} disabled={submitted}>
-        {submitted ? 'Submitted' : 'Submit & Continue'}
+        {submitted ? t('tasks.submitted') : t('tasks.submitContinue')}
       </Button>
     </div>
   );

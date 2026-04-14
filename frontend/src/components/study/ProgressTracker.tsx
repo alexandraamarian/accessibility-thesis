@@ -1,19 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import { StudyStep } from '../../context/StudyContext';
 
 interface ProgressTrackerProps {
   currentStep: StudyStep;
 }
 
-const STEPS: { key: StudyStep; label: string }[] = [
-  { key: 'consent', label: 'Consent' },
-  { key: 'warmup', label: 'Warm-up' },
-  { key: 'tasks', label: 'Tasks' },
-  { key: 'sus', label: 'SUS' },
-  { key: 'nasatlx', label: 'NASA-TLX' },
-  { key: 'summary', label: 'Summary' },
+const STEPS: { key: StudyStep; labelKey: string }[] = [
+  { key: 'consent', labelKey: 'study.steps.consent' },
+  { key: 'warmup', labelKey: 'study.steps.warmup' },
+  { key: 'tasks', labelKey: 'study.steps.tasks' },
+  { key: 'sus', labelKey: 'study.steps.sus' },
+  { key: 'nasatlx', labelKey: 'study.steps.nasatlx' },
+  { key: 'summary', labelKey: 'study.steps.summary' },
 ];
 
 export function ProgressTracker({ currentStep }: ProgressTrackerProps) {
+  const { t } = useTranslation();
   const currentIndex = STEPS.findIndex((s) => s.key === currentStep);
 
   return (
@@ -46,7 +48,7 @@ export function ProgressTracker({ currentStep }: ProgressTrackerProps) {
                     isCurrent ? 'text-accent font-semibold' : isComplete ? 'text-accent' : 'text-gray-500'
                   }`}
                 >
-                  {step.label}
+                  {t(step.labelKey)}
                 </span>
               </div>
               {index < STEPS.length - 1 && (

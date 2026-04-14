@@ -4,6 +4,8 @@ import { useBehaviourCollector } from '../hooks/useBehaviourCollector';
 import { useAdaptationEngine } from '../hooks/useAdaptationEngine';
 import { applyUIState } from '../utils/applyUIState';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from '../components/LanguageSelector';
 import { ProgressTracker } from '../components/study/ProgressTracker';
 import { ConsentScreen } from '../components/study/ConsentScreen';
 import { WarmupPhase } from '../components/study/WarmupPhase';
@@ -15,6 +17,7 @@ import { AdaptationMonitor } from '../components/AdaptationMonitor';
 
 function StudyFlowContent() {
   const { state } = useStudyContext();
+  const { t } = useTranslation();
 
   const enabled = state.condition === 'adaptive' && state.consentGiven;
   const signals = useBehaviourCollector(state.sessionId, enabled);
@@ -45,15 +48,21 @@ function StudyFlowContent() {
   return (
     <div className="min-h-screen py-8">
       <header className="max-w-4xl mx-auto px-4 mb-4">
-        <h1
-          className="font-bold mb-2 text-center adaptive-transition"
-          style={{
-            fontSize: 'calc(var(--font-size-base) * 1.75)',
-            lineHeight: 'var(--line-height)',
-          }}
-        >
-          Adaptive Accessibility Study
-        </h1>
+        <div className="flex items-center justify-between">
+          <div className="flex-1" />
+          <h1
+            className="font-bold mb-2 text-center adaptive-transition flex-1"
+            style={{
+              fontSize: 'calc(var(--font-size-base) * 1.75)',
+              lineHeight: 'var(--line-height)',
+            }}
+          >
+            {t('study.title')}
+          </h1>
+          <div className="flex-1 flex justify-end">
+            <LanguageSelector />
+          </div>
+        </div>
       </header>
 
       {state.step !== 'consent' && (

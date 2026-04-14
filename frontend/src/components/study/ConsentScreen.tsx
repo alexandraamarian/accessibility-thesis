@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useStudyContext } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
 import { Button } from '../Button';
 
 export function ConsentScreen() {
   const { dispatch } = useStudyContext();
+  const { t } = useTranslation();
   const [participantId, setParticipantId] = useState('');
   const [consentChecked, setConsentChecked] = useState(false);
   const [condition, setCondition] = useState<'adaptive' | 'control'>('adaptive');
@@ -16,11 +18,11 @@ export function ConsentScreen() {
     setError('');
 
     if (!participantId.trim()) {
-      setError('Please enter a participant ID.');
+      setError(t('consent.errorNoId'));
       return;
     }
     if (!consentChecked) {
-      setError('Please provide your consent to continue.');
+      setError(t('consent.errorNoConsent'));
       return;
     }
 
@@ -51,7 +53,7 @@ export function ConsentScreen() {
       dispatch({ type: 'GIVE_CONSENT' });
       dispatch({ type: 'SET_STEP', payload: 'warmup' });
     } catch {
-      setError('Failed to create session. Please ensure the backend is running.');
+      setError(t('consent.errorSessionFailed'));
     } finally {
       setLoading(false);
     }
@@ -63,23 +65,23 @@ export function ConsentScreen() {
         className="font-bold mb-6 adaptive-transition"
         style={{ fontSize: 'calc(var(--font-size-base) * 1.5)', lineHeight: 'var(--line-height)' }}
       >
-        Study Consent & Setup
+        {t('consent.heading')}
       </h2>
 
       <form onSubmit={handleSubmit} noValidate>
         <fieldset className="border-2 border-accent border-opacity-30 rounded-lg p-6 mb-6">
-          <legend className="text-accent font-semibold px-2">Participant Information</legend>
+          <legend className="text-accent font-semibold px-2">{t('consent.participantInfo')}</legend>
 
           <div className="mb-4">
             <label htmlFor="participantId" className="block mb-2 font-medium">
-              Participant ID
+              {t('consent.participantId')}
             </label>
             <input
               id="participantId"
               type="text"
               value={participantId}
               onChange={(e) => setParticipantId(e.target.value)}
-              placeholder="e.g., P001"
+              placeholder={t('consent.participantIdPlaceholder')}
               className="w-full px-4 py-2 rounded border-2 border-gray-600 bg-transparent text-inherit focus:border-accent"
               required
               aria-describedby={error ? 'consent-error' : undefined}
@@ -88,7 +90,7 @@ export function ConsentScreen() {
 
           <div className="mb-4">
             <label htmlFor="condition" className="block mb-2 font-medium">
-              Condition
+              {t('consent.condition')}
             </label>
             <select
               id="condition"
@@ -96,29 +98,19 @@ export function ConsentScreen() {
               onChange={(e) => setCondition(e.target.value as 'adaptive' | 'control')}
               className="w-full px-4 py-2 rounded border-2 border-gray-600 bg-transparent text-inherit focus:border-accent"
             >
-              <option value="adaptive">Adaptive (UI adapts to behavior)</option>
-              <option value="control">Control (static UI)</option>
+              <option value="adaptive">{t('consent.conditionAdaptive')}</option>
+              <option value="control">{t('consent.conditionControl')}</option>
             </select>
           </div>
         </fieldset>
 
         <fieldset className="border-2 border-accent border-opacity-30 rounded-lg p-6 mb-6">
-          <legend className="text-accent font-semibold px-2">Informed Consent</legend>
+          <legend className="text-accent font-semibold px-2">{t('consent.informedConsent')}</legend>
 
           <div className="mb-4 space-y-3 opacity-90" style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height)' }}>
-            <p>
-              This study investigates whether behaviour-based UI adaptation can improve usability.
-              During the session, the system will collect data about your interactions (clicks,
-              scrolling, zoom gestures) to evaluate the adaptation mechanism.
-            </p>
-            <p>
-              Your participation is voluntary. You may withdraw at any time without consequence.
-              All data is stored anonymously using your participant ID only.
-            </p>
-            <p>
-              The session will take approximately 15-20 minutes and includes: a warm-up phase,
-              reading and interaction tasks, and two short questionnaires.
-            </p>
+            <p>{t('consent.consentText1')}</p>
+            <p>{t('consent.consentText2')}</p>
+            <p>{t('consent.consentText3')}</p>
           </div>
 
           <label className="flex items-start gap-3 cursor-pointer">
@@ -128,10 +120,7 @@ export function ConsentScreen() {
               onChange={(e) => setConsentChecked(e.target.checked)}
               className="mt-1 w-5 h-5 accent-accent"
             />
-            <span>
-              I have read and understood the above information. I consent to participate in this
-              study and to the collection of my interaction data.
-            </span>
+            <span>{t('consent.consentCheckbox')}</span>
           </label>
         </fieldset>
 
@@ -142,7 +131,7 @@ export function ConsentScreen() {
         )}
 
         <Button type="submit" disabled={loading}>
-          {loading ? 'Creating session...' : 'Begin Study'}
+          {loading ? t('consent.creatingSession') : t('consent.beginStudy')}
         </Button>
       </form>
     </div>

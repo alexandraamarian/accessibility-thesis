@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Session {
   id: string;
@@ -19,6 +20,7 @@ interface SessionListProps {
 type SortField = 'startedAt' | 'participantId' | 'condition' | 'susScore';
 
 export function SessionList({ sessions, onSelect }: SessionListProps) {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState('');
   const [conditionFilter, setConditionFilter] = useState<'' | 'adaptive' | 'control'>('');
   const [sortField, setSortField] = useState<SortField>('startedAt');
@@ -60,12 +62,12 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-accent mb-4">Sessions ({sessions.length})</h2>
+      <h2 className="text-xl font-bold text-accent mb-4">{t('dashboard.sessionList.heading', { count: sessions.length })}</h2>
 
       <div className="flex gap-4 mb-4">
         <input
           type="text"
-          placeholder="Filter by participant ID..."
+          placeholder={t('dashboard.sessionList.filterPlaceholder')}
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           className="px-3 py-2 rounded border border-gray-600 bg-transparent text-inherit text-sm"
@@ -75,9 +77,9 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
           onChange={(e) => setConditionFilter(e.target.value as '' | 'adaptive' | 'control')}
           className="px-3 py-2 rounded border border-gray-600 bg-transparent text-inherit text-sm"
         >
-          <option value="">All conditions</option>
-          <option value="adaptive">Adaptive</option>
-          <option value="control">Control</option>
+          <option value="">{t('dashboard.sessionList.allConditions')}</option>
+          <option value="adaptive">{t('common.adaptive')}</option>
+          <option value="control">{t('common.control')}</option>
         </select>
       </div>
 
@@ -86,10 +88,10 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
           <thead>
             <tr className="border-b border-accent border-opacity-30">
               {[
-                { key: 'participantId' as const, label: 'Participant' },
-                { key: 'condition' as const, label: 'Condition' },
-                { key: 'startedAt' as const, label: 'Started' },
-                { key: 'susScore' as const, label: 'SUS' },
+                { key: 'participantId' as const, label: t('dashboard.sessionList.participant') },
+                { key: 'condition' as const, label: t('dashboard.sessionList.condition') },
+                { key: 'startedAt' as const, label: t('dashboard.sessionList.started') },
+                { key: 'susScore' as const, label: t('dashboard.sessionList.sus') },
               ].map((col) => (
                 <th
                   key={col.key}
@@ -99,8 +101,8 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
                   {col.label} {sortField === col.key ? (sortAsc ? '\u2191' : '\u2193') : ''}
                 </th>
               ))}
-              <th className="text-left p-2">NASA-TLX</th>
-              <th className="text-left p-2">Status</th>
+              <th className="text-left p-2">{t('dashboard.sessionList.nasaTlx')}</th>
+              <th className="text-left p-2">{t('dashboard.sessionList.status')}</th>
               <th className="p-2"></th>
             </tr>
           </thead>
@@ -123,7 +125,7 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
                   <td className="p-2 font-mono">{nasaAvg}</td>
                   <td className="p-2">
                     <span className={session.endedAt ? 'text-green-400' : 'text-yellow-400'}>
-                      {session.endedAt ? 'Complete' : 'Active'}
+                      {session.endedAt ? t('common.complete') : t('common.active')}
                     </span>
                   </td>
                   <td className="p-2">
@@ -131,7 +133,7 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
                       onClick={() => onSelect(session.id)}
                       className="text-accent hover:underline text-sm"
                     >
-                      View
+                      {t('common.view')}
                     </button>
                   </td>
                 </tr>
@@ -142,7 +144,7 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
       </div>
 
       {sorted.length === 0 && (
-        <p className="text-center opacity-50 py-8">No sessions found.</p>
+        <p className="text-center opacity-50 py-8">{t('dashboard.sessionList.noSessions')}</p>
       )}
     </div>
   );

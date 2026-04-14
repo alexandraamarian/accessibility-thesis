@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useStudyContext } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
 import { Article } from '../Article';
@@ -7,19 +8,20 @@ import { Button } from '../Button';
 
 const WARMUP_DURATION = 30; // seconds
 
-const warmupContent = [
-  {
-    id: 'warmup-intro',
-    heading: 'Practice: Getting Familiar',
-    paragraphs: [
-      'This is a short warm-up phase to help you get comfortable with the interface. Feel free to scroll, click buttons, and read the text below.',
-      'The system is now monitoring your interactions. In the adaptive condition, the interface may adjust based on your behavior patterns. This is normal and part of the study design.',
-    ],
-  },
-];
-
 export function WarmupPhase() {
   const { dispatch } = useStudyContext();
+  const { t } = useTranslation();
+
+  const warmupContent = [
+    {
+      id: 'warmup-intro',
+      heading: t('warmup.practiceHeading'),
+      paragraphs: [
+        t('warmup.practiceText1'),
+        t('warmup.practiceText2'),
+      ],
+    },
+  ];
   const [timeLeft, setTimeLeft] = useState(WARMUP_DURATION);
   const [canSkip, setCanSkip] = useState(false);
 
@@ -50,10 +52,10 @@ export function WarmupPhase() {
           className="font-bold adaptive-transition"
           style={{ fontSize: 'calc(var(--font-size-base) * 1.5)', lineHeight: 'var(--line-height)' }}
         >
-          Warm-up Phase
+          {t('warmup.heading')}
         </h2>
         <div className="text-accent font-mono text-lg" aria-live="polite">
-          {timeLeft > 0 ? `${timeLeft}s remaining` : 'Ready to continue'}
+          {timeLeft > 0 ? t('warmup.timeRemaining', { time: timeLeft }) : t('warmup.readyToContinue')}
         </div>
       </div>
 
@@ -61,8 +63,7 @@ export function WarmupPhase() {
         className="mb-6 opacity-75 adaptive-transition"
         style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height)' }}
       >
-        Take {WARMUP_DURATION} seconds to explore the interface. Scroll through the content, click
-        the buttons, and try zooming (Ctrl+Wheel).
+        {t('warmup.instructions', { duration: WARMUP_DURATION })}
       </p>
 
       <div className="space-y-8">
@@ -72,7 +73,7 @@ export function WarmupPhase() {
 
       <div className="mt-8 text-center">
         <Button onClick={handleContinue} disabled={!canSkip}>
-          {canSkip ? 'Continue to Tasks' : `Please wait ${timeLeft}s...`}
+          {canSkip ? t('warmup.continueToTasks') : t('warmup.pleaseWait', { time: timeLeft })}
         </Button>
       </div>
     </div>

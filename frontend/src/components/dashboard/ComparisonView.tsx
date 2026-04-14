@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Session {
   id: string;
@@ -15,6 +16,7 @@ interface ComparisonViewProps {
 }
 
 export function ComparisonView({ sessions }: ComparisonViewProps) {
+  const { t } = useTranslation();
   const [selectedParticipant, setSelectedParticipant] = useState('');
 
   // Get unique participant IDs that have both conditions
@@ -41,18 +43,17 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-accent mb-4">Condition Comparison</h2>
+      <h2 className="text-xl font-bold text-accent mb-4">{t('dashboard.comparison.heading')}</h2>
 
       {pairedParticipants.length === 0 ? (
         <p className="opacity-50">
-          No participants with both adaptive and control sessions found.
-          Each participant needs two sessions (one per condition) for comparison.
+          {t('dashboard.comparison.noParticipants')}
         </p>
       ) : (
         <>
           <div className="mb-6">
             <label htmlFor="participant-select" className="block mb-2 text-sm">
-              Select Participant
+              {t('dashboard.comparison.selectParticipant')}
             </label>
             <select
               id="participant-select"
@@ -69,7 +70,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
           {adaptiveSession && controlSession && (
             <div className="grid grid-cols-3 gap-4">
               <div className="border border-accent border-opacity-20 rounded-lg p-4">
-                <h3 className="font-semibold text-accent mb-3">Adaptive</h3>
+                <h3 className="font-semibold text-accent mb-3">{t('dashboard.comparison.adaptive')}</h3>
                 <div className="space-y-2 text-sm">
                   <div>SUS: <span className="font-mono">{adaptiveSession.susScore ?? '-'}</span></div>
                   {adaptiveSession.nasaTlx && Object.entries(adaptiveSession.nasaTlx).map(([key, value]) => (
@@ -81,7 +82,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
               </div>
 
               <div className="border border-accent border-opacity-20 rounded-lg p-4">
-                <h3 className="font-semibold text-accent mb-3">Control</h3>
+                <h3 className="font-semibold text-accent mb-3">{t('dashboard.comparison.control')}</h3>
                 <div className="space-y-2 text-sm">
                   <div>SUS: <span className="font-mono">{controlSession.susScore ?? '-'}</span></div>
                   {controlSession.nasaTlx && Object.entries(controlSession.nasaTlx).map(([key, value]) => (
@@ -93,7 +94,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
               </div>
 
               <div className="border border-yellow-600 border-opacity-30 rounded-lg p-4 bg-yellow-900 bg-opacity-10">
-                <h3 className="font-semibold text-yellow-400 mb-3">Delta (Adaptive - Control)</h3>
+                <h3 className="font-semibold text-yellow-400 mb-3">{t('dashboard.comparison.delta')}</h3>
                 <div className="space-y-2 text-sm">
                   <div>
                     SUS:{' '}

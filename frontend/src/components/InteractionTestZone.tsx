@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from './Button';
 
 /**
@@ -8,6 +9,7 @@ import { Button } from './Button';
  * Buttons use var(--button-padding) which adapts via button_enlarge rule
  */
 export function InteractionTestZone() {
+  const { t } = useTranslation();
   const [clickCounts, setClickCounts] = useState<Record<number, number>>({
     1: 0,
     2: 0,
@@ -34,7 +36,7 @@ export function InteractionTestZone() {
           lineHeight: 'var(--line-height)',
         }}
       >
-        Interaction Test Area
+        {t('interactionZone.heading')}
       </h3>
       <p
         className="mb-6 opacity-75 adaptive-transition"
@@ -43,14 +45,13 @@ export function InteractionTestZone() {
           lineHeight: 'var(--line-height)',
         }}
       >
-        Click the buttons below to test tap accuracy. The system will detect missed taps (clicks
-        outside buttons) and may enlarge buttons if needed.
+        {t('interactionZone.instructions')}
       </p>
 
       <div className="flex flex-wrap gap-4 mb-6">
         {[1, 2, 3, 4].map((id) => (
           <Button key={id} onClick={() => handleClick(id)}>
-            Button {id}
+            {t('interactionZone.button', { id })}
           </Button>
         ))}
       </div>
@@ -61,12 +62,12 @@ export function InteractionTestZone() {
           fontSize: 'calc(var(--font-size-base) * 0.875)',
         }}
       >
-        <strong>Total clicks:</strong>{' '}
+        <strong>{t('interactionZone.totalClicks')}</strong>{' '}
         {Object.values(clickCounts).reduce((sum, count) => sum + count, 0)}
         <div className="mt-2 flex gap-4">
           {Object.entries(clickCounts).map(([id, count]) => (
             <span key={id}>
-              Btn {id}: {count}
+              {t('interactionZone.btnCount', { id, count })}
             </span>
           ))}
         </div>

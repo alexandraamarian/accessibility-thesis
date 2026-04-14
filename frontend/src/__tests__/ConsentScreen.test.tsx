@@ -23,12 +23,12 @@ describe('ConsentScreen', () => {
 
   it('renders participant ID input', () => {
     renderWithProvider();
-    expect(screen.getByLabelText('Participant ID')).toBeDefined();
+    expect(screen.getByLabelText('ID Participant')).toBeDefined();
   });
 
   it('renders condition select', () => {
     renderWithProvider();
-    expect(screen.getByLabelText('Condition')).toBeDefined();
+    expect(screen.getByLabelText('Conditie')).toBeDefined();
   });
 
   it('renders consent checkbox', () => {
@@ -38,7 +38,7 @@ describe('ConsentScreen', () => {
 
   it('renders submit button', () => {
     renderWithProvider();
-    expect(screen.getByRole('button', { name: /begin study/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /incepe studiul/i })).toBeDefined();
   });
 
   it('shows error when participant ID is empty', async () => {
@@ -48,25 +48,25 @@ describe('ConsentScreen', () => {
     const checkbox = screen.getByRole('checkbox');
     await user.click(checkbox);
 
-    const submitBtn = screen.getByRole('button', { name: /begin study/i });
+    const submitBtn = screen.getByRole('button', { name: /incepe studiul/i });
     await user.click(submitBtn);
 
     expect(screen.getByRole('alert')).toBeDefined();
-    expect(screen.getByText(/please enter a participant id/i)).toBeDefined();
+    expect(screen.getByText(/va rugam sa introduceti un id de participant/i)).toBeDefined();
   });
 
   it('shows error when consent not given', async () => {
     const user = userEvent.setup();
     renderWithProvider();
 
-    const input = screen.getByLabelText('Participant ID');
+    const input = screen.getByLabelText('ID Participant');
     await user.type(input, 'P001');
 
-    const submitBtn = screen.getByRole('button', { name: /begin study/i });
+    const submitBtn = screen.getByRole('button', { name: /incepe studiul/i });
     await user.click(submitBtn);
 
     expect(screen.getByRole('alert')).toBeDefined();
-    expect(screen.getByText(/please provide your consent/i)).toBeDefined();
+    expect(screen.getByText(/va rugam sa va dati consimtamantul/i)).toBeDefined();
   });
 
   it('has fieldset and legend elements', () => {

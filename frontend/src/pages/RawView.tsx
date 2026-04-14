@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AdaptationProvider } from '../context/AdaptationContext';
 import { useBehaviourCollector } from '../hooks/useBehaviourCollector';
 import { useAdaptationEngine } from '../hooks/useAdaptationEngine';
@@ -7,9 +8,10 @@ import { studyLogger } from '../services/studyLogger';
 import { Article } from '../components/Article';
 import { InteractionTestZone } from '../components/InteractionTestZone';
 import { AdaptationMonitor } from '../components/AdaptationMonitor';
-import { articleSets } from '../data/articles';
+import { LanguageSelector } from '../components/LanguageSelector';
 
 function RawViewContent() {
+  const { t } = useTranslation();
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [condition, setCondition] = useState<'adaptive' | 'control'>('adaptive');
   const [loading, setLoading] = useState(true);
@@ -54,7 +56,7 @@ function RawViewContent() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-2xl adaptive-transition" style={{ fontSize: 'var(--font-size-base)' }}>
-          Initializing session...
+          {t('rawView.initializingSession')}
         </div>
       </div>
     );
@@ -63,6 +65,9 @@ function RawViewContent() {
   return (
     <div className="min-h-screen py-8">
       <header className="max-w-4xl mx-auto px-4 mb-8">
+        <div className="flex justify-end mb-2">
+          <LanguageSelector />
+        </div>
         <h1
           className="font-bold mb-2 adaptive-transition"
           style={{
@@ -70,7 +75,7 @@ function RawViewContent() {
             lineHeight: 'var(--line-height)',
           }}
         >
-          Adaptive Accessibility System (Raw View)
+          {t('rawView.title')}
         </h1>
         <p
           className="opacity-75 adaptive-transition"
@@ -79,14 +84,14 @@ function RawViewContent() {
             lineHeight: 'var(--line-height)',
           }}
         >
-          Condition: <span className="font-semibold">{condition}</span> | Session:{' '}
+          {t('rawView.condition')} <span className="font-semibold">{condition}</span> | {t('rawView.session')}{' '}
           {sessionId?.slice(0, 8)}
         </p>
       </header>
 
       <main className="max-w-4xl mx-auto px-4">
         <div className="space-y-12">
-          <Article sections={articleSets[0].sections} />
+          <Article sections={(t('articles.sets', { returnObjects: true }) as any[])[0].sections} />
           <InteractionTestZone />
         </div>
       </main>
