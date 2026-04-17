@@ -54,7 +54,7 @@ export function SUSQuestionnaire() {
         await fetch(`/api/sessions/${state.sessionId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ susScore: Math.round(score) }),
+          body: JSON.stringify({ susScore: score }),
         });
       }
 

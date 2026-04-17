@@ -5,9 +5,13 @@ import { THRESHOLDS } from '../constants';
  * Adaptation Rules - The heart of the thesis research question
  *
  * Each rule has:
- * - Research-justified threshold (cited to peer-reviewed literature)
+ * - A threshold informed by peer-reviewed research (see constants.ts for details)
  * - Cooldown period (prevents adaptation thrashing)
  * - Maximum applications (prevents infinite escalation)
+ *
+ * Note: Specific threshold values are original design decisions refined through
+ * pilot testing. Citations indicate theoretical foundations, not the source
+ * of exact numerical values.
  */
 
 /**
@@ -18,7 +22,7 @@ import { THRESHOLDS } from '../constants';
  * Cooldown: 120s
  * Max: 3 applications
  *
- * Citation: Nielsen, J. (1993). Usability Engineering. Academic Press.
+ * Foundation: Nielsen (1993) - repetitive corrective actions indicate usability barriers
  */
 const fontScaleRule: AdaptationRule = {
   id: 'font_scale',
@@ -39,8 +43,7 @@ const fontScaleRule: AdaptationRule = {
  * Cooldown: 90s
  * Max: 2 applications
  *
- * Citation: Fitts, P.M. (1954). The information capacity of the human
- * motor system. Journal of Experimental Psychology, 47(6).
+ * Foundation: Fitts (1954) - target size inversely related to error rate
  */
 const buttonEnlargeRule: AdaptationRule = {
   id: 'button_enlarge',
@@ -61,8 +64,8 @@ const buttonEnlargeRule: AdaptationRule = {
  * Cooldown: 180s
  * Max: 2 applications
  *
- * Citation: Rayner, K. et al. (2016). So much to read, so little time.
- * Buscher, G. et al. (2012). Attentive documents. ACM CHI 2012.
+ * Foundation: Rayner et al. (2016) on reading comprehension difficulty;
+ * Buscher et al. (2012) on scroll behavior as a reading signal
  */
 const contrastBoostRule: AdaptationRule = {
   id: 'contrast_boost',
@@ -85,8 +88,7 @@ const contrastBoostRule: AdaptationRule = {
  * Cooldown: 150s
  * Max: 3 applications
  *
- * Citation: Wobbrock, J.O. et al. (2008). Longitudinal evaluation of
- * pointing performance models. ACM UIST 2008.
+ * Foundation: Wobbrock et al. (2008) - pointing performance and motor impairment models
  */
 const spacingIncreaseRule: AdaptationRule = {
   id: 'spacing_increase',
@@ -107,8 +109,7 @@ const spacingIncreaseRule: AdaptationRule = {
  * Cooldown: Infinity (permanent)
  * Max: 1 application
  *
- * Citation: Wobbrock, J.O. et al. (2011). Ability-based design.
- * ACM TACCESS, 3(3).
+ * Foundation: Wobbrock et al. (2011) - ability-based design framework
  */
 const motionReduceRule: AdaptationRule = {
   id: 'motion_reduce',
@@ -129,8 +130,7 @@ const motionReduceRule: AdaptationRule = {
  * Cooldown: 90s
  * Max: 2 applications
  *
- * Citation: Hurst, A. et al. (2013). Automatic detection of target
- * accuracy problems during pointing. ACM TACCESS, 6(2).
+ * Foundation: Hurst et al. (2013) - automatic detection of pointing accuracy problems
  */
 const cursorEnlargeRule: AdaptationRule = {
   id: 'cursor_enlarge',
@@ -151,8 +151,7 @@ const cursorEnlargeRule: AdaptationRule = {
  * Cooldown: Infinity (permanent)
  * Max: 1 application
  *
- * Citation: Gajos, K.Z. et al. (2010). Automatically generating
- * personalized user interfaces. Artificial Intelligence, 174(12-13).
+ * Foundation: Gajos et al. (2010) - automatically generating personalized interfaces
  */
 const layoutSimplifyRule: AdaptationRule = {
   id: 'layout_simplify',
@@ -175,8 +174,7 @@ const layoutSimplifyRule: AdaptationRule = {
  * Cooldown: 120s
  * Max: 1 application
  *
- * Citation: Dickinson, A. et al. (2002). Introducing the Internet
- * to the over-60s. Interacting with Computers, 14(4).
+ * Foundation: Dickinson et al. (2002) - reading difficulties in older web users
  */
 const readingAidRule: AdaptationRule = {
   id: 'reading_aid',

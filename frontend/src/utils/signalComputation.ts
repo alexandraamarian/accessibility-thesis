@@ -37,7 +37,8 @@ export function computeTremorScore(taps: TapEvent[]): number {
   const variance = (values: number[]): number => {
     const mean = values.reduce((sum, v) => sum + v, 0) / values.length;
     const squaredDiffs = values.map((v) => Math.pow(v - mean, 2));
-    return squaredDiffs.reduce((sum, d) => sum + d, 0) / values.length;
+    // Bessel's correction (n-1) for sample variance
+    return squaredDiffs.reduce((sum, d) => sum + d, 0) / (values.length - 1);
   };
 
   const varX = variance(xs);
@@ -141,11 +142,18 @@ export function computeReadingSpeed(
   let totalChars = 0;
   let totalSeconds = 0;
 
+  // ~200 WPM average reading speed = ~16.7 chars/second (at 5 chars/word)
+  // Cap character contribution per dwell to prevent briefly-viewed sections
+  // from inflating WPM (e.g., scrolling past a 2000-char section in 1 second
+  // would produce 24,000 WPM without this cap)
+  const EXPECTED_CHARS_PER_SECOND = 16.7;
+
   for (const dwell of dwells) {
     const chars = charCounts[dwell.sectionId] || 0;
     const seconds = (dwell.exitTime - dwell.enterTime) / 1000;
     if (seconds > 0 && chars > 0) {
-      totalChars += chars;
+      const maxCharsForDwell = seconds * EXPECTED_CHARS_PER_SECOND;
+      totalChars += Math.min(chars, maxCharsForDwell);
       totalSeconds += seconds;
     }
   }

@@ -21,14 +21,9 @@ describe('ConsentScreen', () => {
     vi.clearAllMocks();
   });
 
-  it('renders participant ID input', () => {
+  it('renders email input', () => {
     renderWithProvider();
-    expect(screen.getByLabelText('ID Participant')).toBeDefined();
-  });
-
-  it('renders condition select', () => {
-    renderWithProvider();
-    expect(screen.getByLabelText('Conditie')).toBeDefined();
+    expect(screen.getByLabelText(/email/i)).toBeDefined();
   });
 
   it('renders consent checkbox', () => {
@@ -38,35 +33,71 @@ describe('ConsentScreen', () => {
 
   it('renders submit button', () => {
     renderWithProvider();
-    expect(screen.getByRole('button', { name: /incepe studiul/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /începe studiul/i })).toBeDefined();
   });
 
-  it('shows error when participant ID is empty', async () => {
+  it('shows error when email is empty', async () => {
     const user = userEvent.setup();
     renderWithProvider();
 
     const checkbox = screen.getByRole('checkbox');
     await user.click(checkbox);
 
-    const submitBtn = screen.getByRole('button', { name: /incepe studiul/i });
+    const submitBtn = screen.getByRole('button', { name: /începe studiul/i });
     await user.click(submitBtn);
 
     expect(screen.getByRole('alert')).toBeDefined();
-    expect(screen.getByText(/va rugam sa introduceti un id de participant/i)).toBeDefined();
+    expect(screen.getByText(/introduceți adresa de email/i)).toBeDefined();
+  });
+
+  it('shows error for invalid email format', async () => {
+    const user = userEvent.setup();
+    renderWithProvider();
+
+    const input = screen.getByLabelText(/email/i);
+    await user.type(input, 'not-an-email');
+
+    const checkbox = screen.getByRole('checkbox');
+    await user.click(checkbox);
+
+    const submitBtn = screen.getByRole('button', { name: /începe studiul/i });
+    await user.click(submitBtn);
+
+    expect(screen.getByRole('alert')).toBeDefined();
+    expect(screen.getByText(/adresă de email validă/i)).toBeDefined();
   });
 
   it('shows error when consent not given', async () => {
     const user = userEvent.setup();
     renderWithProvider();
 
-    const input = screen.getByLabelText('ID Participant');
-    await user.type(input, 'P001');
+    const input = screen.getByLabelText(/email/i);
+    await user.type(input, 'test@example.com');
 
-    const submitBtn = screen.getByRole('button', { name: /incepe studiul/i });
+    const submitBtn = screen.getByRole('button', { name: /începe studiul/i });
     await user.click(submitBtn);
 
     expect(screen.getByRole('alert')).toBeDefined();
-    expect(screen.getByText(/va rugam sa va dati consimtamantul/i)).toBeDefined();
+    expect(screen.getByText(/consimțământul/i)).toBeDefined();
+  });
+
+  it('shows error when email already used for both sessions', async () => {
+    mockFetch.mockResolvedValueOnce({ ok: false, status: 409 });
+
+    const user = userEvent.setup();
+    renderWithProvider();
+
+    const input = screen.getByLabelText(/email/i);
+    await user.type(input, 'used@example.com');
+
+    const checkbox = screen.getByRole('checkbox');
+    await user.click(checkbox);
+
+    const submitBtn = screen.getByRole('button', { name: /începe studiul/i });
+    await user.click(submitBtn);
+
+    expect(await screen.findByRole('alert')).toBeDefined();
+    expect(screen.getByText(/completat deja ambele sesiuni/i)).toBeDefined();
   });
 
   it('has fieldset and legend elements', () => {

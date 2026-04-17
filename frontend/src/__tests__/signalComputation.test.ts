@@ -21,9 +21,9 @@ describe('Signal Computation', () => {
       ];
       const score = computeTremorScore(taps);
       // Mean: x=3.33, y=3.33
-      // Variance: x=22.22, y=22.22
-      // sqrt(22.22 + 22.22) ≈ 6.67
-      expect(score).toBeCloseTo(6.67, 1);
+      // Sample variance (n-1): x=33.33, y=33.33
+      // sqrt(33.33 + 33.33) ≈ 8.16
+      expect(score).toBeCloseTo(8.16, 1);
     });
 
     it('handles perfect precision (all taps at same position)', () => {

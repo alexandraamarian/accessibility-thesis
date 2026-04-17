@@ -31,10 +31,12 @@ export const en = {
     title: 'Adaptive Accessibility Study',
     steps: {
       consent: 'Consent',
+      demographics: 'Profile',
       warmup: 'Warm-up',
       tasks: 'Tasks',
       sus: 'SUS',
       nasatlx: 'NASA-TLX',
+      feedback: 'Feedback',
       summary: 'Summary',
     },
   },
@@ -42,25 +44,54 @@ export const en = {
   consent: {
     heading: 'Study Consent & Setup',
     participantInfo: 'Participant Information',
-    participantId: 'Participant ID',
-    participantIdPlaceholder: 'e.g., P001',
-    condition: 'Condition',
-    conditionAdaptive: 'Adaptive (UI adapts to behavior)',
-    conditionControl: 'Control (static UI)',
+    email: 'Email Address',
+    emailPlaceholder: 'e.g., participant@example.com',
     informedConsent: 'Informed Consent',
     consentText1:
       'This study investigates whether behaviour-based UI adaptation can improve usability. During the session, the system will collect data about your interactions (clicks, scrolling, zoom gestures) to evaluate the adaptation mechanism.',
     consentText2:
-      'Your participation is voluntary. You may withdraw at any time without consequence. All data is stored anonymously using your participant ID only.',
+      'Your participation is voluntary. You may withdraw at any time without consequence. Your email is used only to link your two sessions and is not shared with third parties.',
     consentText3:
       'The session will take approximately 15-20 minutes and includes: a warm-up phase, reading and interaction tasks, and two short questionnaires.',
     consentCheckbox:
       'I have read and understood the above information. I consent to participate in this study and to the collection of my interaction data.',
-    errorNoId: 'Please enter a participant ID.',
+    errorNoEmail: 'Please enter your email address.',
+    errorInvalidEmail: 'Please enter a valid email address.',
     errorNoConsent: 'Please provide your consent to continue.',
+    errorDuplicateEmail: 'This email has already completed both study sessions. Each participant may only participate twice (once per condition).',
     errorSessionFailed: 'Failed to create session. Please ensure the backend is running.',
     creatingSession: 'Creating session...',
     beginStudy: 'Begin Study',
+  },
+
+  demographics: {
+    heading: 'Participant Profile',
+    instructions: 'Please provide some background information. This helps us analyze results across different user groups.',
+    ageRange: 'Age Range',
+    gender: 'Gender',
+    genderMale: 'Male',
+    genderFemale: 'Female',
+    genderPreferNot: 'Prefer not to say',
+    disability: 'Do you have any disability that affects computer use?',
+    disabilityNone: 'None',
+    disabilityVisual: 'Visual impairment',
+    disabilityMotor: 'Motor impairment',
+    disabilityCognitive: 'Cognitive disability',
+    disabilityOther: 'Other',
+    assistiveTech: 'Do you use assistive technology?',
+    assistiveNone: 'None',
+    assistiveScreenReader: 'Screen reader',
+    assistiveMagnifier: 'Screen magnifier',
+    assistiveVoice: 'Voice control',
+    assistiveOther: 'Other',
+    computerProficiency: 'Computer Proficiency',
+    proficiencyBeginner: 'Beginner',
+    proficiencyIntermediate: 'Intermediate',
+    proficiencyAdvanced: 'Advanced',
+    proficiencyExpert: 'Expert',
+    continue: 'Continue to Warm-up',
+    errorRequired: 'Please fill in all required fields.',
+    errorSaveFailed: 'Failed to save. Please try again.',
   },
 
   warmup: {
@@ -87,6 +118,7 @@ export const en = {
       'Scroll down to find the referenced section, then interact with the test area.',
     submitContinue: 'Submit & Continue',
     submitted: 'Submitted',
+    errors: 'error(s)',
   },
 
   sus: {
@@ -119,7 +151,7 @@ export const en = {
 
   nasatlx: {
     heading: 'NASA Task Load Index (NASA-TLX)',
-    instructions: 'Rate each dimension on a scale of 1 (low) to 7 (high).',
+    instructions: 'Rate each dimension on a scale from 0 (low) to 100 (high). Drag the slider to indicate your rating.',
     dimensions: {
       mental: {
         label: 'Mental Demand',
@@ -142,8 +174,8 @@ export const en = {
       performance: {
         label: 'Performance',
         description: 'How successful were you in accomplishing what you were asked to do?',
-        lowEnd: 'Perfect',
-        highEnd: 'Failure',
+        lowEnd: 'Failure',
+        highEnd: 'Perfect',
       },
       effort: {
         label: 'Effort',
@@ -160,7 +192,15 @@ export const en = {
     },
     errorUnanswered: 'Please rate "{{dimension}}".',
     errorSaveFailed: 'Failed to save responses. Please try again.',
-    continueToSummary: 'Continue to Summary',
+    continueToSummary: 'Continue to Feedback',
+  },
+
+  feedback: {
+    heading: 'Your Experience',
+    instructions: 'One last question before we wrap up. There are no right or wrong answers.',
+    question: 'Did you notice any changes in the interface? If so, how did they make you feel?',
+    placeholder: 'Write your thoughts here... (optional)',
+    continue: 'Continue to Summary',
   },
 
   summary: {
@@ -174,6 +214,8 @@ export const en = {
     susScore: 'SUS Score',
     nasaTlxAvg: 'NASA-TLX Avg',
     sessionInfo: 'Session ID: {{sessionId}} | Participant: {{participantId}}',
+    nextSessionPrompt: 'You have completed the first condition. You can now continue with the second condition to complete the study.',
+    startNextSession: 'Start Second Session',
     closeMessage: 'You may now close this window or notify the researcher.',
   },
 
@@ -187,7 +229,7 @@ export const en = {
   },
 
   monitor: {
-    debugPanel: 'Debug Panel',
+    debugPanel: 'Monitor',
     title: 'Adaptation Monitor',
     session: 'Session:',
     signals: 'Signals:',
@@ -205,15 +247,15 @@ export const en = {
     taps: 'Taps: {{taps}} | Scrolls: {{scrolls}}',
     updated: 'Updated: {{time}}',
     signalLabels: {
-      zoom: 'Zoom',
-      missRate: 'Miss Rate',
-      dwell: 'Dwell',
-      scrollRev: 'Scroll Rev',
-      tremor: 'Tremor',
-      rageClick: 'Rage Click',
-      hesitation: 'Hesitation',
-      idle: 'Idle',
-      readSpd: 'Read Spd',
+      zoom: 'Zoom Count',
+      missRate: 'Missed Taps',
+      dwell: 'Reading Time',
+      scrollRev: 'Re-reading',
+      tremor: 'Pointer Tremor',
+      rageClick: 'Rage Clicks',
+      hesitation: 'Cursor Hesitation',
+      idle: 'Idle Time',
+      readSpd: 'Reading Speed',
     },
   },
 
@@ -249,19 +291,38 @@ export const en = {
       time: 'Time',
       taskMetrics: 'Task Metrics',
       task: 'Task',
+      taskType: 'Type',
+      completed: 'Done',
+      taskTypes: {
+        findAnswer: 'Find Answer',
+        formCompletion: 'Form',
+        navigation: 'Navigation',
+      },
       errors: 'Errors',
+      answer: 'Answer',
       loadingSession: 'Loading session data...',
       sessionNotFound: 'Session not found.',
       signalLabels: {
         zoomCount: 'Zoom Count',
         missedTapRate: 'Missed Tap Rate',
-        avgDwellSeconds: 'Avg Dwell (s)',
-        scrollReversalRate: 'Scroll Reversal',
-        tremorScore: 'Tremor (px)',
+        avgDwellSeconds: 'Section Reading Time',
+        scrollReversalRate: 'Re-reading Rate',
+        tremorScore: 'Pointer Tremor',
         rageClickCount: 'Rage Clicks',
-        mouseHesitationScore: 'Hesitation',
-        idleSeconds: 'Idle (s)',
-        readingSpeed: 'Read Speed',
+        mouseHesitationScore: 'Cursor Hesitation',
+        idleSeconds: 'Idle Time',
+        readingSpeed: 'Reading Speed',
+      },
+      signalTooltips: {
+        zoomCount: 'Number of Ctrl+Scroll or pinch-to-zoom events in the last 60s. High values suggest the user is struggling to read the text at its current size.',
+        missedTapRate: 'Ratio of clicks that missed interactive elements (buttons, links) vs. total clicks near them in the last 30s. High values suggest motor difficulty hitting targets.',
+        avgDwellSeconds: 'Average time (seconds) each article section stayed visible in the viewport over the last 90s. High values suggest the user is reading slowly or having difficulty.',
+        scrollReversalRate: 'Fraction of scroll direction changes that go upward (re-reading) over the last 45s. High values suggest comprehension difficulty.',
+        tremorScore: 'Standard deviation (px) of click positions over the last 8s. Measures pointing precision — high values indicate hand tremor or motor impairment.',
+        rageClickCount: 'Clusters of 3+ rapid clicks in the same area in the last 5s. Indicates frustration with unresponsive or hard-to-click elements.',
+        mouseHesitationScore: 'Count of times the cursor paused 3+ seconds over an interactive element in the last 10s. Suggests uncertainty or difficulty deciding.',
+        idleSeconds: 'Seconds since the last mouse, keyboard, or scroll interaction. High values mean the user stopped interacting.',
+        readingSpeed: 'Estimated words per minute based on visible section time and character count over the last 90s. Low values may indicate reading difficulty.',
       },
     },
     comparison: {
@@ -294,51 +355,51 @@ export const en = {
   articles: {
     sets: [
       {
-        id: 'adaptive-interfaces',
-        title: 'Adaptive Interfaces',
+        id: 'climate-technology',
+        title: 'Climate Change and Technology',
         sections: [
           {
             id: 'intro',
-            heading: 'Introduction to Adaptive Interfaces',
+            heading: 'The Climate Technology Landscape',
             paragraphs: [
-              'Adaptive user interfaces represent a paradigm shift in how we design digital experiences. Rather than forcing users to navigate complex settings menus, these systems observe behavior patterns and silently adjust the interface to better meet individual needs.',
-              'This approach is particularly valuable for accessibility, where users may not be aware of available accommodations or may find the process of configuring them too burdensome. By detecting signals such as zoom frequency, tap accuracy, and reading patterns, adaptive systems can proactively remove barriers to access.',
+              'The intersection of climate science and technology has produced some of the most consequential innovations of the 21st century. From satellite monitoring systems that track deforestation in real time to machine learning models that optimize wind turbine placement, technology is reshaping how humanity responds to environmental challenges.',
+              'Global carbon dioxide concentrations surpassed 420 parts per million in 2024, a level not seen in at least 800,000 years according to ice core records. The urgency of this trajectory has accelerated investment in climate technology, with global clean energy spending reaching $1.8 trillion in 2023, surpassing fossil fuel investment for the first time.',
             ],
           },
           {
-            id: 'methodology',
-            heading: 'Research Methodology',
+            id: 'renewable-energy',
+            heading: 'Renewable Energy Systems',
             paragraphs: [
-              'This system employs a rule-based adaptation approach, where specific behavior signals trigger predefined UI transformations. Each rule threshold is justified by peer-reviewed research in human-computer interaction, accessibility standards, and motor control studies.',
-              'The within-subjects study design allows each participant to experience both adaptive and control conditions, maximizing statistical power while controlling for individual differences. Counterbalancing prevents order effects from confounding the results.',
-              'Data collection focuses on objective measures (task completion time, error rate) alongside subjective assessments (System Usability Scale, NASA Task Load Index). This mixed-methods approach provides a comprehensive view of usability impact.',
+              'Solar photovoltaic technology has experienced a dramatic cost reduction of over 90% since 2010, making it the cheapest source of new electricity generation in most markets worldwide. Modern solar panels achieve conversion efficiencies above 22% for commercial modules, while laboratory cells have exceeded 47% using multi-junction concentrator designs.',
+              'Wind energy has followed a similar trajectory. Offshore wind turbines now reach heights exceeding 260 meters with individual capacities of 15 megawatts, enough to power approximately 13,000 homes each. The Global Wind Energy Council reported 117 gigawatts of new capacity installed in 2023 alone.',
+              'Battery storage technology, particularly lithium-ion cells, has seen costs decline by 97% since 1991. Grid-scale storage projects now regularly exceed 100 megawatt-hours, addressing the intermittency challenge that has historically limited renewable energy adoption. Emerging alternatives including sodium-ion, solid-state, and iron-air batteries promise further improvements.',
             ],
           },
           {
-            id: 'signals',
-            heading: 'Behavior Signal Detection',
+            id: 'carbon-capture',
+            heading: 'Carbon Capture and Removal',
             paragraphs: [
-              'The system tracks five distinct signal types. Zoom count measures pinch gestures and Ctrl+Wheel events, indicating legibility issues. Missed tap rate compares successful button clicks to taps on non-interactive areas, revealing motor control challenges.',
-              'Dwell time uses IntersectionObserver to track how long sections remain visible in the viewport, combined with scroll reversal detection to identify re-reading patterns that suggest comprehension difficulty. Tremor score computes the standard deviation of tap position coordinates, quantifying pointing precision.',
-              'Each signal operates on a sliding time window appropriate to its measurement characteristics. Zoom events are tracked over 60 seconds, missed taps over 30 seconds, dwell time over 90 seconds, scroll reversals over 45 seconds, and tremor over 8 seconds for granular feedback.',
+              'Direct air capture (DAC) technology extracts carbon dioxide directly from ambient air using chemical sorbents or solvents. The Orca plant in Iceland, operated by Climeworks, captures approximately 4,000 tonnes of CO2 annually, storing it as mineral carbonates deep underground through a process called mineralization.',
+              'Nature-based carbon removal approaches include reforestation, soil carbon sequestration, and ocean alkalinity enhancement. A mature tropical forest can sequester between 6 and 30 tonnes of CO2 per hectare per year, though permanence and measurement challenges complicate their inclusion in carbon credit markets.',
+              'The Intergovernmental Panel on Climate Change (IPCC) estimates that limiting warming to 1.5 degrees Celsius will require removing 6 to 10 gigatonnes of CO2 per year by 2050. Current removal capacity stands at roughly 2 gigatonnes annually, almost entirely from conventional forestry and land management.',
             ],
           },
           {
-            id: 'adaptation',
-            heading: 'Adaptation Rules',
+            id: 'smart-cities',
+            heading: 'Smart Cities and Urban Sustainability',
             paragraphs: [
-              'Five adaptation rules transform detected signals into UI changes. Font scaling increases text size when repeated zooming occurs. Button enlargement adds padding when tap accuracy degrades. Contrast boosting progresses through WCAG levels when reading difficulty is detected.',
-              'Spacing increase adjusts line height to accommodate pointing imprecision. Motion reduction disables animations for users exhibiting severe tremor, preventing visual interference with motor tasks. Each rule includes cooldown periods to prevent adaptation thrashing.',
-              'Maximum application limits ensure adaptations do not escalate beyond usable bounds. Font size caps at 26 pixels, button padding at 36 pixels, contrast at WCAG AAA level (21:1 ratio), line height at 2.2, and animations disable permanently once triggered.',
+              'Smart building systems using IoT sensors and AI-driven controls can reduce energy consumption by 20 to 30 percent compared to conventional buildings. Copenhagen aims to become the first carbon-neutral capital by 2025, deploying sensor networks to optimize traffic flow, waste collection, and district heating.',
+              'Electric vehicle adoption accelerated sharply in 2023, with global sales exceeding 14 million units representing 18% of all new car sales. China led with 8.1 million units, followed by Europe with 3.2 million. The International Energy Agency projects EVs will comprise over 60% of new sales globally by 2030.',
+              'Urban heat islands, where cities experience temperatures 3 to 5 degrees Celsius higher than surrounding rural areas, represent a growing challenge as climate change intensifies. Green roof installations, reflective building materials, and urban tree canopy expansion are among the strategies cities deploy to mitigate this effect.',
             ],
           },
           {
-            id: 'evaluation',
-            heading: 'Evaluation and Expected Outcomes',
+            id: 'future-outlook',
+            heading: 'Future Outlook and Challenges',
             paragraphs: [
-              'The primary hypothesis predicts higher System Usability Scale scores in the adaptive condition compared to control. Secondary measures include reduced task completion time, lower error rates, and decreased NASA-TLX workload ratings.',
-              'Statistical analysis employs Wilcoxon signed-rank tests appropriate for the within-subjects design and small sample size (n=12-15). Effect sizes using Cohen\'s d supplement significance testing to assess practical importance.',
-              'Expected limitations include the artificial nature of laboratory tasks, short session duration relative to real-world use, and the inability of rule-based systems to distinguish between different causes of similar behavioral patterns. These will be addressed candidly in the discussion section.',
+              'Nuclear fusion research reached a milestone in December 2022 when the National Ignition Facility achieved net energy gain for the first time. While commercial fusion power remains decades away, private investment in fusion startups exceeded $6 billion by 2024, reflecting growing optimism about the technology.',
+              'The critical minerals supply chain presents a significant bottleneck for clean energy transition. Lithium demand is projected to increase 40-fold by 2040, while cobalt, nickel, and rare earth elements face similar pressures. Recycling infrastructure and alternative battery chemistries are essential to avoid simply trading one resource dependency for another.',
+              'Climate adaptation technology, including early warning systems, drought-resistant crop varieties, and coastal defense infrastructure, receives far less funding than mitigation despite the reality that significant warming is already locked in. The United Nations estimates that developing countries alone will need $300 billion annually for adaptation by 2030.',
             ],
           },
         ],
@@ -447,29 +508,29 @@ export const en = {
   },
 
   taskData: {
-    'adaptive-interfaces': [
+    'climate-technology': [
       {
-        id: 'ai-find',
+        id: 'ct-find',
         title: 'Find Information',
         instruction:
-          'In which section is the sliding time window for tremor measurement discussed? Type the section heading.',
+          'In which section is the Orca plant in Iceland discussed? Type the section heading.',
       },
       {
-        id: 'ai-form',
+        id: 'ct-form',
         title: 'Complete the Form',
         instruction:
-          'Based on the article, fill in the following details about the adaptation system.',
+          'Based on the article, fill in the following details about climate technology.',
         fields: [
-          { id: 'max_font', label: 'Maximum font size (px)' },
-          { id: 'study_design', label: 'Study design type' },
-          { id: 'sample_size', label: 'Target sample size' },
+          { id: 'solar_reduction', label: 'Solar PV cost reduction since 2010 (%)' },
+          { id: 'ev_sales', label: 'Global EV sales in 2023 (millions)' },
+          { id: 'co2_removal', label: 'CO2 removal needed by 2050 (gigatonnes/year, e.g. "6-10")' },
         ],
       },
       {
-        id: 'ai-nav',
+        id: 'ct-nav',
         title: 'Navigate and Interact',
         instruction:
-          'Scroll to the "Evaluation and Expected Outcomes" section and click any button in the interaction test area.',
+          'Scroll to the "Future Outlook and Challenges" section and click any button in the interaction test area.',
       },
     ],
     'digital-accessibility': [

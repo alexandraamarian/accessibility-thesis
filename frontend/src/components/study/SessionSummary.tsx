@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStudyContext } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
+import { Button } from '../Button';
 
 export function SessionSummary() {
   const { t } = useTranslation();
-  const { state } = useStudyContext();
+  const { state, dispatch } = useStudyContext();
   const [ending, setEnding] = useState(false);
+  const [hasNextSession, setHasNextSession] = useState(false);
+  const [checkingNext, setCheckingNext] = useState(true);
+  const [startingNext, setStartingNext] = useState(false);
 
+  // End current session and check if next session is available
   useEffect(() => {
     if (state.sessionId && !ending) {
       setEnding(true);
@@ -17,11 +22,54 @@ export function SessionSummary() {
           studyLogger.destroy();
         })
         .catch(console.error);
+
+      // Check if this participant can do a second session
+      fetch(`/api/sessions?participantId=${encodeURIComponent(state.participantId)}`)
+        .then((r) => r.json())
+        .then((sessions: any[]) => {
+          setHasNextSession(sessions.length < 2);
+        })
+        .catch(() => setHasNextSession(false))
+        .finally(() => setCheckingNext(false));
     }
   }, [state.sessionId]);
 
-  const totalDuration = state.taskResults.reduce((sum, t) => sum + t.durationSeconds, 0);
-  const totalErrors = state.taskResults.reduce((sum, t) => sum + t.errors, 0);
+  const handleStartNextSession = async () => {
+    setStartingNext(true);
+    try {
+      const response = await fetch('/api/sessions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: state.participantId }),
+      });
+
+      if (!response.ok) {
+        setHasNextSession(false);
+        return;
+      }
+
+      const session = await response.json();
+
+      studyLogger.initialize(session.id);
+      studyLogger.log('consent_given', {
+        email: state.participantId,
+        condition: session.condition,
+        isSecondSession: true,
+      });
+
+      dispatch({
+        type: 'START_NEXT_SESSION',
+        payload: { sessionId: session.id, condition: session.condition },
+      });
+    } catch {
+      setHasNextSession(false);
+    } finally {
+      setStartingNext(false);
+    }
+  };
+
+  const totalDuration = state.taskResults.reduce((sum, r) => sum + r.durationSeconds, 0);
+  const totalErrors = state.taskResults.reduce((sum, r) => sum + r.errors, 0);
 
   return (
     <div className="max-w-2xl mx-auto text-center">
@@ -64,7 +112,7 @@ export function SessionSummary() {
             <div className="text-sm opacity-60 mb-1">{t('summary.susScore')}</div>
             <div className="text-2xl font-bold text-accent">
               {state.susResponses.length > 0
-                ? calculateSUSScore(state.susResponses)
+                ? calculateSUSScore(state.susResponses).toFixed(1)
                 : 'N/A'}
             </div>
           </div>
@@ -82,12 +130,24 @@ export function SessionSummary() {
         </div>
       </div>
 
+      {/* Next session button */}
+      {!checkingNext && hasNextSession && (
+        <div className="mb-8 p-6 border-2 border-green-500 border-opacity-30 rounded-lg bg-green-900 bg-opacity-10">
+          <p className="mb-4 text-sm">{t('summary.nextSessionPrompt')}</p>
+          <Button onClick={handleStartNextSession} disabled={startingNext}>
+            {startingNext ? t('common.loading') : t('summary.startNextSession')}
+          </Button>
+        </div>
+      )}
+
       <p className="text-sm opacity-50">
         {t('summary.sessionInfo', { sessionId: state.sessionId?.slice(0, 8), participantId: state.participantId })}
       </p>
-      <p className="text-sm opacity-50 mt-2">
-        {t('summary.closeMessage')}
-      </p>
+      {!hasNextSession && !checkingNext && (
+        <p className="text-sm opacity-50 mt-2">
+          {t('summary.closeMessage')}
+        </p>
+      )}
     </div>
   );
 }
@@ -101,5 +161,5 @@ function calculateSUSScore(responses: number[]): number {
       total += 5 - responses[i];
     }
   }
-  return Math.round(total * 2.5);
+  return total * 2.5;
 }

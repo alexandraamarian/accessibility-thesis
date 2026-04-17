@@ -116,6 +116,8 @@ export interface EventLog {
     | 'task_completed'
     | 'questionnaire_completed'
     | 'consent_given'
+    | 'demographics_completed'
+    | 'device_info'
     | 'warmup_completed'
     | 'study_phase_changed';
 

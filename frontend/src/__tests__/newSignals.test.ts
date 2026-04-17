@@ -66,23 +66,26 @@ describe('Mouse Hesitation Score', () => {
 });
 
 describe('Reading Speed', () => {
-  it('computes words per minute from dwell events', () => {
+  it('computes words per minute from dwell events (capped to prevent inflation)', () => {
     const dwells = [
       { sectionId: 'intro', enterTime: 0, exitTime: 10000 }, // 10s
     ];
-    const charCounts = { intro: 500 }; // 500 chars
-    // 500 chars / 10s = 50 chars/s => (50/5)*60 = 600 wpm
-    expect(computeReadingSpeed(dwells, charCounts)).toBe(600);
+    const charCounts = { intro: 500 }; // 500 chars but capped to 10s * 16.7 = 167
+    // min(500, 167) = 167 chars / 10s = 16.7 chars/s => (16.7/5)*60 ≈ 200.4 wpm
+    const result = computeReadingSpeed(dwells, charCounts);
+    expect(result).toBeCloseTo(200.4, 0);
   });
 
-  it('handles multiple sections', () => {
+  it('handles multiple sections with character capping', () => {
     const dwells = [
       { sectionId: 'intro', enterTime: 0, exitTime: 10000 }, // 10s, 200 chars
       { sectionId: 'body', enterTime: 10000, exitTime: 30000 }, // 20s, 400 chars
     ];
     const charCounts = { intro: 200, body: 400 };
-    // total: 600 chars / 30s = 20 chars/s => (20/5)*60 = 240 wpm
-    expect(computeReadingSpeed(dwells, charCounts)).toBe(240);
+    // intro: min(200, 167) = 167; body: min(400, 334) = 334
+    // total: 501 chars / 30s = 16.7 chars/s => (16.7/5)*60 ≈ 200.4 wpm
+    const result = computeReadingSpeed(dwells, charCounts);
+    expect(result).toBeCloseTo(200.4, 0);
   });
 
   it('returns 0 for no dwells', () => {

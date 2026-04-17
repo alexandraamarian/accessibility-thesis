@@ -10,24 +10,28 @@ export function NASATLXQuestionnaire() {
   const { t } = useTranslation();
   const { state, dispatch } = useStudyContext();
   const [responses, setResponses] = useState<Record<string, number>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (key: string, value: number) => {
     setResponses({ ...responses, [key]: value });
+    setTouched({ ...touched, [key]: true });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    const unansweredKey = dimensionKeys.find((k) => responses[k] === undefined);
+    const unansweredKey = dimensionKeys.find((k) => !touched[k]);
     if (unansweredKey) {
       setError(t('nasatlx.errorUnanswered', { dimension: t(`nasatlx.dimensions.${unansweredKey}.label`) }));
       return;
     }
 
     setSubmitting(true);
+    // Store raw values as entered by the participant.
+    // Performance is reverse-scored only during analysis/export (not at storage).
     const nasaTlx: NasaTlxResponses = {
       mental: responses.mental,
       physical: responses.physical,
@@ -52,7 +56,7 @@ export function NASATLXQuestionnaire() {
       });
 
       dispatch({ type: 'SET_NASA_TLX', payload: nasaTlx });
-      dispatch({ type: 'SET_STEP', payload: 'summary' });
+      dispatch({ type: 'SET_STEP', payload: 'feedback' });
     } catch {
       setError(t('nasatlx.errorSaveFailed'));
     } finally {
@@ -83,29 +87,29 @@ export function NASATLXQuestionnaire() {
 
                 <div className="flex items-center gap-2">
                   <span className="text-xs w-16 text-right opacity-60">{dim.lowEnd}</span>
-                  <div className="flex gap-1 flex-1 justify-center">
-                    {[1, 2, 3, 4, 5, 6, 7].map((value) => (
-                      <label
-                        key={value}
-                        className={`flex flex-col items-center cursor-pointer px-3 py-2 rounded transition-colors ${
-                          responses[key] === value
-                            ? 'bg-accent bg-opacity-20 text-accent'
-                            : 'hover:bg-accent hover:bg-opacity-10'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name={`nasa-${key}`}
-                          value={value}
-                          checked={responses[key] === value}
-                          onChange={() => handleChange(key, value)}
-                          className="mb-1"
-                        />
-                        <span className="text-sm font-mono">{value}</span>
-                      </label>
-                    ))}
+                  <div className="flex-1">
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      step={5}
+                      value={responses[key] ?? 50}
+                      onChange={(e) => handleChange(key, Number(e.target.value))}
+                      className="w-full accent-accent"
+                      aria-label={dim.label}
+                    />
+                    <div className="flex justify-between text-xs opacity-40 mt-1 px-1">
+                      <span>0</span>
+                      <span>25</span>
+                      <span>50</span>
+                      <span>75</span>
+                      <span>100</span>
+                    </div>
                   </div>
                   <span className="text-xs w-16 opacity-60">{dim.highEnd}</span>
+                </div>
+                <div className="text-center mt-1 text-sm font-mono text-accent">
+                  {responses[key] !== undefined ? responses[key] : '—'}
                 </div>
               </fieldset>
             );

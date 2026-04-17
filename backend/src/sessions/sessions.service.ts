@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Session } from './session.entity';
@@ -13,7 +13,43 @@ export class SessionsService {
   ) {}
 
   async create(createSessionDto: CreateSessionDto): Promise<Session> {
-    const session = this.sessionsRepository.create(createSessionDto);
+    const email = createSessionDto.email.toLowerCase().trim();
+
+    // Check existing sessions for this email
+    const existingSessions = await this.sessionsRepository.find({
+      where: { participantId: email },
+      order: { startedAt: 'ASC' },
+    });
+
+    // Enforce max 2 sessions per participant (one per condition)
+    if (existingSessions.length >= 2) {
+      throw new ConflictException(
+        'This email has already completed both study sessions. Each participant may only participate twice (once per condition).'
+      );
+    }
+
+    // Determine counterbalancing group from email hash
+    const hash = email
+      .split('')
+      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const isAdaptiveFirst = hash % 2 === 0;
+    const orderGroup = isAdaptiveFirst ? 'adaptive_first' : 'control_first';
+
+    // First session gets the first condition, second session gets the other
+    let condition: 'adaptive' | 'control';
+    if (existingSessions.length === 0) {
+      condition = isAdaptiveFirst ? 'adaptive' : 'control';
+    } else {
+      // Give them the opposite condition from their first session
+      const firstCondition = existingSessions[0].condition;
+      condition = firstCondition === 'adaptive' ? 'control' : 'adaptive';
+    }
+
+    const session = this.sessionsRepository.create({
+      participantId: email,
+      condition,
+      orderGroup,
+    });
     return this.sessionsRepository.save(session);
   }
 

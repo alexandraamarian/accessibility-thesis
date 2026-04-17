@@ -2,16 +2,20 @@ import { AdaptationProvider } from '../context/AdaptationContext';
 import { StudyProvider, useStudyContext } from '../context/StudyContext';
 import { useBehaviourCollector } from '../hooks/useBehaviourCollector';
 import { useAdaptationEngine } from '../hooks/useAdaptationEngine';
+import { useAdaptationContext } from '../context/AdaptationContext';
 import { applyUIState } from '../utils/applyUIState';
-import { useEffect } from 'react';
+import { DEFAULT_UI } from '../constants';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSelector } from '../components/LanguageSelector';
 import { ProgressTracker } from '../components/study/ProgressTracker';
 import { ConsentScreen } from '../components/study/ConsentScreen';
+import { DemographicsScreen } from '../components/study/DemographicsScreen';
 import { WarmupPhase } from '../components/study/WarmupPhase';
 import { TaskRunner } from '../components/study/TaskRunner';
 import { SUSQuestionnaire } from '../components/study/SUSQuestionnaire';
 import { NASATLXQuestionnaire } from '../components/study/NASATLXQuestionnaire';
+import { FeedbackScreen } from '../components/study/FeedbackScreen';
 import { SessionSummary } from '../components/study/SessionSummary';
 import { AdaptationMonitor } from '../components/AdaptationMonitor';
 
@@ -19,9 +23,24 @@ function StudyFlowContent() {
   const { state } = useStudyContext();
   const { t } = useTranslation();
 
-  const enabled = state.condition === 'adaptive' && state.consentGiven;
-  const signals = useBehaviourCollector(state.sessionId, enabled);
-  const uiState = useAdaptationEngine(signals, enabled, state.sessionId);
+  const { dispatch: adaptDispatch } = useAdaptationContext();
+  const prevSessionId = useRef(state.sessionId);
+
+  // Reset UI to defaults when starting a new session (e.g., switching from adaptive to control)
+  useEffect(() => {
+    if (state.sessionId && state.sessionId !== prevSessionId.current) {
+      adaptDispatch({ type: 'RESET' });
+      applyUIState(DEFAULT_UI);
+      prevSessionId.current = state.sessionId;
+    }
+  }, [state.sessionId, adaptDispatch]);
+
+  // Always collect signals (both conditions need behavioral data for comparison)
+  const collectSignals = state.consentGiven;
+  // Only adapt UI in the adaptive condition
+  const adaptEnabled = state.condition === 'adaptive' && state.consentGiven;
+  const signals = useBehaviourCollector(state.sessionId, collectSignals);
+  const uiState = useAdaptationEngine(signals, adaptEnabled, state.sessionId);
 
   useEffect(() => {
     applyUIState(uiState);
@@ -31,6 +50,8 @@ function StudyFlowContent() {
     switch (state.step) {
       case 'consent':
         return <ConsentScreen />;
+      case 'demographics':
+        return <DemographicsScreen />;
       case 'warmup':
         return <WarmupPhase />;
       case 'tasks':
@@ -39,6 +60,8 @@ function StudyFlowContent() {
         return <SUSQuestionnaire />;
       case 'nasatlx':
         return <NASATLXQuestionnaire />;
+      case 'feedback':
+        return <FeedbackScreen />;
       case 'summary':
       case 'complete':
         return <SessionSummary />;

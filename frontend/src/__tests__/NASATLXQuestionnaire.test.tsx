@@ -32,22 +32,22 @@ describe('NASATLXQuestionnaire', () => {
 
   it('renders Mental Demand dimension', () => {
     renderWithProvider();
-    expect(screen.getByText('Cerinta Mentala')).toBeDefined();
+    expect(screen.getByText(/Cerință Mentală/i)).toBeDefined();
   });
 
   it('renders Physical Demand dimension', () => {
     renderWithProvider();
-    expect(screen.getByText('Cerinta Fizica')).toBeDefined();
+    expect(screen.getByText(/Cerință Fizică/i)).toBeDefined();
   });
 
-  it('renders 7 radio buttons per dimension (42 total)', () => {
+  it('renders 6 range sliders (one per dimension)', () => {
     renderWithProvider();
-    const radios = screen.getAllByRole('radio');
-    expect(radios.length).toBe(42);
+    const sliders = screen.getAllByRole('slider');
+    expect(sliders.length).toBe(6);
   });
 
   it('renders submit button', () => {
     renderWithProvider();
-    expect(screen.getByRole('button', { name: /continua la sumar/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /continu.*feedback/i })).toBeDefined();
   });
 });

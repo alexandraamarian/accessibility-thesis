@@ -67,6 +67,10 @@ export class AnalyticsService {
         signalSnapshots.map((s) => s.scrollReversalRate || 0)
       );
       const avgTremorScore = this.average(signalSnapshots.map((s) => s.tremorScore || 0));
+      const avgRageClickCount = this.average(signalSnapshots.map((s) => s.rageClickCount || 0));
+      const avgMouseHesitationScore = this.average(signalSnapshots.map((s) => s.mouseHesitationScore || 0));
+      const avgIdleSeconds = this.average(signalSnapshots.map((s) => s.idleSeconds || 0));
+      const avgReadingSpeed = this.average(signalSnapshots.map((s) => s.readingSpeed || 0));
 
       // Calculate task metrics
       const avgTaskDuration = this.average(taskEvents.map((e) => e.payload.duration || 0));
@@ -80,20 +84,36 @@ export class AnalyticsService {
           1000
         : null;
 
+      // Extract demographics and device info from session metadata
+      const demographics = session.metadata?.demographics || {};
+      const device = session.metadata?.deviceInfo || {};
+
       return {
         participant_id: session.participantId,
         session_id: session.id,
         condition: session.condition,
         order_group: session.orderGroup,
+        age_range: demographics.ageRange || null,
+        gender: demographics.gender || null,
+        disability: demographics.hasDisability || null,
+        assistive_tech: demographics.assistiveTech || null,
+        computer_proficiency: demographics.computerProficiency || null,
+        screen_width: device.screenWidth || null,
+        screen_height: device.screenHeight || null,
+        input_type: device.inputType || null,
+        touch_support: device.touchSupport ?? null,
+        user_agent: device.userAgent || null,
+        open_ended_feedback: session.metadata?.openEndedFeedback || null,
         started_at: session.startedAt.toISOString(),
         ended_at: session.endedAt ? session.endedAt.toISOString() : null,
         sus_score: session.susScore,
-        nasa_tlx_mental: session.nasaTlx?.mental || null,
-        nasa_tlx_physical: session.nasaTlx?.physical || null,
-        nasa_tlx_temporal: session.nasaTlx?.temporal || null,
-        nasa_tlx_performance: session.nasaTlx?.performance || null,
-        nasa_tlx_effort: session.nasaTlx?.effort || null,
-        nasa_tlx_frustration: session.nasaTlx?.frustration || null,
+        nasa_tlx_mental: session.nasaTlx?.mental ?? null,
+        nasa_tlx_physical: session.nasaTlx?.physical ?? null,
+        nasa_tlx_temporal: session.nasaTlx?.temporal ?? null,
+        // Performance is reverse-scored for analysis: low raw = good, so invert to match other dimensions
+        nasa_tlx_performance: session.nasaTlx?.performance != null ? 100 - session.nasaTlx.performance : null,
+        nasa_tlx_effort: session.nasaTlx?.effort ?? null,
+        nasa_tlx_frustration: session.nasaTlx?.frustration ?? null,
         adaptation_count: session.adaptations.length,
         first_adaptation_time: firstAdaptationTime,
         zoom_count_avg: avgZoomCount,
@@ -101,6 +121,10 @@ export class AnalyticsService {
         dwell_seconds_avg: avgDwellSeconds,
         scroll_reversal_rate_avg: avgScrollReversalRate,
         tremor_score_avg: avgTremorScore,
+        rage_click_count_avg: avgRageClickCount,
+        mouse_hesitation_score_avg: avgMouseHesitationScore,
+        idle_seconds_avg: avgIdleSeconds,
+        reading_speed_avg: avgReadingSpeed,
         task_duration_avg: avgTaskDuration,
         task_errors_total: totalErrors,
       };

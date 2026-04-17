@@ -14,7 +14,7 @@ export class Session {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'participant_id' })
+  @Column({ name: 'participant_id', type: 'varchar' })
   participantId: string;
 
   @Column({ type: 'varchar', length: 20 })
@@ -29,7 +29,7 @@ export class Session {
   @Column({ name: 'ended_at', type: 'timestamp', nullable: true })
   endedAt: Date | null;
 
-  @Column({ name: 'sus_score', type: 'integer', nullable: true })
+  @Column({ name: 'sus_score', type: 'real', nullable: true })
   susScore: number | null;
 
   @Column({ name: 'nasa_tlx', type: 'jsonb', nullable: true })

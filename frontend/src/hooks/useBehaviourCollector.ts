@@ -76,6 +76,22 @@ export function useBehaviourCollector(
   // Track section character counts
   const sectionCharCounts = useRef<Record<string, number>>({});
 
+  // Clear all sliding windows when sessionId changes (prevents stale data between sessions)
+  useEffect(() => {
+    zoomWindow.current.clear();
+    tapWindow.current.clear();
+    dwellWindow.current.clear();
+    scrollWindow.current.clear();
+    tremorWindow.current.clear();
+    rageClickWindow.current.clear();
+    hesitationWindow.current.clear();
+    readingDwellWindow.current.clear();
+    dwellSessions.current.clear();
+    lastInteraction.current = Date.now();
+    sectionCharCounts.current = {};
+    setSignals(EMPTY_SNAPSHOT);
+  }, [sessionId]);
+
   // 1. ZOOM DETECTION
   useEffect(() => {
     if (!enabled) return;
@@ -114,10 +130,16 @@ export function useBehaviourCollector(
         'button, a, input, textarea, select, [data-interactive]'
       );
 
-      tapWindow.current.add(
-        { x: e.clientX, y: e.clientY, missed: !isInteractive },
-        now
-      );
+      // Only count as a tap (hit or miss) when clicking near interactive elements.
+      // This avoids counting normal content clicks (text selection, reading) as misses.
+      const nearInteractive = isInteractive || isNearInteractiveElement(e.clientX, e.clientY, 50);
+
+      if (nearInteractive) {
+        tapWindow.current.add(
+          { x: e.clientX, y: e.clientY, missed: !isInteractive },
+          now
+        );
+      }
 
       tremorWindow.current.add(
         { x: e.clientX, y: e.clientY, missed: !isInteractive },
@@ -131,6 +153,28 @@ export function useBehaviourCollector(
       );
     };
 
+    /**
+     * Check if a click position is within `radius` pixels of any interactive element.
+     * This ensures only near-miss clicks are counted as missed taps,
+     * not arbitrary clicks on content areas.
+     */
+    function isNearInteractiveElement(x: number, y: number, radius: number): boolean {
+      const interactives = document.querySelectorAll(
+        'button, a, input, textarea, select, [data-interactive]'
+      );
+      for (const el of interactives) {
+        const rect = el.getBoundingClientRect();
+        const closestX = Math.max(rect.left, Math.min(x, rect.right));
+        const closestY = Math.max(rect.top, Math.min(y, rect.bottom));
+        const dx = x - closestX;
+        const dy = y - closestY;
+        if (Math.sqrt(dx * dx + dy * dy) <= radius) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     window.addEventListener('pointerdown', handlePointerDown);
 
     return () => {
@@ -139,17 +183,9 @@ export function useBehaviourCollector(
   }, [enabled]);
 
   // 3. DWELL TIME TRACKING
+  // Uses MutationObserver to detect when article sections appear in the DOM
   useEffect(() => {
     if (!enabled) return;
-
-    // Compute section character counts
-    const sections = document.querySelectorAll('[data-section-id]');
-    sections.forEach((section) => {
-      const sectionId = section.getAttribute('data-section-id');
-      if (sectionId) {
-        sectionCharCounts.current[sectionId] = (section.textContent || '').length;
-      }
-    });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -173,10 +209,34 @@ export function useBehaviourCollector(
       { threshold: [0.6] }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    const observedSections = new Set<Element>();
+
+    function scanAndObserveSections() {
+      const sections = document.querySelectorAll('[data-section-id]');
+      sections.forEach((section) => {
+        if (!observedSections.has(section)) {
+          observedSections.add(section);
+          observer.observe(section);
+          const sectionId = section.getAttribute('data-section-id');
+          if (sectionId) {
+            sectionCharCounts.current[sectionId] = (section.textContent || '').length;
+          }
+        }
+      });
+    }
+
+    // Initial scan
+    scanAndObserveSections();
+
+    // Watch for new sections being added to the DOM
+    const mutationObserver = new MutationObserver(() => {
+      scanAndObserveSections();
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, [enabled]);
 

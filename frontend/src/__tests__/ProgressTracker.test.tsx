@@ -3,14 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { ProgressTracker } from '../components/study/ProgressTracker';
 
 describe('ProgressTracker', () => {
-  it('renders all 6 steps', () => {
+  it('renders all 7 steps', () => {
     render(<ProgressTracker currentStep="consent" />);
-    expect(screen.getByText('Consimtamant')).toBeDefined();
-    expect(screen.getByText('Incalzire')).toBeDefined();
+    expect(screen.getByText('Consimțământ')).toBeDefined();
+    expect(screen.getByText('Profil')).toBeDefined();
+    expect(screen.getByText('Încălzire')).toBeDefined();
     expect(screen.getByText('Sarcini')).toBeDefined();
     expect(screen.getByText('SUS')).toBeDefined();
     expect(screen.getByText('NASA-TLX')).toBeDefined();
-    expect(screen.getByText('Sumar')).toBeDefined();
+    expect(screen.getByText('Rezumat')).toBeDefined();
   });
 
   it('marks current step with aria-current="step"', () => {
@@ -21,7 +22,7 @@ describe('ProgressTracker', () => {
 
   it('does not mark non-current steps with aria-current', () => {
     render(<ProgressTracker currentStep="tasks" />);
-    const consentStep = screen.getByText('Consimtamant').closest('li');
+    const consentStep = screen.getByText('Consimțământ').closest('li');
     expect(consentStep?.getAttribute('aria-current')).toBeNull();
   });
 

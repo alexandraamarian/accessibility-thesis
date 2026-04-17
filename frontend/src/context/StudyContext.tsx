@@ -2,10 +2,12 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 export type StudyStep =
   | 'consent'
+  | 'demographics'
   | 'warmup'
   | 'tasks'
   | 'sus'
   | 'nasatlx'
+  | 'feedback'
   | 'summary'
   | 'complete';
 
@@ -48,6 +50,7 @@ type StudyAction =
   | { type: 'ADD_TASK_RESULT'; payload: TaskResult }
   | { type: 'SET_SUS_RESPONSES'; payload: number[] }
   | { type: 'SET_NASA_TLX'; payload: NasaTlxResponses }
+  | { type: 'START_NEXT_SESSION'; payload: { sessionId: string; condition: 'adaptive' | 'control' } }
   | { type: 'RESET' };
 
 const initialState: StudyState = {
@@ -84,6 +87,15 @@ function studyReducer(state: StudyState, action: StudyAction): StudyState {
       return { ...state, susResponses: action.payload };
     case 'SET_NASA_TLX':
       return { ...state, nasaTlxResponses: action.payload };
+    case 'START_NEXT_SESSION':
+      return {
+        ...initialState,
+        participantId: state.participantId,
+        condition: action.payload.condition,
+        sessionId: action.payload.sessionId,
+        consentGiven: true,
+        step: 'tasks',
+      };
     case 'RESET':
       return initialState;
     default:

@@ -82,7 +82,7 @@ export function AdaptationMonitor({ signals, uiState, sessionId }: AdaptationMon
       style={{
         backgroundColor: 'var(--bg)',
         color: 'var(--text)',
-        width: '380px',
+        width: '420px',
       }}
       data-interactive
     >
@@ -171,7 +171,7 @@ export function AdaptationMonitor({ signals, uiState, sessionId }: AdaptationMon
         </div>
 
         {/* Metadata */}
-        <div className="text-xs opacity-50 pt-2 border-t border-accent border-opacity-30">
+        <div className="text-xs opacity-50 pt-2 pb-2 border-t border-accent border-opacity-30">
           <div>{t('monitor.taps', { taps: signals.totalTaps, scrolls: signals.totalScrollChanges })}</div>
           <div>{t('monitor.updated', { time: new Date(signals.timestamp).toLocaleTimeString() })}</div>
         </div>

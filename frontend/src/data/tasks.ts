@@ -10,6 +10,8 @@ export interface StudyTask {
   title: string;
   instruction: string;
   expectedAnswer?: string;
+  /** Romanian expected answer (used when app language is RO) */
+  expectedAnswerRo?: string;
   formFields?: FormField[];
   targetSectionId?: string;
 }
@@ -23,34 +25,35 @@ export interface FormField {
 }
 
 export const tasks: Record<string, StudyTask[]> = {
-  'adaptive-interfaces': [
+  'climate-technology': [
     {
-      id: 'ai-find',
+      id: 'ct-find',
       type: 'find_answer',
-      articleSetId: 'adaptive-interfaces',
+      articleSetId: 'climate-technology',
       title: 'Find Information',
-      instruction: 'In which section is the sliding time window for tremor measurement discussed? Type the section heading.',
-      expectedAnswer: 'Behavior Signal Detection',
+      instruction: 'In which section is the Orca plant in Iceland discussed? Type the section heading.',
+      expectedAnswer: 'Carbon Capture and Removal',
+      expectedAnswerRo: 'Captarea și Eliminarea Carbonului',
     },
     {
-      id: 'ai-form',
+      id: 'ct-form',
       type: 'form_completion',
-      articleSetId: 'adaptive-interfaces',
+      articleSetId: 'climate-technology',
       title: 'Complete the Form',
-      instruction: 'Based on the article, fill in the following details about the adaptation system.',
+      instruction: 'Based on the article, fill in the following details about climate technology.',
       formFields: [
-        { id: 'max_font', label: 'Maximum font size (px)', type: 'text', required: true },
-        { id: 'study_design', label: 'Study design type', type: 'select', options: ['Between-subjects', 'Within-subjects', 'Mixed'], required: true },
-        { id: 'sample_size', label: 'Target sample size', type: 'text', required: true },
+        { id: 'solar_reduction', label: 'Solar PV cost reduction since 2010 (%)', type: 'text', required: true },
+        { id: 'ev_sales', label: 'Global EV sales in 2023 (millions)', type: 'text', required: true },
+        { id: 'co2_removal', label: 'CO2 removal needed by 2050 (gigatonnes/year, e.g. "6-10")', type: 'text', required: true },
       ],
     },
     {
-      id: 'ai-nav',
+      id: 'ct-nav',
       type: 'navigation',
-      articleSetId: 'adaptive-interfaces',
+      articleSetId: 'climate-technology',
       title: 'Navigate and Interact',
-      instruction: 'Scroll to the "Evaluation and Expected Outcomes" section and click any button in the interaction test area.',
-      targetSectionId: 'evaluation',
+      instruction: 'Scroll to the "Future Outlook and Challenges" section and click any button in the interaction test area.',
+      targetSectionId: 'future-outlook',
     },
   ],
   'digital-accessibility': [
@@ -61,6 +64,7 @@ export const tasks: Record<string, StudyTask[]> = {
       title: 'Find Information',
       instruction: 'In which section is the Robles v. Domino\'s Pizza case mentioned? Type the section heading.',
       expectedAnswer: 'Legal and Regulatory Landscape',
+      expectedAnswerRo: 'Peisajul Legal și de Reglementare',
     },
     {
       id: 'da-form',
@@ -91,6 +95,7 @@ export const tasks: Record<string, StudyTask[]> = {
       title: 'Find Information',
       instruction: 'In which section is the Hick-Hyman Law discussed? Type the section heading.',
       expectedAnswer: 'Interaction Models and Paradigms',
+      expectedAnswerRo: 'Modele și Paradigme de Interacțiune',
     },
     {
       id: 'hci-form',

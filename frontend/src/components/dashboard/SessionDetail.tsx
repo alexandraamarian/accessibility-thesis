@@ -32,15 +32,15 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
   const { session, signalSnapshots, adaptations, taskMetrics } = analytics;
 
   const signalKeys = [
-    { key: 'zoomCount', label: t('dashboard.sessionDetail.signalLabels.zoomCount'), threshold: THRESHOLDS.zoomCount },
-    { key: 'missedTapRate', label: t('dashboard.sessionDetail.signalLabels.missedTapRate'), threshold: THRESHOLDS.missedTapRate },
-    { key: 'avgDwellSeconds', label: t('dashboard.sessionDetail.signalLabels.avgDwell'), threshold: THRESHOLDS.avgDwellSeconds },
-    { key: 'scrollReversalRate', label: t('dashboard.sessionDetail.signalLabels.scrollReversal'), threshold: THRESHOLDS.scrollReversalRate },
-    { key: 'tremorScore', label: t('dashboard.sessionDetail.signalLabels.tremor'), threshold: THRESHOLDS.tremorScore },
-    { key: 'rageClickCount', label: t('dashboard.sessionDetail.signalLabels.rageClicks'), threshold: THRESHOLDS.rageClickCount },
-    { key: 'mouseHesitationScore', label: t('dashboard.sessionDetail.signalLabels.hesitation'), threshold: THRESHOLDS.mouseHesitationScore },
-    { key: 'idleSeconds', label: t('dashboard.sessionDetail.signalLabels.idle'), threshold: THRESHOLDS.idleSeconds },
-    { key: 'readingSpeed', label: t('dashboard.sessionDetail.signalLabels.readSpeed'), threshold: THRESHOLDS.readingSpeed },
+    { key: 'zoomCount', label: t('dashboard.sessionDetail.signalLabels.zoomCount'), tooltip: t('dashboard.sessionDetail.signalTooltips.zoomCount'), threshold: THRESHOLDS.zoomCount },
+    { key: 'missedTapRate', label: t('dashboard.sessionDetail.signalLabels.missedTapRate'), tooltip: t('dashboard.sessionDetail.signalTooltips.missedTapRate'), threshold: THRESHOLDS.missedTapRate },
+    { key: 'avgDwellSeconds', label: t('dashboard.sessionDetail.signalLabels.avgDwellSeconds'), tooltip: t('dashboard.sessionDetail.signalTooltips.avgDwellSeconds'), threshold: THRESHOLDS.avgDwellSeconds },
+    { key: 'scrollReversalRate', label: t('dashboard.sessionDetail.signalLabels.scrollReversalRate'), tooltip: t('dashboard.sessionDetail.signalTooltips.scrollReversalRate'), threshold: THRESHOLDS.scrollReversalRate },
+    { key: 'tremorScore', label: t('dashboard.sessionDetail.signalLabels.tremorScore'), tooltip: t('dashboard.sessionDetail.signalTooltips.tremorScore'), threshold: THRESHOLDS.tremorScore },
+    { key: 'rageClickCount', label: t('dashboard.sessionDetail.signalLabels.rageClickCount'), tooltip: t('dashboard.sessionDetail.signalTooltips.rageClickCount'), threshold: THRESHOLDS.rageClickCount },
+    { key: 'mouseHesitationScore', label: t('dashboard.sessionDetail.signalLabels.mouseHesitationScore'), tooltip: t('dashboard.sessionDetail.signalTooltips.mouseHesitationScore'), threshold: THRESHOLDS.mouseHesitationScore },
+    { key: 'idleSeconds', label: t('dashboard.sessionDetail.signalLabels.idleSeconds'), tooltip: t('dashboard.sessionDetail.signalTooltips.idleSeconds'), threshold: THRESHOLDS.idleSeconds },
+    { key: 'readingSpeed', label: t('dashboard.sessionDetail.signalLabels.readingSpeed'), tooltip: t('dashboard.sessionDetail.signalTooltips.readingSpeed'), threshold: THRESHOLDS.readingSpeed },
   ];
 
   return (
@@ -53,18 +53,10 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
         {t('dashboard.sessionDetail.sessionHeading', { participant: session.participantId, condition: session.condition })}
       </h2>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="border border-accent border-opacity-20 rounded p-3">
           <div className="text-xs opacity-60">{t('dashboard.sessionDetail.started')}</div>
           <div className="font-mono text-sm">{new Date(session.startedAt).toLocaleString()}</div>
-        </div>
-        <div className="border border-accent border-opacity-20 rounded p-3">
-          <div className="text-xs opacity-60">{t('dashboard.sessionDetail.duration')}</div>
-          <div className="font-mono text-sm">
-            {session.endedAt
-              ? `${Math.round((new Date(session.endedAt).getTime() - new Date(session.startedAt).getTime()) / 60000)}m`
-              : t('common.active')}
-          </div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3">
           <div className="text-xs opacity-60">{t('dashboard.sessionDetail.susScore')}</div>
@@ -94,18 +86,22 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
       {/* Signal History */}
       <div className="mb-6">
         <h3 className="font-semibold text-accent mb-2">{t('dashboard.sessionDetail.signalHistory', { count: signalSnapshots.length })}</h3>
-        <div className="space-y-3">
-          {signalKeys.map(({ key, label, threshold }) => {
+        <div className="grid grid-cols-1 gap-3">
+          {signalKeys.map(({ key, label, tooltip, threshold }) => {
             const data = signalSnapshots.map((s: any) => {
               const signals = s.signals || s;
               return signals[key] || 0;
             });
+            const lastVal = data[data.length - 1] || 0;
             return (
-              <div key={key} className="flex items-center gap-2">
-                <span className="w-32 text-xs opacity-75">{label}</span>
-                <div className="flex-1">
-                  <SignalSparkline data={data} threshold={threshold} height={30} />
+              <div key={key} className="border border-accent border-opacity-10 rounded p-2">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-xs font-medium opacity-75 cursor-help" title={tooltip}>{label} ⓘ</span>
+                  <span className="text-xs font-mono opacity-50">
+                    {lastVal.toFixed(2)} / {threshold}
+                  </span>
                 </div>
+                <SignalSparkline data={data} threshold={threshold} height={48} />
               </div>
             );
           })}
@@ -138,25 +134,50 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
       {/* Task Metrics */}
       {taskMetrics.length > 0 && (
         <div>
-          <h3 className="font-semibold text-accent mb-2">{t('dashboard.sessionDetail.taskMetrics')}</h3>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-accent border-opacity-30">
-                <th className="text-left p-2">{t('dashboard.sessionDetail.task')}</th>
-                <th className="text-left p-2">{t('dashboard.sessionDetail.duration')}</th>
-                <th className="text-left p-2">{t('dashboard.sessionDetail.errors')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {taskMetrics.map((t: any, i: number) => (
-                <tr key={i} className="border-b border-gray-800">
-                  <td className="p-2">{t.taskId || `Task ${i + 1}`}</td>
-                  <td className="p-2 font-mono">{t.duration ? `${t.duration.toFixed(1)}s` : '-'}</td>
-                  <td className="p-2 font-mono">{t.errors ?? '-'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <h3 className="font-semibold text-accent mb-2">
+            {t('dashboard.sessionDetail.taskMetrics')} ({taskMetrics.length})
+          </h3>
+          <div className="grid grid-cols-1 gap-3">
+            {taskMetrics.map((task: any, i: number) => {
+              const taskType = task.taskType || task.type || 'unknown';
+              const typeLabel = taskType === 'find_answer' ? t('dashboard.sessionDetail.taskTypes.findAnswer')
+                : taskType === 'form_completion' ? t('dashboard.sessionDetail.taskTypes.formCompletion')
+                : taskType === 'navigation' ? t('dashboard.sessionDetail.taskTypes.navigation')
+                : taskType;
+              const dur = typeof task.duration === 'number' ? task.duration : 0;
+              return (
+                <div key={i} className="border border-accent border-opacity-15 rounded p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-accent bg-accent bg-opacity-15 px-2 py-0.5 rounded">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm font-medium">{typeLabel}</span>
+                    </div>
+                    <span className="text-xs font-mono opacity-50">{task.taskId}</span>
+                  </div>
+                  <div className="flex gap-6 text-xs">
+                    <div>
+                      <span className="opacity-50">{t('dashboard.sessionDetail.duration')}: </span>
+                      <span className="font-mono text-accent">{dur.toFixed(1)}s</span>
+                    </div>
+                    <div>
+                      <span className="opacity-50">{t('dashboard.sessionDetail.errors')}: </span>
+                      <span className={`font-mono ${(task.errors || 0) > 0 ? 'text-red-400' : 'text-green-400'}`}>
+                        {task.errors || 0}
+                      </span>
+                    </div>
+                    {task.answer && (
+                      <div className="flex-1 truncate">
+                        <span className="opacity-50">{t('dashboard.sessionDetail.answer')}: </span>
+                        <span className="font-mono text-xs opacity-75">{task.answer}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

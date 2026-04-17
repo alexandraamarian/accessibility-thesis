@@ -16,45 +16,52 @@ export const DEFAULT_UI: UIState = {
 
 /**
  * Threshold constants for adaptation rules
- * Each threshold is justified by peer-reviewed research:
- * - Nielsen (1993): repetitive corrective action patterns
- * - Fitts (1954): target size and error rate
- * - Rayner et al. (2016): reading speed and comprehension
- * - Buscher et al. (2012): scroll behavior as reading signal
- * - Wobbrock et al. (2008): motor impairment thresholds
- * - Hurst et al. (2013): rage click detection for cursor enlargement
- * - Gajos et al. (2010): layout simplification triggers
- * - Dickinson et al. (2002): reading aid thresholds
+ *
+ * Each threshold is an original design decision informed by the broader
+ * findings of the cited research. The specific numerical values were
+ * selected through iterative pilot testing, not directly sourced from
+ * the cited papers. Citations indicate the theoretical foundation, not
+ * the origin of the exact value.
+ *
+ * Theoretical foundations:
+ * - Nielsen (1993): usability heuristics and repetitive corrective actions
+ * - Fitts (1954): movement time as a function of target size and distance
+ * - Rayner et al. (2016): eye movement research on reading comprehension
+ * - Buscher et al. (2012): scroll behavior as an indicator of reading difficulty
+ * - Wobbrock et al. (2008, 2011): pointing performance models and ability-based design
+ * - Hurst et al. (2013): automatic detection of pointing accuracy problems
+ * - Gajos et al. (2010): automatically generating personalized interfaces
+ * - Dickinson et al. (2002): older adults and web-based reading difficulty
  */
 export const THRESHOLDS = {
-  /** 3 zoom events in 60s window (Nielsen 1993) */
+  /** 3 zoom events in 60s window. Informed by Nielsen (1993) on repetitive corrective actions. */
   zoomCount: 3,
 
-  /** 35% missed tap rate in 30s window (Fitts 1954, Apple HIG 44dp) */
+  /** 35% missed tap rate in 30s window. Informed by Fitts (1954) and Apple HIG 44dp touch target. */
   missedTapRate: 0.35,
 
-  /** 7 seconds average dwell time in 90s window (Rayner et al. 2016) */
+  /** 7 seconds average dwell time in 90s window. Informed by Rayner et al. (2016) on reading difficulty. */
   avgDwellSeconds: 7,
 
-  /** 30% scroll reversal rate in 45s window (Buscher et al. 2012) */
+  /** 30% scroll reversal rate in 45s window. Informed by Buscher et al. (2012) on re-reading patterns. */
   scrollReversalRate: 0.30,
 
-  /** 18px tremor score for spacing_increase (Wobbrock et al. 2008) */
+  /** 18px tremor score for spacing_increase. Informed by Wobbrock et al. (2008) on pointing imprecision. */
   tremorScore: 18,
 
-  /** 27px tremor score for motion_reduce (higher threshold) */
+  /** 27px tremor score for motion_reduce (higher severity). Informed by Wobbrock et al. (2011) on ability-based design. */
   tremorScoreHigh: 27,
 
-  /** 3 rage click clusters in 2s window (Hurst et al. 2013) */
+  /** 3 rage click clusters in 5s window. Informed by Hurst et al. (2013) on pointing accuracy problems. */
   rageClickCount: 3,
 
-  /** Hesitation score >= 3 over interactive elements in 10s (Gajos et al. 2010) */
+  /** Hesitation score >= 3 over interactive elements in 10s. Informed by Gajos et al. (2010) on UI personalization. */
   mouseHesitationScore: 3,
 
-  /** 30 seconds idle time (Gajos et al. 2010) */
+  /** 30 seconds idle time. Informed by Gajos et al. (2010) on engagement-based simplification. */
   idleSeconds: 30,
 
-  /** Below 100 words per minute reading speed (Dickinson et al. 2002) */
+  /** Below 100 wpm reading speed. Informed by Dickinson et al. (2002) on older adults' reading rates. */
   readingSpeed: 100,
 } as const;
 

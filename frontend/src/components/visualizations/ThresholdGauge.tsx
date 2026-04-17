@@ -22,7 +22,7 @@ export function ThresholdGauge({
 
   return (
     <div className="flex items-center gap-2 text-xs">
-      <span className="w-20 truncate opacity-75">{label}</span>
+      <span className="w-32 truncate opacity-75" title={label}>{label}</span>
       <div className="flex-1 relative h-3 bg-gray-700 rounded-full overflow-hidden">
         <div
           className="absolute inset-y-0 left-0 rounded-full transition-all duration-300"

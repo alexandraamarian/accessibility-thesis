@@ -68,12 +68,13 @@ function TaskView({
   taskIndex: number;
   onComplete: (result: TaskResult) => void;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const startTime = useRef(Date.now());
   const [errors, setErrors] = useState(0);
   const [answer, setAnswer] = useState('');
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [finalResult, setFinalResult] = useState<TaskResult | null>(null);
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
@@ -89,6 +90,7 @@ function TaskView({
 
     let taskErrors = 0;
 
+    // Validate required fields are not empty
     if (task.type === 'find_answer' && !answer.trim()) {
       setErrors((e) => e + 1);
       taskErrors++;
@@ -101,6 +103,38 @@ function TaskView({
         setErrors((e) => e + missing.length);
         taskErrors += missing.length;
         return;
+      }
+    }
+
+    // Validate answer correctness (fuzzy match for find_answer tasks)
+    if (task.type === 'find_answer' && task.expectedAnswer) {
+      // Strip diacritics so "Captarea si Eliminarea Carbonului" matches
+      // "Captarea și Eliminarea Carbonului"
+      const stripDiacritics = (s: string) =>
+        s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const normalize = (s: string) =>
+        stripDiacritics(s).toLowerCase().trim().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ');
+
+      const userNorm = normalize(answer);
+
+      // Use Romanian expected answer if available and language is Romanian
+      const lang = i18n.language;
+      const expected = (lang === 'ro' && task.expectedAnswerRo)
+        ? task.expectedAnswerRo
+        : task.expectedAnswer;
+      const expectedNorm = normalize(expected);
+
+      // Also check against both language versions for robustness
+      const expectedEnNorm = normalize(task.expectedAnswer);
+      const expectedRoNorm = task.expectedAnswerRo ? normalize(task.expectedAnswerRo) : '';
+
+      const isCorrect =
+        userNorm.includes(expectedNorm) || expectedNorm.includes(userNorm) ||
+        userNorm.includes(expectedEnNorm) || expectedEnNorm.includes(userNorm) ||
+        (expectedRoNorm && (userNorm.includes(expectedRoNorm) || expectedRoNorm.includes(userNorm)));
+
+      if (!isCorrect) {
+        taskErrors++;
       }
     }
 
@@ -124,7 +158,9 @@ function TaskView({
       answer: result.answer,
     });
 
-    onComplete(result);
+    // Show result briefly before advancing
+    setFinalResult(result);
+    setTimeout(() => onComplete(result), 2000);
   };
 
   return (
@@ -202,9 +238,21 @@ function TaskView({
         </p>
       )}
 
-      <Button onClick={handleSubmit} disabled={submitted}>
-        {submitted ? t('tasks.submitted') : t('tasks.submitContinue')}
-      </Button>
+      {finalResult ? (
+        <div className="flex items-center gap-4 p-3 rounded-lg bg-accent bg-opacity-10 border border-accent border-opacity-30">
+          <span className="text-accent font-semibold">{t('tasks.submitted')}</span>
+          <span className="font-mono text-sm">
+            {Math.floor(finalResult.durationSeconds / 60)}:{Math.round(finalResult.durationSeconds % 60).toString().padStart(2, '0')}
+          </span>
+          {finalResult.errors > 0 && (
+            <span className="text-red-400 text-sm">{finalResult.errors} {t('tasks.errors')}</span>
+          )}
+        </div>
+      ) : (
+        <Button onClick={handleSubmit} disabled={submitted}>
+          {t('tasks.submitContinue')}
+        </Button>
+      )}
     </div>
   );
 }

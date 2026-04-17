@@ -7,10 +7,12 @@ interface ProgressTrackerProps {
 
 const STEPS: { key: StudyStep; labelKey: string }[] = [
   { key: 'consent', labelKey: 'study.steps.consent' },
+  { key: 'demographics', labelKey: 'study.steps.demographics' },
   { key: 'warmup', labelKey: 'study.steps.warmup' },
   { key: 'tasks', labelKey: 'study.steps.tasks' },
   { key: 'sus', labelKey: 'study.steps.sus' },
   { key: 'nasatlx', labelKey: 'study.steps.nasatlx' },
+  { key: 'feedback', labelKey: 'study.steps.feedback' },
   { key: 'summary', labelKey: 'study.steps.summary' },
 ];
 

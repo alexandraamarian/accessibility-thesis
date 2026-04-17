@@ -101,7 +101,11 @@ export function Dashboard() {
             ].map((item) => (
               <li key={item.key}>
                 <button
-                  onClick={() => setView(item.key)}
+                  onClick={() => {
+                    setView(item.key);
+                    setSelectedSessionId(null);
+                    loadSessions();
+                  }}
                   className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
                     view === item.key
                       ? 'bg-accent bg-opacity-20 text-accent'
@@ -129,7 +133,7 @@ export function Dashboard() {
 
         {/* Main content */}
         <main className="flex-1 p-6">
-          {view === 'sessions' && !selectedSessionId && (
+          {view === 'sessions' && (
             <SessionList
               sessions={sessions}
               onSelect={(id) => {
@@ -144,6 +148,7 @@ export function Dashboard() {
               onBack={() => {
                 setSelectedSessionId(null);
                 setView('sessions');
+                loadSessions();
               }}
             />
           )}

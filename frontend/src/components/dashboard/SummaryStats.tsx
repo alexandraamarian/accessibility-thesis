@@ -125,7 +125,7 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
               <BarChart data={nasaData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                 <XAxis dataKey="dimension" stroke="#9ca3af" />
-                <YAxis domain={[0, 7]} stroke="#9ca3af" />
+                <YAxis domain={[0, 100]} stroke="#9ca3af" />
                 <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #38bdf8' }} />
                 <Legend />
                 <Bar dataKey="Adaptive" fill="#38bdf8" radius={[4, 4, 0, 0]} />

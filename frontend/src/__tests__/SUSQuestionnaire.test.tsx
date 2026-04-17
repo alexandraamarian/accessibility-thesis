@@ -38,12 +38,12 @@ describe('SUSQuestionnaire', () => {
 
   it('renders submit button', () => {
     renderWithProvider();
-    expect(screen.getByRole('button', { name: /continua la nasa-tlx/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /continu.*nasa-tlx/i })).toBeDefined();
   });
 
   it('shows error when not all questions answered', async () => {
     const { container } = renderWithProvider();
-    const submitBtn = screen.getByRole('button', { name: /continua la nasa-tlx/i });
+    const submitBtn = screen.getByRole('button', { name: /continu.*nasa-tlx/i });
 
     // Simulate click on form submit
     const form = container.querySelector('form')!;

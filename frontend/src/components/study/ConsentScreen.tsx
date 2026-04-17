@@ -4,12 +4,13 @@ import { useStudyContext } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
 import { Button } from '../Button';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function ConsentScreen() {
   const { dispatch } = useStudyContext();
   const { t } = useTranslation();
-  const [participantId, setParticipantId] = useState('');
+  const [email, setEmail] = useState('');
   const [consentChecked, setConsentChecked] = useState(false);
-  const [condition, setCondition] = useState<'adaptive' | 'control'>('adaptive');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -17,8 +18,14 @@ export function ConsentScreen() {
     e.preventDefault();
     setError('');
 
-    if (!participantId.trim()) {
-      setError(t('consent.errorNoId'));
+    const trimmedEmail = email.trim().toLowerCase();
+
+    if (!trimmedEmail) {
+      setError(t('consent.errorNoEmail'));
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setError(t('consent.errorInvalidEmail'));
       return;
     }
     if (!consentChecked) {
@@ -32,12 +39,13 @@ export function ConsentScreen() {
       const response = await fetch('/api/sessions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          participantId: participantId.trim(),
-          condition,
-          orderGroup: condition === 'adaptive' ? 'adaptive_first' : 'control_first',
-        }),
+        body: JSON.stringify({ email: trimmedEmail }),
       });
+
+      if (response.status === 409) {
+        setError(t('consent.errorDuplicateEmail'));
+        return;
+      }
 
       if (!response.ok) {
         throw new Error('Failed to create session');
@@ -45,13 +53,39 @@ export function ConsentScreen() {
 
       const session = await response.json();
 
-      studyLogger.initialize(session.id);
-      studyLogger.log('consent_given', { participantId: participantId.trim(), condition });
+      // Condition is auto-assigned by the backend (blinded from participant)
+      const condition = session.condition;
 
-      dispatch({ type: 'SET_PARTICIPANT', payload: { participantId: participantId.trim(), condition } });
+      studyLogger.initialize(session.id);
+      studyLogger.log('consent_given', { email: trimmedEmail, condition });
+
+      // Log device info automatically for cross-device analysis
+      const deviceInfo = {
+        userAgent: navigator.userAgent,
+        screenWidth: screen.width,
+        screenHeight: screen.height,
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio,
+        touchSupport: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+        inputType: navigator.maxTouchPoints > 0 ? 'touch' : 'mouse',
+        language: navigator.language,
+        platform: navigator.platform,
+      };
+
+      // Store device info in session metadata
+      fetch(`/api/sessions/${session.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ metadata: { deviceInfo } }),
+      }).catch(() => {});
+
+      studyLogger.log('device_info', deviceInfo);
+
+      dispatch({ type: 'SET_PARTICIPANT', payload: { participantId: trimmedEmail, condition } });
       dispatch({ type: 'SET_SESSION_ID', payload: session.id });
       dispatch({ type: 'GIVE_CONSENT' });
-      dispatch({ type: 'SET_STEP', payload: 'warmup' });
+      dispatch({ type: 'SET_STEP', payload: 'demographics' });
     } catch {
       setError(t('consent.errorSessionFailed'));
     } finally {
@@ -73,34 +107,20 @@ export function ConsentScreen() {
           <legend className="text-accent font-semibold px-2">{t('consent.participantInfo')}</legend>
 
           <div className="mb-4">
-            <label htmlFor="participantId" className="block mb-2 font-medium">
-              {t('consent.participantId')}
+            <label htmlFor="email" className="block mb-2 font-medium">
+              {t('consent.email')}
             </label>
             <input
-              id="participantId"
-              type="text"
-              value={participantId}
-              onChange={(e) => setParticipantId(e.target.value)}
-              placeholder={t('consent.participantIdPlaceholder')}
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t('consent.emailPlaceholder')}
               className="w-full px-4 py-2 rounded border-2 border-gray-600 bg-transparent text-inherit focus:border-accent"
               required
+              autoComplete="email"
               aria-describedby={error ? 'consent-error' : undefined}
             />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="condition" className="block mb-2 font-medium">
-              {t('consent.condition')}
-            </label>
-            <select
-              id="condition"
-              value={condition}
-              onChange={(e) => setCondition(e.target.value as 'adaptive' | 'control')}
-              className="w-full px-4 py-2 rounded border-2 border-gray-600 bg-transparent text-inherit focus:border-accent"
-            >
-              <option value="adaptive">{t('consent.conditionAdaptive')}</option>
-              <option value="control">{t('consent.conditionControl')}</option>
-            </select>
           </div>
         </fieldset>
 
@@ -125,7 +145,7 @@ export function ConsentScreen() {
         </fieldset>
 
         {error && (
-          <div role="alert" className="mb-4 p-3 bg-red-900 bg-opacity-30 border border-red-500 rounded text-red-300">
+          <div role="alert" id="consent-error" className="mb-4 p-3 bg-red-900 bg-opacity-30 border border-red-500 rounded text-red-300">
             {error}
           </div>
         )}
