@@ -7,13 +7,15 @@ COPY frontend/package.json frontend/
 COPY backend/package.json backend/
 RUN npm ci
 
+# Shared config needed by both frontend and backend
+COPY tsconfig.base.json ./
+
 # Build frontend
 COPY frontend/ frontend/
 RUN npm run build --workspace=frontend
 
 # Build backend
 COPY backend/ backend/
-COPY tsconfig.base.json ./
 RUN npm run build --workspace=backend
 
 # Production image
