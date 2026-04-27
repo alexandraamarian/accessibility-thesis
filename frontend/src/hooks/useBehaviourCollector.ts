@@ -139,12 +139,15 @@ export function useBehaviourCollector(
           { x: e.clientX, y: e.clientY, missed: !isInteractive },
           now
         );
-      }
 
-      tremorWindow.current.add(
-        { x: e.clientX, y: e.clientY, missed: !isInteractive },
-        now
-      );
+        // Only track tremor from clicks near interactive elements.
+        // Clicks on different parts of the page (normal navigation) would produce
+        // huge std-dev that falsely indicates tremor.
+        tremorWindow.current.add(
+          { x: e.clientX, y: e.clientY, missed: !isInteractive },
+          now
+        );
+      }
 
       // Rage click tracking
       rageClickWindow.current.add(

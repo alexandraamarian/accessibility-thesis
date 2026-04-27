@@ -11,7 +11,8 @@ import { Button } from '../Button';
 export function TaskRunner() {
   const { state, dispatch } = useStudyContext();
   const { t } = useTranslation();
-  const articleSet = getArticleSetForParticipant(state.participantId);
+  const sessionOffset = state.condition === 'control' ? 1 : 0;
+  const articleSet = getArticleSetForParticipant(state.participantId, sessionOffset);
   const allTasks = getTasksForArticleSet(articleSet.id);
   const currentTask = allTasks[state.currentTaskIndex];
 
@@ -28,7 +29,7 @@ export function TaskRunner() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <h2
           className="font-bold adaptive-transition"
           style={{ fontSize: 'calc(var(--font-size-base) * 1.5)', lineHeight: 'var(--line-height)' }}
@@ -165,14 +166,19 @@ function TaskView({
 
   return (
     <div className="border-2 border-accent border-opacity-30 rounded-lg p-6">
-      <div className="flex justify-between items-start mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
         <h3
           className="font-semibold adaptive-transition"
           style={{ fontSize: 'calc(var(--font-size-base) * 1.25)', lineHeight: 'var(--line-height)' }}
         >
           {translatedTask?.title || task.title}
         </h3>
-        <span className="text-accent font-mono text-sm" aria-live="polite">
+        <span
+          className="text-accent font-mono text-sm"
+          aria-live="polite"
+          aria-label={t('common.elapsedTime', { time: `${Math.floor(elapsed / 60)}:${(elapsed % 60).toString().padStart(2, '0')}` })}
+          role="timer"
+        >
           {Math.floor(elapsed / 60)}:{(elapsed % 60).toString().padStart(2, '0')}
         </span>
       </div>
@@ -244,9 +250,6 @@ function TaskView({
           <span className="font-mono text-sm">
             {Math.floor(finalResult.durationSeconds / 60)}:{Math.round(finalResult.durationSeconds % 60).toString().padStart(2, '0')}
           </span>
-          {finalResult.errors > 0 && (
-            <span className="text-red-400 text-sm">{finalResult.errors} {t('tasks.errors')}</span>
-          )}
         </div>
       ) : (
         <Button onClick={handleSubmit} disabled={submitted}>

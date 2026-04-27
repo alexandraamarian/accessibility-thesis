@@ -10,6 +10,13 @@ interface Session {
   endedAt: string | null;
   susScore: number | null;
   nasaTlx: Record<string, number> | null;
+  metadata: {
+    demographics?: {
+      ageRange?: string;
+      hasDisability?: string;
+      computerProficiency?: string;
+    };
+  } | null;
 }
 
 interface SessionListProps {
@@ -23,12 +30,18 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
   const { t } = useTranslation();
   const [filter, setFilter] = useState('');
   const [conditionFilter, setConditionFilter] = useState<'' | 'adaptive' | 'control'>('');
+  const [ageFilter, setAgeFilter] = useState('');
+  const [disabilityFilter, setDisabilityFilter] = useState('');
+  const [proficiencyFilter, setProficiencyFilter] = useState('');
   const [sortField, setSortField] = useState<SortField>('startedAt');
   const [sortAsc, setSortAsc] = useState(false);
 
   const filtered = sessions.filter((s) => {
     if (filter && !s.participantId.toLowerCase().includes(filter.toLowerCase())) return false;
     if (conditionFilter && s.condition !== conditionFilter) return false;
+    if (ageFilter && s.metadata?.demographics?.ageRange !== ageFilter) return false;
+    if (disabilityFilter && s.metadata?.demographics?.hasDisability !== disabilityFilter) return false;
+    if (proficiencyFilter && s.metadata?.demographics?.computerProficiency !== proficiencyFilter) return false;
     return true;
   });
 
@@ -64,7 +77,7 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
     <div>
       <h2 className="text-xl font-bold text-accent mb-4">{t('dashboard.sessionList.heading', { count: sessions.length })}</h2>
 
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <input
           type="text"
           placeholder={t('dashboard.sessionList.filterPlaceholder')}
@@ -80,6 +93,43 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
           <option value="">{t('dashboard.sessionList.allConditions')}</option>
           <option value="adaptive">{t('common.adaptive')}</option>
           <option value="control">{t('common.control')}</option>
+        </select>
+        <select
+          value={ageFilter}
+          onChange={(e) => setAgeFilter(e.target.value)}
+          className="px-3 py-2 rounded border border-gray-600 bg-transparent text-inherit text-sm"
+        >
+          <option value="">{t('dashboard.sessionList.allAgeRanges')}</option>
+          <option value="18-24">18-24</option>
+          <option value="25-34">25-34</option>
+          <option value="35-44">35-44</option>
+          <option value="45-54">45-54</option>
+          <option value="55-64">55-64</option>
+          <option value="65+">65+</option>
+        </select>
+        <select
+          value={disabilityFilter}
+          onChange={(e) => setDisabilityFilter(e.target.value)}
+          className="px-3 py-2 rounded border border-gray-600 bg-transparent text-inherit text-sm"
+        >
+          <option value="">{t('dashboard.sessionList.allDisabilities')}</option>
+          <option value="none">{t('demographics.disabilityNone')}</option>
+          <option value="visual">{t('demographics.disabilityVisual')}</option>
+          <option value="motor">{t('demographics.disabilityMotor')}</option>
+          <option value="cognitive">{t('demographics.disabilityCognitive')}</option>
+          <option value="other">{t('demographics.disabilityOther')}</option>
+          <option value="prefer-not-to-say">{t('demographics.genderPreferNot')}</option>
+        </select>
+        <select
+          value={proficiencyFilter}
+          onChange={(e) => setProficiencyFilter(e.target.value)}
+          className="px-3 py-2 rounded border border-gray-600 bg-transparent text-inherit text-sm"
+        >
+          <option value="">{t('dashboard.sessionList.allProficiencies')}</option>
+          <option value="beginner">{t('demographics.proficiencyBeginner')}</option>
+          <option value="intermediate">{t('demographics.proficiencyIntermediate')}</option>
+          <option value="advanced">{t('demographics.proficiencyAdvanced')}</option>
+          <option value="expert">{t('demographics.proficiencyExpert')}</option>
         </select>
       </div>
 
@@ -109,7 +159,7 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
           <tbody>
             {sorted.map((session) => {
               const nasaAvg = session.nasaTlx
-                ? (Object.values(session.nasaTlx).reduce((a, b) => a + b, 0) / Object.values(session.nasaTlx).length).toFixed(1)
+                ? (Object.values(session.nasaTlx).map((v) => v > 10 ? Math.round(v / 10) : v).reduce((a, b) => a + b, 0) / Object.values(session.nasaTlx).length).toFixed(1)
                 : '-';
 
               return (

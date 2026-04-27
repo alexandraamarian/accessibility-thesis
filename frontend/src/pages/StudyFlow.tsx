@@ -5,7 +5,8 @@ import { useAdaptationEngine } from '../hooks/useAdaptationEngine';
 import { useAdaptationContext } from '../context/AdaptationContext';
 import { applyUIState } from '../utils/applyUIState';
 import { DEFAULT_UI } from '../constants';
-import { useEffect, useRef } from 'react';
+import { UIState } from '../types';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSelector } from '../components/LanguageSelector';
 import { ProgressTracker } from '../components/study/ProgressTracker';
@@ -46,6 +47,30 @@ function StudyFlowContent() {
     applyUIState(uiState);
   }, [uiState]);
 
+  // Screen reader announcements for UI adaptations
+  const [adaptationAnnouncement, setAdaptationAnnouncement] = useState('');
+  const prevUiRef = useRef<UIState>(uiState);
+
+  useEffect(() => {
+    const prev = prevUiRef.current;
+    const announcements: string[] = [];
+
+    if (uiState.fontSize !== prev.fontSize) announcements.push(t('a11yAnnouncements.fontScaleApplied'));
+    if (uiState.buttonPadding !== prev.buttonPadding) announcements.push(t('a11yAnnouncements.buttonEnlargeApplied'));
+    if (uiState.contrast !== prev.contrast) announcements.push(t('a11yAnnouncements.contrastBoostApplied'));
+    if (uiState.lineHeight !== prev.lineHeight) announcements.push(t('a11yAnnouncements.spacingIncreaseApplied'));
+    if (uiState.animations !== prev.animations) announcements.push(t('a11yAnnouncements.motionReduceApplied'));
+    if (uiState.cursorScale !== prev.cursorScale) announcements.push(t('a11yAnnouncements.cursorEnlargeApplied'));
+    if (uiState.layoutSimplified !== prev.layoutSimplified) announcements.push(t('a11yAnnouncements.layoutSimplifyApplied'));
+    if (uiState.readingGuide !== prev.readingGuide) announcements.push(t('a11yAnnouncements.readingAidApplied'));
+
+    if (announcements.length > 0) {
+      setAdaptationAnnouncement(announcements.join(' '));
+    }
+
+    prevUiRef.current = uiState;
+  }, [uiState, t]);
+
   const renderStep = () => {
     switch (state.step) {
       case 'consent':
@@ -70,11 +95,20 @@ function StudyFlowContent() {
 
   return (
     <div className="min-h-screen py-8">
+      <a href="#main-content" className="skip-to-main">
+        {t('common.skipToMain')}
+      </a>
+
+      {/* Screen reader announcements for UI adaptations */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {adaptationAnnouncement}
+      </div>
+
       <header className="max-w-4xl mx-auto px-4 mb-4">
         <div className="flex items-center justify-between">
           <div className="flex-1" />
           <h1
-            className="font-bold mb-2 text-center adaptive-transition flex-1"
+            className="font-bold mb-2 text-center adaptive-transition flex-1 whitespace-nowrap"
             style={{
               fontSize: 'calc(var(--font-size-base) * 1.75)',
               lineHeight: 'var(--line-height)',
@@ -94,7 +128,7 @@ function StudyFlowContent() {
         </div>
       )}
 
-      <main className="max-w-4xl mx-auto px-4">
+      <main id="main-content" className="max-w-4xl mx-auto px-4">
         {renderStep()}
       </main>
 

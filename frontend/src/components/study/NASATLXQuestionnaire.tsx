@@ -86,30 +86,26 @@ export function NASATLXQuestionnaire() {
                 <p className="text-sm opacity-75 mb-3">{dim.description}</p>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs w-16 text-right opacity-60">{dim.lowEnd}</span>
-                  <div className="flex-1">
-                    <input
-                      type="range"
-                      min={0}
-                      max={100}
-                      step={5}
-                      value={responses[key] ?? 50}
-                      onChange={(e) => handleChange(key, Number(e.target.value))}
-                      className="w-full accent-accent"
-                      aria-label={dim.label}
-                    />
-                    <div className="flex justify-between text-xs opacity-40 mt-1 px-1">
-                      <span>0</span>
-                      <span>25</span>
-                      <span>50</span>
-                      <span>75</span>
-                      <span>100</span>
-                    </div>
+                  <span className="text-xs w-14 text-right opacity-60">{dim.lowEnd}</span>
+                  <div className="flex-1 grid grid-cols-5 sm:grid-cols-10 gap-1" role="radiogroup" aria-label={dim.label}>
+                    {Array.from({ length: 10 }, (_, i) => i + 1).map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => handleChange(key, value)}
+                        className={`min-h-[44px] py-2 rounded text-sm font-medium transition-colors ${
+                          responses[key] === value
+                            ? 'bg-accent bg-opacity-20 text-accent border-2 border-accent'
+                            : 'border-2 border-gray-600 hover:bg-accent hover:bg-opacity-10'
+                        }`}
+                        aria-label={`${value}`}
+                        aria-pressed={responses[key] === value}
+                      >
+                        {value}
+                      </button>
+                    ))}
                   </div>
-                  <span className="text-xs w-16 opacity-60">{dim.highEnd}</span>
-                </div>
-                <div className="text-center mt-1 text-sm font-mono text-accent">
-                  {responses[key] !== undefined ? responses[key] : '—'}
+                  <span className="text-xs w-14 opacity-60">{dim.highEnd}</span>
                 </div>
               </fieldset>
             );

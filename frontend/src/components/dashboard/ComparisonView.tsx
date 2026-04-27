@@ -30,6 +30,9 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
   const adaptiveSession = sessions.find((s) => s.participantId === selected && s.condition === 'adaptive');
   const controlSession = sessions.find((s) => s.participantId === selected && s.condition === 'control');
 
+  // Normalize NASA-TLX values: old sessions used 0-100, new ones use 1-10.
+  const normalizeNasa = (v: number) => v > 10 ? Math.round(v / 10) : v;
+
   const delta = (a: number | null, b: number | null) => {
     if (a === null || b === null) return null;
     return a - b;
@@ -75,7 +78,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
                   <div>SUS: <span className="font-mono">{adaptiveSession.susScore ?? '-'}</span></div>
                   {adaptiveSession.nasaTlx && Object.entries(adaptiveSession.nasaTlx).map(([key, value]) => (
                     <div key={key} className="capitalize">
-                      {key}: <span className="font-mono">{value as number}</span>
+                      {key}: <span className="font-mono">{normalizeNasa(value as number)}</span>
                     </div>
                   ))}
                 </div>
@@ -87,7 +90,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
                   <div>SUS: <span className="font-mono">{controlSession.susScore ?? '-'}</span></div>
                   {controlSession.nasaTlx && Object.entries(controlSession.nasaTlx).map(([key, value]) => (
                     <div key={key} className="capitalize">
-                      {key}: <span className="font-mono">{value as number}</span>
+                      {key}: <span className="font-mono">{normalizeNasa(value as number)}</span>
                     </div>
                   ))}
                 </div>
@@ -105,8 +108,8 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
                   {adaptiveSession.nasaTlx && controlSession.nasaTlx &&
                     Object.keys(adaptiveSession.nasaTlx).map((key) => {
                       const d = delta(
-                        (adaptiveSession.nasaTlx as Record<string, number>)[key],
-                        (controlSession.nasaTlx as Record<string, number>)[key]
+                        normalizeNasa((adaptiveSession.nasaTlx as Record<string, number>)[key]),
+                        normalizeNasa((controlSession.nasaTlx as Record<string, number>)[key])
                       );
                       return (
                         <div key={key} className="capitalize">

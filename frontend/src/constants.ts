@@ -37,32 +37,32 @@ export const THRESHOLDS = {
   /** 3 zoom events in 60s window. Informed by Nielsen (1993) on repetitive corrective actions. */
   zoomCount: 3,
 
-  /** 35% missed tap rate in 30s window. Informed by Fitts (1954) and Apple HIG 44dp touch target. */
-  missedTapRate: 0.35,
+  /** 25% missed tap rate in 30s window. Informed by Fitts (1954) and Apple HIG 44dp touch target. */
+  missedTapRate: 0.25,
 
-  /** 7 seconds average dwell time in 90s window. Informed by Rayner et al. (2016) on reading difficulty. */
-  avgDwellSeconds: 7,
+  /** 5 seconds average dwell time in 90s window. Informed by Rayner et al. (2016) on reading difficulty. */
+  avgDwellSeconds: 5,
 
-  /** 30% scroll reversal rate in 45s window. Informed by Buscher et al. (2012) on re-reading patterns. */
-  scrollReversalRate: 0.30,
+  /** 35% scroll reversal rate in 45s window. Informed by Buscher et al. (2012) on re-reading patterns. */
+  scrollReversalRate: 0.35,
 
-  /** 18px tremor score for spacing_increase. Informed by Wobbrock et al. (2008) on pointing imprecision. */
-  tremorScore: 18,
+  /** 15px tremor score for spacing_increase. Informed by Wobbrock et al. (2008) on pointing imprecision. */
+  tremorScore: 15,
 
-  /** 27px tremor score for motion_reduce (higher severity). Informed by Wobbrock et al. (2011) on ability-based design. */
-  tremorScoreHigh: 27,
+  /** 25px tremor score for motion_reduce (higher severity). Informed by Wobbrock et al. (2011) on ability-based design. */
+  tremorScoreHigh: 25,
 
-  /** 3 rage click clusters in 5s window. Informed by Hurst et al. (2013) on pointing accuracy problems. */
-  rageClickCount: 3,
+  /** 2 rage click clusters in 5s window. Informed by Hurst et al. (2013) on pointing accuracy problems. */
+  rageClickCount: 2,
 
-  /** Hesitation score >= 3 over interactive elements in 10s. Informed by Gajos et al. (2010) on UI personalization. */
-  mouseHesitationScore: 3,
+  /** Hesitation score >= 1 over interactive elements in 10s. Informed by Gajos et al. (2010) on UI personalization. */
+  mouseHesitationScore: 1,
 
-  /** 30 seconds idle time. Informed by Gajos et al. (2010) on engagement-based simplification. */
-  idleSeconds: 30,
+  /** 15 seconds idle time. Informed by Gajos et al. (2010) on engagement-based simplification. */
+  idleSeconds: 15,
 
-  /** Below 100 wpm reading speed. Informed by Dickinson et al. (2002) on older adults' reading rates. */
-  readingSpeed: 100,
+  /** Below 150 wpm reading speed. Informed by Dickinson et al. (2002) on older adults' reading rates. */
+  readingSpeed: 150,
 } as const;
 
 /**

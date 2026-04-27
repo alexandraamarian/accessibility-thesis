@@ -17,6 +17,13 @@ interface Session {
   endedAt: string | null;
   susScore: number | null;
   nasaTlx: Record<string, number> | null;
+  metadata: {
+    demographics?: {
+      ageRange?: string;
+      hasDisability?: string;
+      computerProficiency?: string;
+    };
+  } | null;
   events?: any[];
   adaptations?: any[];
 }

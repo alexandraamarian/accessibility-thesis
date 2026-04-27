@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ variant = 'primary', className = '', children, ...props }: ButtonProps) {
   const baseStyles =
-    'rounded transition-all font-semibold adaptive-transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2';
+    'rounded transition-all font-semibold adaptive-transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 min-h-[44px] min-w-[44px]';
 
   const variantStyles = {
     primary: 'bg-accent text-bg hover:opacity-90 active:opacity-80',

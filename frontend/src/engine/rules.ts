@@ -29,10 +29,10 @@ const fontScaleRule: AdaptationRule = {
   check: (signals: SignalSnapshot) => signals.zoomCount >= THRESHOLDS.zoomCount,
   apply: (ui: UIState) => ({
     ...ui,
-    fontSize: Math.min(ui.fontSize + 2, 26),
+    fontSize: Math.min(ui.fontSize + 3, 28),
   }),
-  cooldown: 120_000,
-  maxApplications: 3,
+  cooldown: 30_000,
+  maxApplications: 4,
 };
 
 /**
@@ -50,10 +50,10 @@ const buttonEnlargeRule: AdaptationRule = {
   check: (signals: SignalSnapshot) => signals.missedTapRate >= THRESHOLDS.missedTapRate,
   apply: (ui: UIState) => ({
     ...ui,
-    buttonPadding: Math.min(ui.buttonPadding + 8, 36),
+    buttonPadding: Math.min(ui.buttonPadding + 10, 40),
   }),
-  cooldown: 90_000,
-  maxApplications: 2,
+  cooldown: 30_000,
+  maxApplications: 3,
 };
 
 /**
@@ -76,7 +76,7 @@ const contrastBoostRule: AdaptationRule = {
     ...ui,
     contrast: Math.min(ui.contrast + 1, 2),
   }),
-  cooldown: 180_000,
+  cooldown: 45_000,
   maxApplications: 2,
 };
 
@@ -95,9 +95,9 @@ const spacingIncreaseRule: AdaptationRule = {
   check: (signals: SignalSnapshot) => signals.tremorScore >= THRESHOLDS.tremorScore,
   apply: (ui: UIState) => ({
     ...ui,
-    lineHeight: Math.min(ui.lineHeight + 0.15, 2.2),
+    lineHeight: Math.min(ui.lineHeight + 0.2, 2.4),
   }),
-  cooldown: 150_000,
+  cooldown: 40_000,
   maxApplications: 3,
 };
 
@@ -139,7 +139,7 @@ const cursorEnlargeRule: AdaptationRule = {
     ...ui,
     cursorScale: Math.min(ui.cursorScale + 0.5, 2),
   }),
-  cooldown: 90_000,
+  cooldown: 30_000,
   maxApplications: 2,
 };
 
@@ -162,7 +162,7 @@ const layoutSimplifyRule: AdaptationRule = {
     ...ui,
     layoutSimplified: true,
   }),
-  cooldown: Infinity,
+  cooldown: 60_000,
   maxApplications: 1,
 };
 

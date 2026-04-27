@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 export function LanguageSelector() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleChange = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -18,7 +18,8 @@ export function LanguageSelector() {
             ? 'bg-accent text-bg'
             : 'border border-gray-600 hover:border-accent'
         }`}
-        aria-label="Romana"
+        aria-label={t('common.switchLanguage', { language: 'Română' })}
+        aria-pressed={i18n.language === 'ro'}
       >
         RO
       </button>
@@ -29,7 +30,8 @@ export function LanguageSelector() {
             ? 'bg-accent text-bg'
             : 'border border-gray-600 hover:border-accent'
         }`}
-        aria-label="English"
+        aria-label={t('common.switchLanguage', { language: 'English' })}
+        aria-pressed={i18n.language === 'en'}
       >
         EN
       </button>

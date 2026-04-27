@@ -98,7 +98,7 @@ export function SUSQuestionnaire() {
                   return (
                     <label
                       key={value}
-                      className={`flex flex-col items-center cursor-pointer p-2 rounded transition-colors ${
+                      className={`flex flex-col items-center cursor-pointer p-1 sm:p-2 rounded transition-colors ${
                         responses[qIndex] === value
                           ? 'bg-accent bg-opacity-20 text-accent'
                           : 'hover:bg-accent hover:bg-opacity-10'

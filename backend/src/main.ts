@@ -8,9 +8,12 @@ async function bootstrap() {
 
   // Enable CORS for frontend
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     credentials: true,
   });
+
+  // Global API prefix so frontend /api/* routes map correctly
+  app.setGlobalPrefix('api');
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -31,9 +34,10 @@ async function bootstrap() {
     .addTag('analytics')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(3000);
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
   console.log(`🚀 Backend running on: http://localhost:3000`);
   console.log(`📚 Swagger docs: http://localhost:3000/api`);
 }

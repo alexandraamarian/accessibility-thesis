@@ -69,7 +69,6 @@ export function SessionSummary() {
   };
 
   const totalDuration = state.taskResults.reduce((sum, r) => sum + r.durationSeconds, 0);
-  const totalErrors = state.taskResults.reduce((sum, r) => sum + r.errors, 0);
 
   return (
     <div className="max-w-2xl mx-auto text-center">
@@ -98,10 +97,6 @@ export function SessionSummary() {
           <div className="text-lg font-semibold text-accent">
             {Math.floor(totalDuration / 60)}m {Math.round(totalDuration % 60)}s
           </div>
-        </div>
-        <div className="border-2 border-accent border-opacity-20 rounded-lg p-4">
-          <div className="text-sm opacity-60 mb-1">{t('summary.totalErrors')}</div>
-          <div className="text-lg font-semibold text-accent">{totalErrors}</div>
         </div>
       </div>
 

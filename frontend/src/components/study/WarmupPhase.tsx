@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStudyContext } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
@@ -6,11 +6,13 @@ import { Article } from '../Article';
 import { InteractionTestZone } from '../InteractionTestZone';
 import { Button } from '../Button';
 
-const WARMUP_DURATION = 30; // seconds
-
 export function WarmupPhase() {
-  const { dispatch } = useStudyContext();
+  const { state, dispatch } = useStudyContext();
   const { t } = useTranslation();
+
+  const practiceText2Key = state.condition === 'adaptive'
+    ? 'warmup.practiceText2Adaptive'
+    : 'warmup.practiceText2Control';
 
   const warmupContent = [
     {
@@ -18,30 +20,14 @@ export function WarmupPhase() {
       heading: t('warmup.practiceHeading'),
       paragraphs: [
         t('warmup.practiceText1'),
-        t('warmup.practiceText2'),
+        t(practiceText2Key),
       ],
     },
   ];
-  const [timeLeft, setTimeLeft] = useState(WARMUP_DURATION);
-  const [canSkip, setCanSkip] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setCanSkip(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const startTime = useRef(Date.now());
 
   const handleContinue = () => {
-    studyLogger.log('warmup_completed', { duration: WARMUP_DURATION - timeLeft });
+    studyLogger.log('warmup_completed', { duration: (Date.now() - startTime.current) / 1000 });
     dispatch({ type: 'SET_STEP', payload: 'tasks' });
   };
 
@@ -54,16 +40,13 @@ export function WarmupPhase() {
         >
           {t('warmup.heading')}
         </h2>
-        <div className="text-accent font-mono text-lg" aria-live="polite">
-          {timeLeft > 0 ? t('warmup.timeRemaining', { time: timeLeft }) : t('warmup.readyToContinue')}
-        </div>
       </div>
 
       <p
         className="mb-6 opacity-75 adaptive-transition"
         style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height)' }}
       >
-        {t('warmup.instructions', { duration: WARMUP_DURATION })}
+        {t('warmup.instructionsNoTime')}
       </p>
 
       <div className="space-y-8">
@@ -72,8 +55,8 @@ export function WarmupPhase() {
       </div>
 
       <div className="mt-8 text-center">
-        <Button onClick={handleContinue} disabled={!canSkip}>
-          {canSkip ? t('warmup.continueToTasks') : t('warmup.pleaseWait', { time: timeLeft })}
+        <Button onClick={handleContinue}>
+          {t('warmup.continueToTasks')}
         </Button>
       </div>
     </div>

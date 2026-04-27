@@ -25,6 +25,21 @@ export const ro = {
     participant: 'Participant',
     exportCsv: 'Exportă CSV',
     language: 'Limbă',
+    skipToMain: 'Sari la conținutul principal',
+    elapsedTime: 'Timp scurs: {{time}}',
+    stepOfTotal: 'Pasul {{current}} din {{total}}: {{label}}',
+    switchLanguage: 'Schimbă limba în {{language}}',
+  },
+
+  a11yAnnouncements: {
+    fontScaleApplied: 'Dimensiunea fontului a fost mărită pentru o citire mai ușoară.',
+    buttonEnlargeApplied: 'Butoanele au fost mărite pentru un click mai ușor.',
+    contrastBoostApplied: 'Contrastul a fost crescut pentru o vizibilitate mai bună.',
+    spacingIncreaseApplied: 'Spațierea textului a fost mărită.',
+    motionReduceApplied: 'Animațiile au fost dezactivate.',
+    cursorEnlargeApplied: 'Cursorul a fost mărit.',
+    layoutSimplifyApplied: 'Aspectul paginii a fost simplificat.',
+    readingAidApplied: 'Un ghid de citire a fost activat.',
   },
 
   study: {
@@ -103,10 +118,14 @@ export const ro = {
     practiceHeading: 'Practică: Familiarizare',
     practiceText1:
       'Aceasta este o scurtă fază de încălzire pentru a vă ajuta să vă obișnuiți cu interfața. Nu ezitați să derulați, să faceți click pe butoane și să citiți textul de mai jos.',
-    practiceText2:
-      'Sistemul vă monitorizează acum interacțiunile. În condiția adaptivă, interfața se poate ajusta în funcție de tiparele comportamentului dumneavoastră. Acest lucru este normal și face parte din designul studiului.',
+    practiceText2Adaptive:
+      'Interacțiunile dumneavoastră sunt observate pe parcursul acestei sesiuni. Interfața poate arăta sau funcționa diferit pe măsură ce sesiunea avansează. Acest lucru este normal și face parte din designul studiului.',
+    practiceText2Control:
+      'Interacțiunile dumneavoastră sunt observate pe parcursul acestei sesiuni. Vă rugăm să folosiți interfața în mod normal. Acest lucru face parte din designul studiului.',
     instructions:
       'Aveți {{duration}} secunde să explorați interfața. Derulați prin conținut, faceți click pe butoane și încercați zoom-ul (Ctrl+Rotiță).',
+    instructionsNoTime:
+      'Explorați interfața de mai jos. Derulați prin conținut, faceți click pe butoane și încercați zoom-ul (Ctrl+Rotiță).',
     continueToTasks: 'Continuă la Sarcini',
     pleaseWait: 'Vă rugăm așteptați {{time}}s...',
   },
@@ -124,20 +143,20 @@ export const ro = {
   },
 
   sus: {
-    heading: 'Scala de Utilizabilitate a Sistemului (SUS)',
+    heading: 'Chestionar de Utilizabilitate',
     instructions:
-      'Vă rugăm să evaluați acordul dumneavoastră cu fiecare afirmație despre sistemul pe care tocmai l-ați folosit.',
+      'Vă rugăm să evaluați acordul dumneavoastră cu fiecare afirmație despre interfața pe care tocmai ați folosit-o.',
     questions: [
-      'Cred că mi-ar plăcea să folosesc acest sistem frecvent.',
-      'Mi s-a părut că sistemul este inutil de complex.',
-      'Am considerat că sistemul este ușor de utilizat.',
-      'Cred că aș avea nevoie de ajutorul unei persoane tehnice pentru a putea folosi acest sistem.',
-      'Consider că diversele funcții ale sistemului sunt bine integrate.',
-      'Am considerat că există prea multă inconsistență în acest sistem.',
-      'Cred că majoritatea oamenilor ar învăța să folosească acest sistem foarte repede.',
-      'Am găsit sistemul foarte greu de utilizat.',
-      'M-am simțit foarte încrezător folosind sistemul.',
-      'A trebuit să învăț multe lucruri înainte de a putea folosi acest sistem.',
+      'Mi-ar plăcea să folosesc această interfață în mod regulat.',
+      'Am găsit interfața mai complicată decât ar fi necesar.',
+      'Interfața a fost ușor de utilizat.',
+      'Aș avea nevoie de ajutor de la cineva pentru a folosi această interfață.',
+      'Diferitele părți ale interfeței au funcționat bine împreună.',
+      'Au fost prea multe inconsistențe în această interfață.',
+      'Majoritatea oamenilor ar învăța să folosească această interfață rapid.',
+      'Interfața a fost dificil de utilizat.',
+      'M-am simțit încrezător folosind această interfață.',
+      'A trebuit să învăț multe lucruri înainte de a putea folosi această interfață.',
     ],
     likert: ['Total Dezacord', 'Dezacord', 'Neutru', 'Acord', 'Total Acord'],
     errorUnanswered: 'Vă rugăm să răspundeți la întrebarea {{n}}.',
@@ -146,46 +165,46 @@ export const ro = {
   },
 
   nasatlx: {
-    heading: 'NASA Task Load Index (NASA-TLX)',
+    heading: 'Chestionar privind Încărcarea Sarcinii',
     instructions:
-      'Evaluați fiecare dimensiune pe o scară de la 0 (scăzut) la 100 (ridicat). Trageți cursorul pentru a indica evaluarea.',
+      'Evaluați fiecare întrebare pe o scară de la 1 (scăzut) la 10 (ridicat). Faceți click pe numărul care se potrivește cel mai bine experienței dumneavoastră.',
     dimensions: {
       mental: {
-        label: 'Cerință Mentală',
-        description: 'Cât de solicitantă mental a fost sarcina?',
-        lowEnd: 'Foarte Scăzută',
-        highEnd: 'Foarte Ridicată',
+        label: 'Cât de obositor mental a fost?',
+        description: 'Cât de mult a trebuit să gândiți, să decideți sau să vă concentrați?',
+        lowEnd: 'Foarte Puțin',
+        highEnd: 'Foarte Mult',
       },
       physical: {
-        label: 'Cerință Fizică',
-        description: 'Cât de solicitantă fizic a fost sarcina?',
-        lowEnd: 'Foarte Scăzută',
-        highEnd: 'Foarte Ridicată',
+        label: 'Cât de obositor fizic a fost?',
+        description: 'Cât de multă activitate fizică a fost necesară (de ex., click-uri, derulare, tastare)?',
+        lowEnd: 'Foarte Puțin',
+        highEnd: 'Foarte Mult',
       },
       temporal: {
-        label: 'Cerință Temporală',
-        description: 'Cât de mult v-ați simțit presat de timp în realizarea sarcinii?',
-        lowEnd: 'Foarte Scăzută',
-        highEnd: 'Foarte Ridicată',
+        label: 'Cât de grăbit v-ați simțit?',
+        description: 'Cât de presat de timp v-ați simțit în timpul sarcinii?',
+        lowEnd: 'Foarte Puțin',
+        highEnd: 'Foarte Mult',
       },
       performance: {
-        label: 'Performanță',
-        description: 'Cât de bine considerați că ați îndeplinit ceea ce vi s-a cerut?',
-        lowEnd: 'Eșec',
-        highEnd: 'Perfect',
+        label: 'Cât de bine v-ați descurcat?',
+        description: 'Cât de mulțumit sunteți de ce ați realizat?',
+        lowEnd: 'Nemulțumit',
+        highEnd: 'Foarte Mulțumit',
       },
       effort: {
-        label: 'Efort',
+        label: 'Cât de mult a trebuit să munciți?',
         description:
-          'Cât de mult a trebuit să vă străduiți pentru a atinge acest nivel de performanță?',
-        lowEnd: 'Foarte Scăzut',
-        highEnd: 'Foarte Ridicat',
+          'Cât de mult a trebuit să munciți (mental și fizic) pentru a obține rezultatele?',
+        lowEnd: 'Foarte Puțin',
+        highEnd: 'Foarte Mult',
       },
       frustration: {
-        label: 'Frustrare',
-        description: 'Cât de frustrat, descurajat, iritat sau stresat v-ați simțit?',
-        lowEnd: 'Foarte Scăzută',
-        highEnd: 'Foarte Ridicată',
+        label: 'Cât de frustrat v-ați simțit?',
+        description: 'Cât de stresat, enervat sau frustrat v-ați simțit în timpul sarcinii?',
+        lowEnd: 'Foarte Puțin',
+        highEnd: 'Foarte Mult',
       },
     },
     errorUnanswered: 'Vă rugăm să evaluați „{{dimension}}".',
@@ -223,7 +242,7 @@ export const ro = {
     heading: 'Zona de Test',
     instructions:
       'Faceți click pe butoanele de mai jos pentru a testa acuratețea atingerii. Sistemul va detecta atingerile ratate (click-uri în afara butoanelor) și poate mări butoanele dacă este necesar.',
-    button: 'Buton {{id}}',
+    button: 'Buton de test {{id}}',
     totalClicks: 'Total click-uri:',
     btnCount: 'Btn {{id}}: {{count}}',
   },
@@ -275,6 +294,9 @@ export const ro = {
       sus: 'SUS',
       nasaTlx: 'NASA-TLX',
       status: 'Status',
+      allAgeRanges: 'Toate grupele de vârstă',
+      allDisabilities: 'Toate dizabilitățile',
+      allProficiencies: 'Toate nivelurile',
       noSessions: 'Nu s-au găsit sesiuni.',
     },
     sessionDetail: {

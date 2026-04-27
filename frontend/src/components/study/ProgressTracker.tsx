@@ -22,7 +22,15 @@ export function ProgressTracker({ currentStep }: ProgressTrackerProps) {
 
   return (
     <nav aria-label="Study progress" className="mb-8">
-      <ol className="flex items-center justify-center gap-0" role="list">
+      {/* Mobile: compact step indicator */}
+      <div className="flex sm:hidden items-center justify-center gap-2 text-sm">
+        <span className="text-accent font-semibold">
+          {t('common.stepOfTotal', { current: currentIndex + 1, total: STEPS.length, label: t(STEPS[currentIndex]?.labelKey || STEPS[0].labelKey) })}
+        </span>
+      </div>
+
+      {/* Desktop: full step circles */}
+      <ol className="hidden sm:flex items-center justify-center gap-0" role="list">
         {STEPS.map((step, index) => {
           const isComplete = index < currentIndex;
           const isCurrent = step.key === currentStep;
@@ -32,6 +40,7 @@ export function ProgressTracker({ currentStep }: ProgressTrackerProps) {
               key={step.key}
               className="flex items-center"
               aria-current={isCurrent ? 'step' : undefined}
+              aria-label={t('common.stepOfTotal', { current: index + 1, total: STEPS.length, label: t(step.labelKey) })}
             >
               <div className="flex flex-col items-center">
                 <div

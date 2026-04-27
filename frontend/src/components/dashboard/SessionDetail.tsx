@@ -73,12 +73,16 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
         <div className="mb-6">
           <h3 className="font-semibold text-accent mb-2">{t('dashboard.sessionDetail.nasaTlxScores')}</h3>
           <div className="grid grid-cols-6 gap-2">
-            {Object.entries(session.nasaTlx).map(([key, value]) => (
-              <div key={key} className="border border-accent border-opacity-20 rounded p-2 text-center">
-                <div className="text-xs opacity-60 capitalize">{key}</div>
-                <div className="font-mono text-lg text-accent">{value as number}</div>
-              </div>
-            ))}
+            {Object.entries(session.nasaTlx).map(([key, value]) => {
+              // Normalize: old sessions used 0-100, new ones use 1-10
+              const v = (value as number) > 10 ? Math.round((value as number) / 10) : (value as number);
+              return (
+                <div key={key} className="border border-accent border-opacity-20 rounded p-2 text-center">
+                  <div className="text-xs opacity-60 capitalize">{key}</div>
+                  <div className="font-mono text-lg text-accent">{v}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

@@ -170,16 +170,18 @@ export const articleSets: ArticleSet[] = [
 ];
 
 /**
- * Get article set based on participant ID hash
+ * Get article set based on participant ID hash and session offset.
+ * Each condition (adaptive/control) gets a different article set
+ * so participants don't read the same text twice.
  */
-export function getArticleSetForParticipant(participantId: string): ArticleSet {
+export function getArticleSetForParticipant(participantId: string, sessionOffset: number = 0): ArticleSet {
   let hash = 0;
   for (let i = 0; i < participantId.length; i++) {
     const char = participantId.charCodeAt(i);
     hash = ((hash << 5) - hash) + char;
     hash |= 0;
   }
-  const index = Math.abs(hash) % articleSets.length;
+  const index = (Math.abs(hash) + sessionOffset) % articleSets.length;
   return articleSets[index];
 }
 

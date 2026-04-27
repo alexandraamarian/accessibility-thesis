@@ -94,7 +94,7 @@ function studyReducer(state: StudyState, action: StudyAction): StudyState {
         condition: action.payload.condition,
         sessionId: action.payload.sessionId,
         consentGiven: true,
-        step: 'tasks',
+        step: 'warmup',
       };
     case 'RESET':
       return initialState;

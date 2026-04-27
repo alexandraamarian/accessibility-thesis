@@ -25,6 +25,21 @@ export const en = {
     participant: 'Participant',
     exportCsv: 'Export CSV',
     language: 'Language',
+    skipToMain: 'Skip to main content',
+    elapsedTime: 'Elapsed time: {{time}}',
+    stepOfTotal: 'Step {{current}} of {{total}}: {{label}}',
+    switchLanguage: 'Switch language to {{language}}',
+  },
+
+  a11yAnnouncements: {
+    fontScaleApplied: 'Font size has been increased for better readability.',
+    buttonEnlargeApplied: 'Buttons have been enlarged for easier clicking.',
+    contrastBoostApplied: 'Contrast has been increased for better visibility.',
+    spacingIncreaseApplied: 'Text spacing has been increased.',
+    motionReduceApplied: 'Animations have been disabled.',
+    cursorEnlargeApplied: 'Cursor has been enlarged.',
+    layoutSimplifyApplied: 'Page layout has been simplified.',
+    readingAidApplied: 'A reading guide has been enabled.',
   },
 
   study: {
@@ -101,10 +116,14 @@ export const en = {
     practiceHeading: 'Practice: Getting Familiar',
     practiceText1:
       'This is a short warm-up phase to help you get comfortable with the interface. Feel free to scroll, click buttons, and read the text below.',
-    practiceText2:
-      'The system is now monitoring your interactions. In the adaptive condition, the interface may adjust based on your behavior patterns. This is normal and part of the study design.',
+    practiceText2Adaptive:
+      'Your interactions are being observed during this session. The interface may look or behave differently as the session progresses. This is normal and part of the study design.',
+    practiceText2Control:
+      'Your interactions are being observed during this session. Please use the interface as you normally would. This is part of the study design.',
     instructions:
       'Take {{duration}} seconds to explore the interface. Scroll through the content, click the buttons, and try zooming (Ctrl+Wheel).',
+    instructionsNoTime:
+      'Explore the interface below. Scroll through the content, click the buttons, and try zooming (Ctrl+Wheel).',
     continueToTasks: 'Continue to Tasks',
     pleaseWait: 'Please wait {{time}}s...',
   },
@@ -122,20 +141,20 @@ export const en = {
   },
 
   sus: {
-    heading: 'System Usability Scale (SUS)',
+    heading: 'Usability Questionnaire',
     instructions:
-      'Please rate your agreement with each statement about the system you just used.',
+      'Please rate your agreement with each statement about the interface you just used.',
     questions: [
-      'I think that I would like to use this system frequently.',
-      'I found the system unnecessarily complex.',
-      'I thought the system was easy to use.',
-      'I think that I would need the support of a technical person to be able to use this system.',
-      'I found the various functions in this system were well integrated.',
-      'I thought there was too much inconsistency in this system.',
-      'I would imagine that most people would learn to use this system very quickly.',
-      'I found the system very cumbersome to use.',
-      'I felt very confident using the system.',
-      'I needed to learn a lot of things before I could get going with this system.',
+      'I would like to use this interface regularly.',
+      'I found the interface more complicated than it needs to be.',
+      'The interface was easy to use.',
+      'I would need help from someone to use this interface.',
+      'The different parts of this interface worked well together.',
+      'There were too many inconsistencies in this interface.',
+      'Most people would learn to use this interface quickly.',
+      'The interface was awkward to use.',
+      'I felt confident using this interface.',
+      'I had to learn a lot before I could use this interface.',
     ],
     likert: [
       'Strongly Disagree',
@@ -150,42 +169,42 @@ export const en = {
   },
 
   nasatlx: {
-    heading: 'NASA Task Load Index (NASA-TLX)',
-    instructions: 'Rate each dimension on a scale from 0 (low) to 100 (high). Drag the slider to indicate your rating.',
+    heading: 'Task Load Questionnaire',
+    instructions: 'Rate each question on a scale from 1 (low) to 10 (high). Click the number that best matches your experience.',
     dimensions: {
       mental: {
-        label: 'Mental Demand',
-        description: 'How mentally demanding was the task?',
+        label: 'How mentally tiring was it?',
+        description: 'How much thinking, deciding, or concentrating was required?',
         lowEnd: 'Very Low',
         highEnd: 'Very High',
       },
       physical: {
-        label: 'Physical Demand',
-        description: 'How physically demanding was the task?',
+        label: 'How physically tiring was it?',
+        description: 'How much physical activity was required (e.g., clicking, scrolling, typing)?',
         lowEnd: 'Very Low',
         highEnd: 'Very High',
       },
       temporal: {
-        label: 'Temporal Demand',
-        description: 'How hurried or rushed was the pace of the task?',
+        label: 'How rushed did you feel?',
+        description: 'How hurried or pressured did you feel while doing the task?',
         lowEnd: 'Very Low',
         highEnd: 'Very High',
       },
       performance: {
-        label: 'Performance',
-        description: 'How successful were you in accomplishing what you were asked to do?',
-        lowEnd: 'Failure',
-        highEnd: 'Perfect',
+        label: 'How well did you do?',
+        description: 'How satisfied are you with what you accomplished?',
+        lowEnd: 'Not satisfied',
+        highEnd: 'Very satisfied',
       },
       effort: {
-        label: 'Effort',
-        description: 'How hard did you have to work to accomplish your level of performance?',
+        label: 'How hard did you have to work?',
+        description: 'How hard did you have to work (mentally and physically) to get your results?',
         lowEnd: 'Very Low',
         highEnd: 'Very High',
       },
       frustration: {
-        label: 'Frustration',
-        description: 'How insecure, discouraged, irritated, stressed, and annoyed were you?',
+        label: 'How frustrated were you?',
+        description: 'How stressed, annoyed, or frustrated did you feel during the task?',
         lowEnd: 'Very Low',
         highEnd: 'Very High',
       },
@@ -223,7 +242,7 @@ export const en = {
     heading: 'Interaction Test Area',
     instructions:
       'Click the buttons below to test tap accuracy. The system will detect missed taps (clicks outside buttons) and may enlarge buttons if needed.',
-    button: 'Button {{id}}',
+    button: 'Test button {{id}}',
     totalClicks: 'Total clicks:',
     btnCount: 'Btn {{id}}: {{count}}',
   },
@@ -275,6 +294,9 @@ export const en = {
       sus: 'SUS',
       nasaTlx: 'NASA-TLX',
       status: 'Status',
+      allAgeRanges: 'All age ranges',
+      allDisabilities: 'All disabilities',
+      allProficiencies: 'All proficiencies',
       noSessions: 'No sessions found.',
     },
     sessionDetail: {

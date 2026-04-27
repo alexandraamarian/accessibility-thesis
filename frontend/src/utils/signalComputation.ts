@@ -27,12 +27,30 @@ interface HesitationEvent {
 /**
  * Compute tremor score as standard deviation of tap positions
  * Formula: sqrt(var(x) + var(y))
+ *
+ * Only considers clicks that are near each other (within 150px of the median).
+ * Clicks on different interactive elements across the page are filtered out,
+ * since those reflect normal navigation, not motor imprecision.
+ * Requires at least 4 nearby taps to produce a score.
  */
 export function computeTremorScore(taps: TapEvent[]): number {
-  if (taps.length < 2) return 0;
+  if (taps.length < 4) return 0;
 
-  const xs = taps.map((t) => t.x);
-  const ys = taps.map((t) => t.y);
+  // Filter to largest cluster of clicks within 150px of each other.
+  // This prevents clicks on different buttons from inflating the score.
+  const CLUSTER_RADIUS = 150;
+  const medianX = taps.map((t) => t.x).sort((a, b) => a - b)[Math.floor(taps.length / 2)];
+  const medianY = taps.map((t) => t.y).sort((a, b) => a - b)[Math.floor(taps.length / 2)];
+  const nearby = taps.filter((t) => {
+    const dx = t.x - medianX;
+    const dy = t.y - medianY;
+    return Math.sqrt(dx * dx + dy * dy) <= CLUSTER_RADIUS;
+  });
+
+  if (nearby.length < 4) return 0;
+
+  const xs = nearby.map((t) => t.x);
+  const ys = nearby.map((t) => t.y);
 
   const variance = (values: number[]): number => {
     const mean = values.reduce((sum, v) => sum + v, 0) / values.length;
