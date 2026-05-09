@@ -103,17 +103,19 @@ export class AnalyticsService {
         input_type: device.inputType || null,
         touch_support: device.touchSupport ?? null,
         user_agent: device.userAgent || null,
+        article_set_id: session.metadata?.articleSetId || null,
         open_ended_feedback: session.metadata?.openEndedFeedback || null,
         started_at: session.startedAt.toISOString(),
         ended_at: session.endedAt ? session.endedAt.toISOString() : null,
         sus_score: session.susScore,
-        nasa_tlx_mental: session.nasaTlx?.mental ?? null,
-        nasa_tlx_physical: session.nasaTlx?.physical ?? null,
-        nasa_tlx_temporal: session.nasaTlx?.temporal ?? null,
-        // Performance is reverse-scored for analysis: low raw = good, so invert to match other dimensions
-        nasa_tlx_performance: session.nasaTlx?.performance != null ? 100 - session.nasaTlx.performance : null,
-        nasa_tlx_effort: session.nasaTlx?.effort ?? null,
-        nasa_tlx_frustration: session.nasaTlx?.frustration ?? null,
+        // Normalize NASA-TLX to 1-10 scale (old sessions stored 0-100)
+        nasa_tlx_mental: this.normalizeNasa(session.nasaTlx?.mental),
+        nasa_tlx_physical: this.normalizeNasa(session.nasaTlx?.physical),
+        nasa_tlx_temporal: this.normalizeNasa(session.nasaTlx?.temporal),
+        // Performance is reverse-scored: high raw = good, invert so higher = more workload (consistent with other dimensions)
+        nasa_tlx_performance: this.normalizeNasa(session.nasaTlx?.performance, true),
+        nasa_tlx_effort: this.normalizeNasa(session.nasaTlx?.effort),
+        nasa_tlx_frustration: this.normalizeNasa(session.nasaTlx?.frustration),
         adaptation_count: session.adaptations.length,
         first_adaptation_time: firstAdaptationTime,
         zoom_count_avg: avgZoomCount,
@@ -131,6 +133,12 @@ export class AnalyticsService {
     });
 
     return this.jsonToCSV(rows);
+  }
+
+  private normalizeNasa(value: number | null | undefined, reverseScore = false): number | null {
+    if (value == null) return null;
+    const normalized = value > 10 ? Math.round(value / 10) : value;
+    return reverseScore ? 10 - normalized : normalized;
   }
 
   private average(numbers: number[]): number {

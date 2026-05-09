@@ -75,7 +75,9 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
           <div className="grid grid-cols-6 gap-2">
             {Object.entries(session.nasaTlx).map(([key, value]) => {
               // Normalize: old sessions used 0-100, new ones use 1-10
-              const v = (value as number) > 10 ? Math.round((value as number) / 10) : (value as number);
+              // Performance is reverse-scored so higher = more workload (consistent with other dimensions)
+              const normalized = (value as number) > 10 ? Math.round((value as number) / 10) : (value as number);
+              const v = key === 'performance' ? 10 - normalized : normalized;
               return (
                 <div key={key} className="border border-accent border-opacity-20 rounded p-2 text-center">
                   <div className="text-xs opacity-60 capitalize">{key}</div>
@@ -105,7 +107,7 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
                     {lastVal.toFixed(2)} / {threshold}
                   </span>
                 </div>
-                <SignalSparkline data={data} threshold={threshold} height={48} />
+                <SignalSparkline data={data} threshold={threshold} label={label} height={48} />
               </div>
             );
           })}

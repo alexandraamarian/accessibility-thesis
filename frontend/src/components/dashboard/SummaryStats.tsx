@@ -33,18 +33,22 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
 
   // Normalize NASA-TLX values: old sessions used 0-100, new ones use 1-10.
   // Values > 10 are from the old scale and are converted to the 1-10 range.
-  const normalizeNasa = (v: number) => v > 10 ? Math.round(v / 10) : v;
+  // Performance is reverse-scored so that higher = more workload (consistent with other dimensions).
+  const normalizeNasa = (v: number, dim?: string) => {
+    const normalized = v > 10 ? Math.round(v / 10) : v;
+    return dim === 'performance' ? 10 - normalized : normalized;
+  };
 
   const nasaDimensions = ['mental', 'physical', 'temporal', 'performance', 'effort', 'frustration'];
   const nasaData = nasaDimensions.map((dim) => {
     const adaptiveVals = adaptive
       .map((s) => s.nasaTlx?.[dim])
       .filter((v): v is number => v !== undefined && v !== null)
-      .map(normalizeNasa);
+      .map((v) => normalizeNasa(v, dim));
     const controlVals = control
       .map((s) => s.nasaTlx?.[dim])
       .filter((v): v is number => v !== undefined && v !== null)
-      .map(normalizeNasa);
+      .map((v) => normalizeNasa(v, dim));
     return {
       dimension: dim.charAt(0).toUpperCase() + dim.slice(1),
       Adaptive: avg(adaptiveVals),

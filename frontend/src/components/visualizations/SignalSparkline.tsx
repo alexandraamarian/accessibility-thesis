@@ -3,6 +3,7 @@ import { LineChart, Line, ReferenceLine, ResponsiveContainer, YAxis, XAxis, Tool
 interface SignalSparklineProps {
   data: number[];
   threshold: number;
+  label?: string;
   color?: string;
   height?: number;
 }
@@ -10,6 +11,7 @@ interface SignalSparklineProps {
 export function SignalSparkline({
   data,
   threshold,
+  label,
   color = '#38bdf8',
   height = 40,
 }: SignalSparklineProps) {
@@ -44,8 +46,8 @@ export function SignalSparkline({
               opacity: 1,
             }}
             wrapperStyle={{ zIndex: 50, opacity: 1 }}
-            formatter={(value: number) => [value.toFixed(2), 'Value']}
-            labelFormatter={(label: number) => `#${label}`}
+            formatter={(value: number) => [value.toFixed(2), label || 'Value']}
+            labelFormatter={(idx: number) => `Snapshot #${idx}`}
           />
           <ReferenceLine y={threshold} stroke="#6b7280" strokeDasharray="3 3" />
           <Line

@@ -29,12 +29,16 @@ export interface NasaTlxResponses {
   frustration: number;
 }
 
+export type AgeGroup = '18-24' | '25-34' | '35-44' | '45-54' | '55-64' | '65+';
+
 export interface StudyState {
   step: StudyStep;
   participantId: string;
   condition: 'adaptive' | 'control';
   sessionId: string | null;
   consentGiven: boolean;
+  ageGroup: AgeGroup | null;
+  sessionIndex: 0 | 1;
   currentTaskIndex: number;
   taskResults: TaskResult[];
   susResponses: number[];
@@ -50,6 +54,7 @@ type StudyAction =
   | { type: 'ADD_TASK_RESULT'; payload: TaskResult }
   | { type: 'SET_SUS_RESPONSES'; payload: number[] }
   | { type: 'SET_NASA_TLX'; payload: NasaTlxResponses }
+  | { type: 'SET_AGE_GROUP'; payload: AgeGroup }
   | { type: 'START_NEXT_SESSION'; payload: { sessionId: string; condition: 'adaptive' | 'control' } }
   | { type: 'RESET' };
 
@@ -59,6 +64,8 @@ const initialState: StudyState = {
   condition: 'adaptive',
   sessionId: null,
   consentGiven: false,
+  ageGroup: null,
+  sessionIndex: 0,
   currentTaskIndex: 0,
   taskResults: [],
   susResponses: [],
@@ -87,10 +94,14 @@ function studyReducer(state: StudyState, action: StudyAction): StudyState {
       return { ...state, susResponses: action.payload };
     case 'SET_NASA_TLX':
       return { ...state, nasaTlxResponses: action.payload };
+    case 'SET_AGE_GROUP':
+      return { ...state, ageGroup: action.payload };
     case 'START_NEXT_SESSION':
       return {
         ...initialState,
         participantId: state.participantId,
+        ageGroup: state.ageGroup,
+        sessionIndex: 1,
         condition: action.payload.condition,
         sessionId: action.payload.sessionId,
         consentGiven: true,

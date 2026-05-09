@@ -159,7 +159,10 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
           <tbody>
             {sorted.map((session) => {
               const nasaAvg = session.nasaTlx
-                ? (Object.values(session.nasaTlx).map((v) => v > 10 ? Math.round(v / 10) : v).reduce((a, b) => a + b, 0) / Object.values(session.nasaTlx).length).toFixed(1)
+                ? (Object.entries(session.nasaTlx).map(([k, v]) => {
+                    const normalized = v > 10 ? Math.round(v / 10) : v;
+                    return k === 'performance' ? 10 - normalized : normalized;
+                  }).reduce((a, b) => a + b, 0) / Object.keys(session.nasaTlx).length).toFixed(1)
                 : '-';
 
               return (

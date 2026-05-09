@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStudyContext, TaskResult } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
-import { getArticleSetForParticipant } from '../../data/articles';
+import { getArticleSetForAgeGroup } from '../../data/articles';
 import { getTasksForArticleSet, StudyTask } from '../../data/tasks';
 import { Article } from '../Article';
 import { InteractionTestZone } from '../InteractionTestZone';
@@ -11,10 +11,23 @@ import { Button } from '../Button';
 export function TaskRunner() {
   const { state, dispatch } = useStudyContext();
   const { t } = useTranslation();
-  const sessionOffset = state.condition === 'control' ? 1 : 0;
-  const articleSet = getArticleSetForParticipant(state.participantId, sessionOffset);
+  if (!state.ageGroup) {
+    dispatch({ type: 'SET_STEP', payload: 'demographics' });
+    return null;
+  }
+  const articleSet = getArticleSetForAgeGroup(state.ageGroup, state.sessionIndex);
   const allTasks = getTasksForArticleSet(articleSet.id);
   const currentTask = allTasks[state.currentTaskIndex];
+
+  useEffect(() => {
+    if (state.sessionId && articleSet.id) {
+      fetch(`/api/sessions/${state.sessionId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ metadata: { articleSetId: articleSet.id } }),
+      }).catch(() => {});
+    }
+  }, [state.sessionId, articleSet.id]);
 
   const translatedArticles = t('articles.sets', { returnObjects: true }) as any[];
   const translatedArticleSet = translatedArticles?.find((a: any) => a.id === articleSet.id) || articleSet;

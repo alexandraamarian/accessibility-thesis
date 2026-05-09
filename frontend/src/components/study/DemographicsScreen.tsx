@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useStudyContext } from '../../context/StudyContext';
+import { useStudyContext, AgeGroup } from '../../context/StudyContext';
 import { studyLogger } from '../../services/studyLogger';
 import { Button } from '../Button';
 
@@ -44,6 +44,7 @@ export function DemographicsScreen() {
       }
 
       studyLogger.log('demographics_completed', demographics);
+      dispatch({ type: 'SET_AGE_GROUP', payload: ageRange as AgeGroup });
       dispatch({ type: 'SET_STEP', payload: 'warmup' });
     } catch {
       setError(t('demographics.errorSaveFailed'));

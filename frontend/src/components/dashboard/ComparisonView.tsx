@@ -31,7 +31,11 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
   const controlSession = sessions.find((s) => s.participantId === selected && s.condition === 'control');
 
   // Normalize NASA-TLX values: old sessions used 0-100, new ones use 1-10.
-  const normalizeNasa = (v: number) => v > 10 ? Math.round(v / 10) : v;
+  // Performance is reverse-scored so higher = more workload (consistent with other dimensions).
+  const normalizeNasa = (v: number, dim?: string) => {
+    const normalized = v > 10 ? Math.round(v / 10) : v;
+    return dim === 'performance' ? 10 - normalized : normalized;
+  };
 
   const delta = (a: number | null, b: number | null) => {
     if (a === null || b === null) return null;
@@ -78,7 +82,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
                   <div>SUS: <span className="font-mono">{adaptiveSession.susScore ?? '-'}</span></div>
                   {adaptiveSession.nasaTlx && Object.entries(adaptiveSession.nasaTlx).map(([key, value]) => (
                     <div key={key} className="capitalize">
-                      {key}: <span className="font-mono">{normalizeNasa(value as number)}</span>
+                      {key}: <span className="font-mono">{normalizeNasa(value as number, key)}</span>
                     </div>
                   ))}
                 </div>
@@ -90,7 +94,7 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
                   <div>SUS: <span className="font-mono">{controlSession.susScore ?? '-'}</span></div>
                   {controlSession.nasaTlx && Object.entries(controlSession.nasaTlx).map(([key, value]) => (
                     <div key={key} className="capitalize">
-                      {key}: <span className="font-mono">{normalizeNasa(value as number)}</span>
+                      {key}: <span className="font-mono">{normalizeNasa(value as number, key)}</span>
                     </div>
                   ))}
                 </div>
@@ -108,8 +112,8 @@ export function ComparisonView({ sessions }: ComparisonViewProps) {
                   {adaptiveSession.nasaTlx && controlSession.nasaTlx &&
                     Object.keys(adaptiveSession.nasaTlx).map((key) => {
                       const d = delta(
-                        normalizeNasa((adaptiveSession.nasaTlx as Record<string, number>)[key]),
-                        normalizeNasa((controlSession.nasaTlx as Record<string, number>)[key])
+                        normalizeNasa((adaptiveSession.nasaTlx as Record<string, number>)[key], key),
+                        normalizeNasa((controlSession.nasaTlx as Record<string, number>)[key], key)
                       );
                       return (
                         <div key={key} className="capitalize">

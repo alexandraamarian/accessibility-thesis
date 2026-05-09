@@ -3,19 +3,19 @@ export const ro = {
     loading: 'Se încarcă...',
     saving: 'Se salvează...',
     error: 'Eroare',
-    submit: 'Trimite',
-    continue: 'Continuă',
+    submit: 'Trimiteți',
+    continue: 'Continuați',
     back: 'Înapoi',
-    close: 'Închide',
+    close: 'Închideți',
     yes: 'Da',
     no: 'Nu',
     on: 'Activat',
     off: 'Dezactivat',
     none: 'Niciunul',
-    select: 'Selectează...',
-    view: 'Vizualizează',
-    refresh: 'Reîncarcă',
-    enter: 'Intră',
+    select: 'Selectați...',
+    view: 'Vizualizați',
+    refresh: 'Reîncărcați',
+    enter: 'Intrați',
     adaptive: 'Adaptiv',
     control: 'Control',
     complete: 'Finalizat',
@@ -23,12 +23,12 @@ export const ro = {
     condition: 'Condiție',
     session: 'Sesiune',
     participant: 'Participant',
-    exportCsv: 'Exportă CSV',
+    exportCsv: 'Exportați CSV',
     language: 'Limbă',
     skipToMain: 'Sari la conținutul principal',
-    elapsedTime: 'Timp scurs: {{time}}',
+    elapsedTime: 'Timp parcurs: {{time}}',
     stepOfTotal: 'Pasul {{current}} din {{total}}: {{label}}',
-    switchLanguage: 'Schimbă limba în {{language}}',
+    switchLanguage: 'Schimbați limba în {{language}}',
   },
 
   a11yAnnouncements: {
@@ -77,13 +77,13 @@ export const ro = {
       'Acest email a completat deja ambele sesiuni ale studiului. Fiecare participant poate participa de cel mult două ori (o dată pe condiție).',
     errorSessionFailed: 'Sesiunea nu a putut fi creată. Asigurați-vă că serverul este pornit.',
     creatingSession: 'Se creează sesiunea...',
-    beginStudy: 'Începe Studiul',
+    beginStudy: 'Începeți Studiul',
   },
 
   demographics: {
     heading: 'Profilul Participantului',
     instructions:
-      'Vă rugăm să furnizați câteva informații de fond. Acestea ne ajută să analizăm rezultatele în funcție de diferite grupuri de utilizatori.',
+      'Vă rugăm să furnizați câteva informații despre dumneavoastră. Acestea ne ajută să analizăm rezultatele în funcție de diferite grupuri de utilizatori.',
     ageRange: 'Grupa de Vârstă',
     gender: 'Gen',
     genderMale: 'Masculin',
@@ -106,7 +106,7 @@ export const ro = {
     proficiencyIntermediate: 'Intermediar',
     proficiencyAdvanced: 'Avansat',
     proficiencyExpert: 'Expert',
-    continue: 'Continuă la Încălzire',
+    continue: 'Continuați la Încălzire',
     errorRequired: 'Vă rugăm completați toate câmpurile obligatorii.',
     errorSaveFailed: 'Nu s-au putut salva datele. Vă rugăm încercați din nou.',
   },
@@ -117,16 +117,16 @@ export const ro = {
     readyToContinue: 'Sunt gata să continui',
     practiceHeading: 'Practică: Familiarizare',
     practiceText1:
-      'Aceasta este o scurtă fază de încălzire pentru a vă ajuta să vă obișnuiți cu interfața. Nu ezitați să derulați, să faceți click pe butoane și să citiți textul de mai jos.',
+      'Aceasta este o scurtă fază de încălzire pentru a vă ajuta să vă obișnuiți cu interfața. Nu ezitați să derulați, să faceți clic pe butoane și să citiți textul de mai jos.',
     practiceText2Adaptive:
       'Interacțiunile dumneavoastră sunt observate pe parcursul acestei sesiuni. Interfața poate arăta sau funcționa diferit pe măsură ce sesiunea avansează. Acest lucru este normal și face parte din designul studiului.',
     practiceText2Control:
       'Interacțiunile dumneavoastră sunt observate pe parcursul acestei sesiuni. Vă rugăm să folosiți interfața în mod normal. Acest lucru face parte din designul studiului.',
     instructions:
-      'Aveți {{duration}} secunde să explorați interfața. Derulați prin conținut, faceți click pe butoane și încercați zoom-ul (Ctrl+Rotiță).',
+      'Aveți {{duration}} secunde să explorați interfața. Derulați prin conținut, faceți clic pe butoane și încercați zoom-ul (Ctrl+Rotiță).',
     instructionsNoTime:
-      'Explorați interfața de mai jos. Derulați prin conținut, faceți click pe butoane și încercați zoom-ul (Ctrl+Rotiță).',
-    continueToTasks: 'Continuă la Sarcini',
+      'Explorați interfața de mai jos. Derulați prin conținut, faceți clic pe butoane și încercați zoom-ul (Ctrl+Rotiță).',
+    continueToTasks: 'Continuați la Sarcini',
     pleaseWait: 'Vă rugăm așteptați {{time}}s...',
   },
 
@@ -137,7 +137,7 @@ export const ro = {
     answerPlaceholder: 'Scrieți răspunsul aici...',
     navigationHint:
       'Derulați în jos pentru a găsi secțiunea menționată, apoi interacționați cu zona de test.',
-    submitContinue: 'Trimite și Continuă',
+    submitContinue: 'Trimiteți și Continuați',
     submitted: 'Trimis',
     errors: 'eroare/erori',
   },
@@ -161,7 +161,7 @@ export const ro = {
     likert: ['Total Dezacord', 'Dezacord', 'Neutru', 'Acord', 'Total Acord'],
     errorUnanswered: 'Vă rugăm să răspundeți la întrebarea {{n}}.',
     errorSaveFailed: 'Nu s-au putut salva răspunsurile. Vă rugăm încercați din nou.',
-    continueToNasaTlx: 'Continuă la NASA-TLX',
+    continueToNasaTlx: 'Continuați la NASA-TLX',
   },
 
   nasatlx: {
@@ -209,7 +209,7 @@ export const ro = {
     },
     errorUnanswered: 'Vă rugăm să evaluați „{{dimension}}".',
     errorSaveFailed: 'Nu s-au putut salva răspunsurile. Vă rugăm încercați din nou.',
-    continueToSummary: 'Continuă la Feedback',
+    continueToSummary: 'Continuați la Feedback',
   },
 
   feedback: {
@@ -217,7 +217,7 @@ export const ro = {
     instructions: 'O ultimă întrebare înainte de final. Nu există răspunsuri corecte sau greșite.',
     question: 'Ați observat vreo schimbare în interfață? Dacă da, cum v-ați simțit în legătură cu aceste schimbări?',
     placeholder: 'Scrieți gândurile dumneavoastră aici... (opțional)',
-    continue: 'Continuă la Rezumat',
+    continue: 'Continuați la Rezumat',
   },
 
   summary: {
@@ -233,7 +233,7 @@ export const ro = {
     nasaTlxAvg: 'Media NASA-TLX',
     sessionInfo: 'ID Sesiune: {{sessionId}} | Participant: {{participantId}}',
     nextSessionPrompt: 'Ați finalizat prima condiție. Puteți continua acum cu a doua condiție pentru a finaliza studiul.',
-    startNextSession: 'Începe A Doua Sesiune',
+    startNextSession: 'Începeți a Doua Sesiune',
     closeMessage:
       'Puteți închide această fereastră sau îl puteți notifica pe cercetător.',
   },
@@ -271,8 +271,8 @@ export const ro = {
       dwell: 'Timp Citire Secțiune',
       scrollRev: 'Recitire (derulare sus)',
       tremor: 'Tremur Cursor',
-      rageClick: 'Click-uri Repetate',
-      hesitation: 'Ezitare pe Butoane',
+      rageClick: 'Click-uri de Frustrare',
+      hesitation: 'Ezitare Cursor',
       idle: 'Timp Inactiv',
       readSpd: 'Viteză de Citire',
     },
@@ -282,11 +282,11 @@ export const ro = {
     title: 'Panou Cercetător',
     enterPassphrase: 'Introduceți parola',
     sessions: 'Sesiuni',
-    compare: 'Compară',
+    compare: 'Comparați',
     summary: 'Rezumat',
     sessionList: {
       heading: 'Sesiuni ({{count}})',
-      filterPlaceholder: 'Filtrează după email participant...',
+      filterPlaceholder: 'Filtrați după email participant...',
       allConditions: 'Toate condițiile',
       participant: 'Participant',
       condition: 'Condiție',
@@ -330,8 +330,8 @@ export const ro = {
         avgDwellSeconds: 'Timp Citire Secțiune',
         scrollReversalRate: 'Rată Recitire',
         tremorScore: 'Tremur Cursor',
-        rageClickCount: 'Click-uri Repetate',
-        mouseHesitationScore: 'Ezitare pe Butoane',
+        rageClickCount: 'Click-uri de Frustrare',
+        mouseHesitationScore: 'Ezitare Cursor',
         idleSeconds: 'Timp Inactiv',
         readingSpeed: 'Viteză de Citire',
       },
@@ -377,238 +377,200 @@ export const ro = {
   articles: {
     sets: [
       {
-        id: 'climate-technology',
-        title: 'Schimbările Climatice și Tehnologia',
+        id: 'social-media-mental-health',
+        title: 'Rețelele Sociale și Sănătatea Mintală',
         sections: [
-          {
-            id: 'intro',
-            heading: 'Peisajul Tehnologiei Climatice',
-            paragraphs: [
-              'Intersecția dintre știința climatică și tehnologie a produs unele dintre cele mai importante inovații ale secolului XXI. De la sisteme de monitorizare prin satelit care urmăresc defrișarea în timp real, până la modele de învățare automată care optimizează amplasarea turbinelor eoliene, tehnologia redefinește modul în care omenirea răspunde provocărilor de mediu.',
-              'Concentrațiile globale de dioxid de carbon au depășit 420 de părți pe milion în 2024, un nivel care nu a mai fost atins de cel puțin 800.000 de ani, conform înregistrărilor din carotele de gheață. Urgența acestei traiectorii a accelerat investițiile în tehnologia climatică, cheltuielile globale pentru energie curată ajungând la 1,8 trilioane de dolari în 2023, depășind pentru prima dată investițiile în combustibili fosili.',
-            ],
-          },
-          {
-            id: 'renewable-energy',
-            heading: 'Sisteme de Energie Regenerabilă',
-            paragraphs: [
-              'Tehnologia fotovoltaică solară a cunoscut o reducere dramatică a costurilor de peste 90% din 2010, devenind cea mai ieftină sursă de generare a energiei electrice noi pe majoritatea piețelor din lume. Panourile solare moderne ating eficiențe de conversie de peste 22% pentru modulele comerciale, în timp ce celulele de laborator au depășit 47% folosind designuri cu concentrator multi-joncțiune.',
-              'Energia eoliană a urmat o traiectorie similară. Turbinele eoliene offshore ating acum înălțimi de peste 260 de metri cu capacități individuale de 15 megawați, suficiente pentru a alimenta aproximativ 13.000 de locuințe fiecare. Consiliul Global pentru Energie Eoliană a raportat 117 gigawați de capacitate nouă instalată doar în 2023.',
-              'Tehnologia de stocare a energiei în baterii, în special celulele litiu-ion, a înregistrat o scădere a costurilor de 97% din 1991. Proiectele de stocare la scară de rețea depășesc acum în mod regulat 100 de megawatt-ore, abordând provocarea intermitenței care a limitat istoric adoptarea energiei regenerabile. Alternativele emergente, inclusiv bateriile sodiu-ion, solid-state și fier-aer, promit îmbunătățiri suplimentare.',
-            ],
-          },
-          {
-            id: 'carbon-capture',
-            heading: 'Captarea și Eliminarea Carbonului',
-            paragraphs: [
-              'Tehnologia de captare directă din aer (DAC) extrage dioxidul de carbon direct din aerul ambiental folosind sorbenți sau solvenți chimici. Instalația Orca din Islanda, operată de Climeworks, captează aproximativ 4.000 de tone de CO2 anual, stocându-l sub formă de carbonați minerali adânc în subteran printr-un proces numit mineralizare.',
-              'Abordările de eliminare a carbonului bazate pe natură includ reîmpădurirea, sechestrarea carbonului în sol și creșterea alcalinității oceanelor. O pădure tropicală matură poate sechestra între 6 și 30 de tone de CO2 pe hectar pe an, deși provocările legate de permanență și măsurare complică includerea lor pe piețele de credite de carbon.',
-              'Grupul Interguvernamental privind Schimbările Climatice (IPCC) estimează că limitarea încălzirii la 1,5 grade Celsius va necesita eliminarea a 6 până la 10 gigatone de CO2 pe an până în 2050. Capacitatea actuală de eliminare este de aproximativ 2 gigatone anual, aproape în totalitate din silvicultură convențională și gestionarea terenurilor.',
-            ],
-          },
-          {
-            id: 'smart-cities',
-            heading: 'Orașe Inteligente și Sustenabilitate Urbană',
-            paragraphs: [
-              'Sistemele inteligente de clădiri care utilizează senzori IoT și controale bazate pe inteligență artificială pot reduce consumul de energie cu 20 până la 30 de procente comparativ cu clădirile convenționale. Copenhaga își propune să devină prima capitală neutră din punct de vedere al carbonului până în 2025, implementând rețele de senzori pentru optimizarea traficului, colectarea deșeurilor și încălzirea centralizată.',
-              'Adoptarea vehiculelor electrice s-a accelerat puternic în 2023, cu vânzări globale care au depășit 14 milioane de unități, reprezentând 18% din totalul vânzărilor de mașini noi. China a condus cu 8,1 milioane de unități, urmată de Europa cu 3,2 milioane. Agenția Internațională a Energiei proiectează că vehiculele electrice vor reprezenta peste 60% din vânzările noi la nivel global până în 2030.',
-              'Insulele urbane de căldură, unde orașele înregistrează temperaturi cu 3 până la 5 grade Celsius mai mari decât zonele rurale înconjurătoare, reprezintă o provocare tot mai mare pe măsură ce schimbările climatice se intensifică. Instalațiile de acoperișuri verzi, materialele de construcție reflectorizante și extinderea coronamentului arborilor urbani sunt printre strategiile pe care orașele le implementează pentru a atenua acest efect.',
-            ],
-          },
-          {
-            id: 'future-outlook',
-            heading: 'Perspective și Provocări Viitoare',
-            paragraphs: [
-              'Cercetarea fuziunii nucleare a atins un reper în decembrie 2022 când Facilitatea Națională de Igniție a realizat câștig net de energie pentru prima dată. Deși energia comercială din fuziune rămâne la decenii distanță, investițiile private în startup-uri de fuziune au depășit 6 miliarde de dolari până în 2024, reflectând un optimism crescând cu privire la această tehnologie.',
-              'Lanțul de aprovizionare cu minerale critice prezintă un blocaj semnificativ pentru tranziția către energie curată. Cererea de litiu este proiectată să crească de 40 de ori până în 2040, în timp ce cobaltul, nichelul și elementele pământurilor rare se confruntă cu presiuni similare. Infrastructura de reciclare și chimiile alternative ale bateriilor sunt esențiale pentru a evita simpla înlocuire a unei dependențe de resurse cu alta.',
-              'Tehnologia de adaptare climatică, inclusiv sistemele de avertizare timpurie, varietățile de culturi rezistente la secetă și infrastructura de apărare costieră, primește mult mai puține fonduri decât atenuarea, în ciuda realității că o încălzire semnificativă este deja inevitabilă. Națiunile Unite estimează că țările în curs de dezvoltare singure vor avea nevoie de 300 de miliarde de dolari anual pentru adaptare până în 2030.',
-            ],
-          },
+          { id: 'intro', heading: 'Peisajul Rețelelor Sociale', paragraphs: ['Platformele de social media au devenit profund integrate în viața de zi cu zi, mai ales pentru tinerii adulți cu vârste între 18 și 24 de ani. Cercetările Pew Research Center arată că 84% dintre adulții din această grupă de vârstă folosesc cel puțin o platformă de socializare, mulți dintre ei verificându-și conturile de peste 50 de ori pe zi.', 'Tânărul adult mediu petrece aproximativ 3 ore zilnic pe platformele de social media. Acest nivel de implicare i-a determinat pe cercetători, educatori și profesioniștii în sănătate mintală să investigheze atât conexiunile sociale pozitive, cât și costurile psihologice potențiale ale interacțiunii digitale constante.'] },
+          { id: 'current-landscape', heading: 'Cum Afectează Platformele Bunăstarea', paragraphs: ['Studiile publicate în Journal of Social and Clinical Psychology au constatat că limitarea utilizării rețelelor sociale la 30 de minute pe zi a dus la reduceri semnificative ale singurătății și depresiei pe o perioadă de trei săptămâni. Mecanismul pare să implice comparația socială: utilizatorii își compară frecvent realitatea de zi cu zi cu momentele selectate ale altora.', 'Cercetarea internă a Instagram, dezvăluită în 2021, a arătat că 32% dintre fetele adolescente au raportat că se simt mai rău în privința imaginii corporale după utilizarea platformei. Amplificarea algoritmică a conținutului idealizat creează bucle de feedback care pot intensifica sentimentele de inadecvare.', 'În schimb, rețelele sociale oferă conexiuni vitale pentru comunitățile marginalizate. Tinerii LGBTQ+, persoanele cu afecțiuni medicale rare și oamenii din zone izolate geografic găsesc adesea comunități de sprijin online care nu sunt disponibile în mediul lor fizic.'] },
+          { id: 'challenges', heading: 'Bucla Dopaminei și Dependența', paragraphs: ['Platformele de social media folosesc programe de recompensă variabilă — același mecanism psihologic utilizat la aparatele de slot — pentru a maximiza implicarea. Fiecare notificare, apreciere sau comentariu declanșează o mică eliberare de dopamină, consolidând obiceiul de a verifica aplicația în mod repetat.', 'Conceptul de „doomscrolling", consumul compulsiv de fluxuri de știri negative, a devenit larg recunoscut în timpul pandemiei de COVID-19. Cercetările indică faptul că derularea pasivă, spre deosebire de postarea și mesajele active, este cel mai puternic asociată cu scăderea sănătății mintale.', 'Studiile neuroștiințifice utilizând scanări fMRI arată că primirea notificărilor de pe rețelele sociale activează aceleași regiuni cerebrale ca primirea recompenselor monetare. Acest răspuns neuronal ajută la explicarea motivului pentru care mulți utilizatori descriu că nu se pot opri din a-și verifica telefonul, deși și-ar dori.'] },
+          { id: 'strategies', heading: 'Detoxifierea Digitală și Strategii de Adaptare', paragraphs: ['Programele de detoxifiere digitală încurajează participanții să se abțină de la rețelele sociale pentru perioade definite. Un studiu din 2022 la Universitatea din Bath a constatat că o pauză de o săptămână de la rețelele sociale a îmbunătățit scorurile auto-raportate de bunăstare, depresie și anxietate ale participanților comparativ cu un grup de control.', 'Instrumentele integrate de timp de ecran, disponibile acum atât pe iOS, cât și pe Android, permit utilizatorilor să stabilească limite zilnice și să urmărească tiparele de utilizare. Cu toate acestea, cercetările arată că doar 28% dintre tinerii adulți care stabilesc limite le respectă efectiv, sugerând că soluțiile bazate pe tehnologie nu sunt suficiente singure.', 'Strategiile cognitiv-comportamentale, inclusiv practicile de derulare conștientă și ferestrele programate pentru rețelele sociale, au arătat rezultate promițătoare în mediile clinice. Terapeuții încorporează din ce în ce mai mult alfabetizarea digitală în planurile de tratament pentru anxietate și depresie.'] },
+          { id: 'future-outlook', heading: 'Direcții Viitoare și Politici', paragraphs: ['Actul Serviciilor Digitale al Uniunii Europene, în vigoare din 2024, impune platformelor să evalueze și să atenueze riscurile sistemice pentru sănătatea mintală. Legislație similară este în curs de examinare în Statele Unite, Australia și Regatul Unit.', 'Susținătorii redesignului platformelor propun eliminarea numărului public de aprecieri, fluxuri cronologice în loc de cele algoritmice și funcții obligatorii de „fricțiune" care solicită utilizatorilor să reconsidere înainte de utilizarea prelungită. Unele dintre aceste modificări au fost deja testate pilot de Instagram și TikTok.', 'Cercetările emergente în instrumente personalizate de bunăstare digitală utilizează învățarea automată pentru a detecta semne timpurii ale stărilor emoționale negative din tiparele de utilizare și pentru a sugera proactiv pauze sau activități alternative. Aceste abordări adaptive reprezintă următoarea frontieră în sănătatea mintală digitală.'] },
         ],
       },
       {
-        id: 'digital-accessibility',
-        title: 'Istoria Accesibilității Digitale',
+        id: 'gig-economy-freelancing',
+        title: 'Economia Gig și Freelancing-ul',
         sections: [
-          {
-            id: 'origins',
-            heading: 'Originile Accesibilității Digitale',
-            paragraphs: [
-              'Istoria accesibilității digitale se întinde până în primele zile ale informaticii, când interfețele bazate pe text erau norma. Cititoarele de ecran au apărut pentru prima dată în anii 1980, traducând textul de pe ecran în vorbire sintetizată pentru utilizatorii cu deficiențe de vedere.',
-              'Adoptarea Actului Americanilor cu Dizabilități în 1990 a reprezentat un moment de cotitură, stabilind cadre juridice care se vor extinde în cele din urmă la spațiile digitale. Primele eforturi de accesibilitate web au fost în mare parte comunitare, conduse de activiști care au recunoscut potențialul internetului de a include sau exclude.',
-            ],
-          },
-          {
-            id: 'standards',
-            heading: 'Ghidurile de Accesibilitate a Conținutului Web',
-            paragraphs: [
-              'Consorțiul World Wide Web a publicat primele Ghiduri de Accesibilitate a Conținutului Web (WCAG 1.0) în 1999, stabilind 14 ghiduri organizate pe prioritate. WCAG 2.0 a urmat în 2008 cu un cadru mai testabil și agnostic tehnologic, construit în jurul a patru principii: Perceptibil, Operabil, Inteligibil și Robust.',
-              'WCAG 2.1, lansat în 2018, a adăugat 17 noi criterii de succes care abordează accesibilitatea mobilă, vederea slabă și dizabilitățile cognitive. Ghidurile au introdus cerințe pentru spațierea textului, redistribuirea conținutului și dimensiunea țintei care informează direct designul interfețelor adaptive.',
-              'Fiecare ghid include trei niveluri de conformitate: A (minim), AA (standard) și AAA (îmbunătățit). Cele mai multe cerințe legale fac referire la conformitatea AA, care include rapoarte de contrast de 4,5:1 pentru text normal și 3:1 pentru text mare.',
-            ],
-          },
-          {
-            id: 'assistive-tech',
-            heading: 'Evoluția Tehnologiei Asistive',
-            paragraphs: [
-              'Cititoarele de ecran au evoluat de la motoare simple text-în-vorbire la instrumente sofisticate de navigare. Cititoarele de ecran moderne precum JAWS, NVDA și VoiceOver interpretează HTML semantic, reperele ARIA și regiunile live pentru a oferi experiențe interactive bogate utilizatorilor nevăzători și cu vedere slabă.',
-              'Dispozitivele de acces prin comutator permit utilizatorilor cu deficiențe motorii severe să interacționeze cu calculatoarele prin comutatoare simple sau duble. Sistemele de urmărire oculară s-au maturizat de la echipamente de laborator la produse de consum, oferind noi modalități de interacțiune pentru utilizatorii cu control motor limitat.',
-              'Software-ul de recunoaștere vocală, exemplificat de Dragon NaturallySpeaking și dictarea integrată în sistemul de operare, permite operarea calculatorului fără mâini. Aceste instrumente beneficiază utilizatorii cu leziuni de efort repetitiv, dizabilități motorii și accidentări temporare deopotrivă.',
-            ],
-          },
-          {
-            id: 'legal-landscape',
-            heading: 'Peisajul Legal și de Reglementare',
-            paragraphs: [
-              'Secțiunea 508 a Actului de Reabilitare din SUA cere agențiilor federale să facă informațiile electronice accesibile. Actul European de Accesibilitate, în vigoare din 2025, impune accesibilitatea pentru o gamă largă de produse și servicii în statele membre UE.',
-              "Deciziile instanțelor, în special Robles vs. Domino's Pizza (2019), au stabilit că site-urile web și aplicațiile mobile intră sub incidența Actului Americanilor cu Dizabilități. Acest precedent a accelerat investițiile corporative în programele de accesibilitate.",
-              'Numărul tot mai mare de legi de accesibilitate la nivel mondial reflectă trecerea de la respectarea voluntară la cerințe obligatorii, crescând cererea pentru instrumente de testare automată, suprapuneri de accesibilitate și soluții de interfețe adaptive.',
-            ],
-          },
-          {
-            id: 'future-directions',
-            heading: 'Direcții Viitoare în Accesibilitate',
-            paragraphs: [
-              'Învățarea automată oferă căi promițătoare pentru accesibilitate. Modelele de viziune computerizată pot genera descrieri de imagini, procesarea limbajului natural poate simplifica textul complex, iar modelele comportamentale pot prezice nevoile individuale de accesibilitate înainte ca utilizatorii să solicite explicit adaptări.',
-              'Conceptul de design inclusiv extinde principiile accesibilității pentru a beneficia toți utilizatorii, nu doar pe cei cu dizabilități. Caracteristici proiectate inițial pentru accesibilitate, precum rampele de acces, subtitrarea și asistenții vocali, au devenit funcționalități folosite de toată lumea.',
-              'Tehnologiile emergente precum realitatea augmentată, interfețele creier-calculator și sistemele de feedback haptic prezintă atât oportunități, cât și provocări pentru accesibilitate. Asigurarea că aceste tehnologii sunt accesibile de la început necesită colaborarea între cercetători, designeri și persoane cu dizabilități.',
-            ],
-          },
+          { id: 'intro', heading: 'Ascensiunea Economiei Gig', paragraphs: ['Economia gig a transformat modul în care tinerii adulți gândesc despre muncă. Un sondaj din 2024 realizat de McKinsey a constatat că 36% dintre americanii angajați se identifică drept lucrători independenți, în creștere de la 27% în 2016. Platforme precum Uber, Fiverr, Upwork și DoorDash au făcut posibilă obținerea de venituri cu o flexibilitate fără precedent.', 'Pentru mulți din grupa de vârstă 18-24 de ani, freelancing-ul nu este doar o activitate secundară, ci o strategie principală de venit. Atracția constă în autonomie: stabilirea propriului program, alegerea proiectelor și munca de oriunde cu o conexiune la internet.'] },
+          { id: 'current-landscape', heading: 'Platforme Majore și Oportunități', paragraphs: ['Upwork, cea mai mare piață de freelancing, raportează peste 18 milioane de freelanceri înregistrați care oferă servicii în categorii de la dezvoltare web la design grafic. Platforma a facilitat câștiguri de 3,8 miliarde de dolari pentru freelanceri în 2023.', 'Crearea de conținut a apărut ca o cale viabilă de carieră. Programul de Parteneri YouTube plătește creatorilor în medie între 3 și 5 dolari la o mie de vizualizări, în timp ce Fondul pentru Creatori TikTok distribuie plăți pe baza metricilor de implicare. Creatorii de top din categorii de nișă pot obține venituri de șase cifre.', 'Piața globală de freelancing este proiectată să ajungă la 12 miliarde de dolari până în 2028, impulsionată de companiile care adoptă talentele la distanță și de tinerii profesioniști care prioritizează flexibilitatea în detrimentul stabilității tradiționale a locului de muncă.'] },
+          { id: 'challenges', heading: 'Provocări cu Care Se Confruntă Lucrătorii Gig', paragraphs: ['Volatilitatea veniturilor este cea mai citată provocare în rândul lucrătorilor gig. Spre deosebire de angajații salariați, freelancerii se confruntă cu câștiguri lunare imprevizibile. Un sondaj al Freelancers Union a constatat că 63% dintre freelanceri au experimentat cel puțin o perioadă de neplată sau plată întârziată în anul precedent.', 'Lacunele în beneficii reprezintă un alt obstacol semnificativ. Majoritatea lucrătorilor gig nu au asigurare de sănătate oferită de angajator, contribuții la pensie și concediu plătit. În Statele Unite, unde asistența medicală este în mare parte legată de angajator, acest lucru creează o lacună semnificativă de acoperire pentru lucrătorii independenți.', 'Managementul algoritmic pe platforme precum Uber și DoorDash înseamnă că câștigurile și oportunitățile lucrătorilor sunt determinate de sisteme opace pe care nu le pot controla sau contesta. Sistemele de evaluare pot penaliza lucrătorii pentru factori în afara controlului lor, cum ar fi traficul sau întârzierile restaurantelor.'] },
+          { id: 'strategies', heading: 'Construirea unei Cariere Sustenabile de Freelancing', paragraphs: ['Consilierii financiari recomandă ca freelancerii să mențină un fond de urgență care acoperă cel puțin trei până la șase luni de cheltuieli. Punerea deoparte a 25 până la 30 la sută din venit pentru taxe este esențială, deoarece lucrătorii gig sunt responsabili atât pentru partea angajatorului, cât și pentru cea a angajatului din impozitele pe salarii.', 'Diversificarea portofoliului pe mai multe platforme și tipuri de clienți reduce dependența de o singură sursă de venit. Freelancerii de succes dezvoltă de obicei un brand personal prin site-uri profesionale, prezență pe rețelele sociale și testimoniale ale clienților.', 'Dezvoltarea profesională rămâne crucială. Freelancerii care investesc în certificări și perfecționare a competențelor raportează câștiguri cu 40% mai mari decât cei care nu o fac. Platformele de învățare online precum Coursera și LinkedIn Learning oferă cursuri specifice aliniate cu competențele de freelancing foarte solicitate.'] },
+          { id: 'future-outlook', heading: 'Viitorul Muncii Independente', paragraphs: ['Uniunea Europeană a propus o Directivă privind Munca pe Platforme care ar reclasifica mulți lucrători gig ca angajați, dându-le dreptul la protecții de salariu minim, concediu plătit și beneficii de securitate socială. Dezbateri similare sunt active în California, unde Propoziția 22 rămâne contestată.', 'Inteligența artificială transformă peisajul freelancing-ului în moduri contradictorii. Deși instrumentele AI permit freelancerilor să producă munca mai eficient, ele amenință și să automatizeze sarcinile de nivel introductiv în scriere, design și introducere de date pe care mulți nou-veniți se bazează pentru venitul inițial.', 'Platformele descentralizate construite pe tehnologia blockchain promit să reducă comisioanele platformelor și să ofere lucrătorilor mai mult control asupra datelor lor și relațiilor cu clienții. Proiecte precum Braintrust funcționează ca cooperative deținute de lucrători, sugerând modele alternative pentru viitorul muncii gig.'] },
         ],
       },
       {
-        id: 'hci-methods',
-        title: 'Metode de Interacțiune Om-Calculator',
+        id: 'remote-work-balance',
+        title: 'Munca la Distanță și Echilibrul Viață-Muncă',
         sections: [
-          {
-            id: 'hci-foundations',
-            heading: 'Fundamentele Cercetării HCI',
-            paragraphs: [
-              'Interacțiunea Om-Calculator a apărut ca un domeniu distinct la începutul anilor 1980, reunind cunoștințe din psihologia cognitivă, informatică și design. Premisa fondatoare a domeniului este că tehnologia ar trebui să se adapteze capacităților și limitărilor umane, nu oamenii să se adapteze limitărilor tehnologice.',
-              'Cartea lui Card, Moran și Newell „Psihologia Interacțiunii Om-Calculator" (1983) a stabilit modele fondatoare incluzând modelul la nivel de tastare și cadrul GOMS. Aceste modele predictive au permis designerilor să estimeze timpii de finalizare a sarcinilor și să identifice blocajele de interacțiune înainte de implementare.',
-            ],
-          },
-          {
-            id: 'usability-testing',
-            heading: 'Metode de Testare a Utilizabilității',
-            paragraphs: [
-              'Protocoalele de gândire cu voce tare, introduse de Ericsson și Simon (1980), rămân o piatră de temelie a evaluării utilizabilității. Participanții își verbalizează procesele de gândire în timp ce completează sarcini, dezvăluind modele mentale, așteptări și puncte de confuzie pe care metricile cantitative singure nu le pot captura.',
-              'Evaluarea euristică, formalizată de Nielsen și Molich (1990), oferă o metodă de inspecție eficientă din punct de vedere al costurilor. Evaluatorii analizează o interfață în raport cu principii de utilizabilitate stabilite, identificând probleme fără a necesita participanți utilizatori. Studiile arată că 3–5 evaluatori găsesc de obicei 75% din problemele de utilizabilitate.',
-              'Testarea A/B și experimentele controlate complementează metodele calitative furnizând dovezi statistice pentru deciziile de design. Designurile intra-subiecți, în care fiecare participant experimentează toate condițiile, maximizează puterea statistică cu eșantioane mai mici, fiind astfel potrivite pentru cercetarea academică.',
-            ],
-          },
-          {
-            id: 'measurement',
-            heading: 'Măsurarea Experienței Utilizatorului',
-            paragraphs: [
-              'Scala de Utilizabilitate a Sistemului, dezvoltată de Brooke (1996), oferă un chestionar fiabil cu 10 întrebări care produce scoruri de la 0 la 100. Simplitatea și fiabilitatea sa au făcut-o cel mai utilizat chestionar standardizat de utilizabilitate, cu o bază de date de referință care depășește 10.000 de răspunsuri.',
-              'NASA Task Load Index măsoară șase dimensiuni ale volumului de muncă: cerința mentală, cerința fizică, cerința temporală, performanța, efortul și frustrarea. Dezvoltat inițial pentru aplicații aerospațiale, a fost adoptat pe larg în cercetarea HCI pentru a evalua costul cognitiv al interacțiunilor cu interfața.',
-              'Măsurile fiziologice incluzând urmărirea oculară, răspunsul galvanic al pielii și analiza expresiilor faciale oferă indicatori obiectivi ai stării utilizatorului. Aceste măsuri completează scalele auto-raportate prin captarea răspunsurilor inconștiente și a schimbărilor de la un moment la altul în implicare și frustrare.',
-            ],
-          },
-          {
-            id: 'interaction-models',
-            heading: 'Modele și Paradigme de Interacțiune',
-            paragraphs: [
-              'Legea lui Fitts, publicată în 1954, modelează timpul necesar pentru a indica o țintă ca funcție a distanței și lățimii țintei. Această lege a fost validată pe dispozitive de intrare de la mouse la ecrane tactile și rămâne fundamentală pentru optimizarea aspectului interfeței.',
-              'Legea Hick-Hyman descrie relația logaritmică între numărul de opțiuni și timpul de decizie. Acest principiu informează designul meniurilor, structura interfețelor de căutare și organizarea sistemelor de navigare pentru a minimiza supraîncărcarea cognitivă.',
-              'Modelul celor șapte etape ale acțiunii al lui Norman descrie cum utilizatorii formează scopuri, le traduc în acțiuni, execută acele acțiuni și evaluează rezultatele. Modelul identifică două goluri cheie: golul de execuție (maparea scopurilor la acțiuni) și golul de evaluare (interpretarea feedback-ului sistemului).',
-            ],
-          },
-          {
-            id: 'modern-hci',
-            heading: 'Provocări Moderne în HCI',
-            paragraphs: [
-              'Multitudinea de dispozitive și formate de ecran a făcut ca designul responsive să nu mai fie suficient. Interfețele adaptive care răspund nu doar la dimensiunea ecranului, ci și la comportamentul utilizatorului, context și nivelul de abilitate reprezintă următoarea evoluție în designul personalizat al interacțiunii.',
-              'Preocupările legate de confidențialitate în urmărirea comportamentală necesită atenție sporită la minimizarea datelor, consimțământului informat și limitării scopului. Sistemele transparente care explică de ce apar adaptările construiesc încrederea utilizatorilor și respectă reglementări precum GDPR.',
-              'Intersecția inteligenței artificiale și HCI ridică întrebări despre agentivitatea utilizatorului, prejudecata algoritmică și nivelul adecvat de autonomie a sistemului. Sistemele adaptive eficiente trebuie să echilibreze asistența proactivă cu controlul utilizatorului, evitând senzația de disconfort care descurajează adopția.',
-            ],
-          },
+          { id: 'intro', heading: 'Revoluția Muncii la Distanță', paragraphs: ['Pandemia de COVID-19 a accelerat o tranziție către munca la distanță care se construia treptat de ani de zile. Până în 2024, aproximativ 28% din zilele de lucru din Statele Unite erau efectuate la distanță, comparativ cu doar 5% înainte de pandemie. Economistul de la Stanford, Nicholas Bloom, descrie aceasta drept cea mai semnificativă transformare a piețelor muncii de la Al Doilea Război Mondial.', 'Pentru profesioniștii cu vârste între 25 și 34 de ani, munca la distanță a devenit o cerință non-negociabilă la locul de muncă. Un sondaj din 2024 realizat de Buffer a constatat că 98% dintre lucrătorii la distanță doresc să continue să lucreze la distanță cel puțin parțial pentru restul carierei lor.'] },
+          { id: 'current-landscape', heading: 'Modele Hibride și Productivitate', paragraphs: ['Aranjamentele de muncă hibride, combinând două până la trei zile la birou cu zile la distanță, au apărut ca modelul dominant. Companii precum Microsoft, Google și Salesforce au adoptat variații ale acestei abordări, raportând scoruri de satisfacție a angajaților cu 15 până la 20% mai mari decât aranjamentele complet la birou.', 'Cercetările de la Universitatea Stanford care au urmărit 16.000 de lucrători au constatat că angajații la distanță erau cu 13% mai productivi decât omologii lor de la birou. Mai puține distrageri, eliminarea timpului de navetă și o flexibilitate mai mare a programului au fost citate drept factorii principali.', 'Adoptarea software-ului de monitorizare a productivității a crescut brusc, 60% dintre companiile cu lucrători la distanță folosind acum o formă de urmărire a angajaților. Instrumente precum Hubstaff, Time Doctor și ActivTrak ridică îngrijorări cu privire la cultura supravegherii și impactul acesteia asupra încrederii și moralului.'] },
+          { id: 'challenges', heading: 'Epuizarea și Erodarea Granițelor', paragraphs: ['Estomparea granițelor dintre viața profesională și cea personală este cea mai frecvent raportată provocare a muncii la distanță. Un index Microsoft Work Trend a constatat că munca după program a crescut cu 28%, iar munca de weekend cu 14% în rândul lucrătorilor la distanță. Așteptarea de a fi mereu disponibil creează un stres constant de nivel scăzut.', 'Izolarea socială afectează semnificativ lucrătorii la distanță. Gallup raportează că angajații complet la distanță sunt cu 30% mai predispuși să raporteze sentimente de singurătate decât lucrătorii hibrizi. Absența conversațiilor spontane pe hol și a ieșirilor la prânz reduce legăturile sociale care contribuie la satisfacția profesională.', 'Preocupările legate de evoluția carierei persistă în rândul lucrătorilor la distanță. Studiile arată că angajații la distanță primesc promovări la rate cu 31% mai mici decât colegii de la birou, un fenomen pe care cercetătorii îl numesc „părtinirea proximității". Această discrepanță este deosebit de îngrijorătoare pentru profesioniștii la începutul carierei care își construiesc rețelele.'] },
+          { id: 'strategies', heading: 'Strategii pentru Echilibru', paragraphs: ['Stabilirea unui spațiu de lucru dedicat cu granițe fizice clare între zonele de muncă și cele de locuit este în mod constant recomandarea principală a psihologilor ocupaționali. Lucrătorii cu birouri separate acasă raportează o gestionare cu 23% mai bună a graniței viață-muncă decât cei care lucrează din spații comune.', 'Tehnicile de blocare a timpului, în special metoda Pomodoro cu sesiuni de lucru concentrat de 25 de minute, ajută la structurarea zilelor de lucru la distanță. Blocarea calendarului pentru activități personale — exerciții fizice, mese, timp în familie — cu aceeași prioritate ca întâlnirile previne extinderea muncii pentru a umple tot timpul disponibil.', 'Companii precum Basecamp și GitLab au implementat politici de comunicare „async-first", reducând încărcătura de întâlniri și permițând angajaților să lucreze în orele lor cele mai productive. Cultura muncii asincrone respectă diferitele fusuri orare și ritmuri personale.'] },
+          { id: 'future-outlook', heading: 'Viitorul Muncii la Distanță', paragraphs: ['Spațiile de lucru în realitate virtuală, exemplificate de Horizon Workrooms de la Meta și Microsoft Mesh, promit să abordeze provocarea izolării sociale prin crearea de medii imersive partajate. Adoptarea timpurie rămâne scăzută, dar tehnologia avansează rapid.', 'Mișcarea „lucrează de oriunde" a generat programe de viză pentru nomazi digitali în peste 50 de țări, inclusiv Portugalia, Estonia și Costa Rica. Aceste vize permit lucrătorilor la distanță să locuiască în străinătate menținând în același timp angajarea la companii din țările lor de origine.', 'Economiștii muncii prezic că până în 2030, 40% dintre lucrătorii din domeniul cunoașterii vor lucra complet la distanță, cu implicații pentru imobiliarele comerciale, planificarea urbană și dezvoltarea economică regională. Orașele care atrag lucrători la distanță prin calitatea vieții și investiții în infrastructură vor beneficia cel mai mult.'] },
+        ],
+      },
+      {
+        id: 'sustainable-living-budget',
+        title: 'Viața Sustenabilă cu un Buget Redus',
+        sections: [
+          { id: 'intro', heading: 'Sustenabilitatea Întâlnește Accesibilitatea Financiară', paragraphs: ['O concepție greșită frecventă este că viața sustenabilă necesită un venit mai mare. În realitate, multe practici ecologice economisesc bani reducând în același timp impactul asupra mediului. Un studiu din 2023 al Environmental Defense Fund a constatat că gospodăriile care adoptă practici de bază de sustenabilitate au economisit în medie 2.500 de dolari anual la energie, alimente și costuri de transport.', 'Tinerii profesioniști cu vârste între 25 și 34 de ani stimulează cererea de opțiuni sustenabile. Nielsen raportează că 73% dintre mileniali sunt dispuși să plătească mai mult pentru produse sustenabile, dar realitatea este că multe alegeri ecologice — de la gătitul acasă la mersul cu bicicleta — sunt inerent mai ieftine decât alternativele lor convenționale.'] },
+          { id: 'current-landscape', heading: 'Fast Fashion și Alternativele Sale', paragraphs: ['Industria modei produce aproximativ 92 de milioane de tone de deșeuri textile anual, consumatorul mediu eliminând 37 de kilograme de îmbrăcăminte pe an. Brandurile de fast fashion lansează până la 52 de „micro-sezoane" anual, încurajând achiziția constantă.', 'Piețele de îmbrăcăminte second-hand au crescut cu 25% de la an la an, cu platforme precum ThredUp, Depop și Vinted care fac moda pre-deținută accesibilă și la modă. ThredUp proiectează că piața second-hand va ajunge la 350 de miliarde de dolari la nivel global până în 2028.', 'Garderobele capsulă — colecții curate de 30 până la 40 de piese versatile — pot reduce cheltuielile cu îmbrăcămintea cu până la 60%, minimizând în același timp oboseala decizională. Abordarea pune accent pe calitate în detrimentul cantității, fiecare articol fiind conceput să se potrivească cu mai multe altele.'] },
+          { id: 'challenges', heading: 'Risipa Alimentară și Alimentația Inteligentă', paragraphs: ['La nivel global, o treime din toată mâncarea produsă este pierdută sau risipită, însumând 1,3 miliarde de tone anual. La nivel de gospodărie, familia medie risipește alimente în valoare de 1.500 de dolari pe an prin alterare, cumpărături excesive și resturi aruncate.', 'Planificarea meselor și gătitul în serie sunt cele mai eficiente strategii pentru reducerea risipei alimentare. Aplicații precum Too Good To Go, care vinde surplus de mâncare de la restaurante și magazine la prețuri reduse, au prevenit risipirea a peste 300 de milioane de mese de la lansare.', 'Alimentația pe bază de plante, chiar și parțial, oferă atât beneficii de mediu, cât și financiare. Înlocuirea cărnii cu leguminoase de trei ori pe săptămână poate economisi unei gospodării 1.200 de dolari anual, reducând în același timp emisiile de carbon alimentare cu până la 35%.'] },
+          { id: 'strategies', heading: 'Economii la Energie și Transport', paragraphs: ['Ajustările simple ale energiei acasă generează economii semnificative. Trecerea la becuri LED economisește aproximativ 225 de dolari pe an pentru o gospodărie medie. Termostatele inteligente precum Nest sau Ecobee reduc costurile de încălzire și răcire cu 10 până la 15% prin programare automatizată și detectarea ocupării.', 'Bicicletele electrice au devenit o alternativă practică de navetă pentru distanțe sub 15 kilometri. Cu un cost mediu de achiziție de 1.500 de dolari și costuri de operare neglijabile, e-bike-urile se amortizează în 6 luni comparativ cu costurile de navetă cu mașina de 300 până la 500 de dolari pe lună.', 'Programele de partajare comunitară pentru unelte, vehicule și aparate reduc atât costurile, cât și impactul asupra mediului. Inițiativele de tip bibliotecă de obiecte, care funcționează acum în peste 100 de orașe din întreaga lume, permit rezidenților să împrumute articole de care au nevoie doar ocazional.'] },
+          { id: 'future-outlook', heading: 'Viitorul Vieții Sustenabile', paragraphs: ['Modelele de economie circulară, în care produsele sunt proiectate pentru reutilizare, reparare și reciclare, câștigă adoptare corporativă. Fundația Ellen MacArthur estimează că abordările circulare ar putea genera 4,5 trilioane de dolari în beneficii economice până în 2030.', 'Aplicațiile de urmărire a amprentei de carbon precum Joro și Yayzy se conectează la conturile bancare pentru a estima impactul asupra mediului al achizițiilor de zi cu zi. Aceste instrumente fac costurile abstracte de mediu personale și acționabile, ajutând utilizatorii să identifice domeniile cu cel mai mare impact pentru schimbare.', 'Programele municipale din orașe precum Amsterdam, Copenhaga și San Francisco implementează inițiative de sustenabilitate la nivel de cartier, de la grădini solare comunitare la magazine alimentare cu zero deșeuri. Aceste abordări colective fac din alegerile sustenabile opțiunea implicită, nu excepția.'] },
+        ],
+      },
+      {
+        id: 'parenting-digital-age',
+        title: 'Parentingul în Era Digitală',
+        sections: [
+          { id: 'intro', heading: 'Creșterea Copiilor într-o Lume Conectată', paragraphs: ['Părinții de astăzi se confruntă cu provocări fără precedent în gestionarea relației copiilor lor cu tehnologia. Academia Americană de Pediatrie raportează că copiii cu vârste între 8 și 12 ani petrec în medie 4 până la 6 ore zilnic în fața ecranelor, în timp ce adolescenții au o medie de până la 9 ore — excluzând temele pentru școală.', 'Provocarea se extinde dincolo de cantitatea de timp petrecut în fața ecranului. Tipul de conținut, calitatea interacțiunilor digitale și înlocuirea activității fizice, a somnului și a socializării față în față — toate influențează rezultatele de dezvoltare pe care cercetătorii abia încep să le înțeleagă.'] },
+          { id: 'current-landscape', heading: 'Ghiduri privind Timpul de Ecran și Realitatea', paragraphs: ['Organizația Mondială a Sănătății recomandă zero timp de ecran pentru copiii sub doi ani, maximum o oră pentru vârste între doi și patru ani, și limite consistente pentru copiii mai mari. Cu toate acestea, un studiu din 2023 în JAMA Pediatrics a constatat că doar 17% dintre familii respectă cu succes aceste ghiduri.', 'Timpul de ecran educativ produce rezultate diferite față de consumul pasiv. Aplicațiile educative interactive pot îmbunătăți abilitățile de alfabetizare și numerație la copiii cu vârste între 3 și 5 ani, cu condiția să fie utilizate alături de implicarea unui adult. Factorul cheie nu este dispozitivul, ci prezența unui adult care ghidează.', 'Jocurile video au devenit forma dominantă de divertisment digital pentru copii. Minecraft, cu peste 170 de milioane de jucători lunari, a fost adoptat de educatori pentru predarea raționamentului spațial, creativității și colaborării. Distincția între jocurile recreative și cele educative este din ce în ce mai neclară.'] },
+          { id: 'challenges', heading: 'Siguranța Online și Cyberbullying-ul', paragraphs: ['Cyberbullying-ul afectează aproximativ 37% dintre elevii cu vârste între 12 și 17 ani, conform Centrului de Cercetare a Cyberbullying-ului. Spre deosebire de intimidarea tradițională, hărțuirea digitală urmărește copiii acasă și poate fi persistentă, publică și anonimă, făcând-o deosebit de supărătoare.', 'Riscurile legate de prădătorii online au evoluat odată cu tehnologia. Centrul Național pentru Copii Dispăruți și Exploatați a primit peste 32 de milioane de rapoarte de suspiciune de exploatare a copiilor în 2022. Mesajele criptate și platformele anonime complică detectarea și intervenția.', 'Confidențialitatea datelor copiilor reprezintă o preocupare crescândă. Legea privind Protecția Confidențialității Online a Copiilor (COPPA) din SUA restricționează colectarea de date de la copiii sub 13 ani, dar aplicarea este inconsistentă și mulți copii accesează platformele declarând în mod fals vârsta lor.'] },
+          { id: 'strategies', heading: 'Strategii Practice pentru Parentingul Digital', paragraphs: ['Planurile media de familie, recomandate de Academia Americană de Pediatrie, stabilesc așteptări comune privind zonele fără dispozitive (dormitoare, masa de cină), perioadele fără ecran (o oră înainte de culcare) și sursele de conținut aprobate. Familiile care creează acorduri scrise raportează cu 40% mai puține conflicte legate de utilizarea tehnologiei.', 'Instrumentele de control parental precum Apple Screen Time, Google Family Link și Qustodio permit părinților să stabilească filtre de conținut, limite de timp și restricții pentru aplicații. Cercetările sugerează că aceste instrumente sunt cele mai eficiente atunci când sunt combinate cu conversații continue despre comportamentul online.', 'Co-vizionarea și co-jocul — vizionarea de conținut sau jocul împreună — transformă timpul de ecran dintr-o activitate pasivă într-o oportunitate de conectare. Studiile arată că copiii rețin cu 45% mai mult conținut educativ atunci când un adult participă și discută ceea ce văd.'] },
+          { id: 'future-outlook', heading: 'Viitorul Parentingului Digital', paragraphs: ['Moderarea conținutului bazată pe inteligență artificială se îmbunătățește rapid. Instrumentele care pot detecta cyberbullying-ul, conținutul inadecvat și comportamentul de grooming în timp real sunt integrate atât în platforme, cât și în software-ul de control parental.', 'Conceptul de cetățenie digitală este integrat în programa școlară la nivel mondial. Programe precum curricula de Cetățenie Digitală a Common Sense Media învață copiii gândirea critică despre informațiile online, comunicarea digitală respectuoasă și gestionarea datelor personale.', 'Codurile de design adecvate vârstei, precum Codul pentru Copii al Regatului Unit, stabilesc standarde internaționale pentru modul în care platformele trebuie să trateze utilizatorii tineri. Aceste reglementări impun setări implicite prietenoase pentru copii, minimizarea datelor și interzicerea modelelor de design manipulative care vizează copiii.'] },
+        ],
+      },
+      {
+        id: 'career-transitions-learning',
+        title: 'Tranziții de Carieră și Învățare Continuă',
+        sections: [
+          { id: 'intro', heading: 'Peisajul Carierei în Evoluție', paragraphs: ['Noțiunea unei singure cariere pe viață a devenit din ce în ce mai rară. Biroul de Statistici a Muncii raportează că persoana medie își schimbă locul de muncă de 12 ori în cursul carierei, mulți făcând tranziții complete de industrie. Pentru profesioniștii de la mijlocul treizecii până la mijlocul patruzecii de ani, schimbările de carieră sunt deosebit de frecvente.', 'Disrupția tehnologică accelerează această tendință. Forumul Economic Mondial estimează că 44% din competențele de bază ale lucrătorilor se vor schimba până în 2027, creând atât urgență, cât și oportunitate pentru profesioniștii dispuși să se recalifice și să se adapteze.'] },
+          { id: 'current-landscape', heading: 'Certificări Online și Micro-Credențiale', paragraphs: ['Platformele de învățare online au democratizat educația profesională. Coursera raportează peste 130 de milioane de cursanți înregistrați, în timp ce LinkedIn Learning oferă peste 21.000 de cursuri predate de experți din industrie. Google, IBM și Meta oferă acum certificate profesionale care pot fi finalizate în trei până la șase luni.', 'Micro-credențialele — certificări scurte și concentrate pe competențe specifice — câștigă recunoaștere în rândul angajatorilor. Un sondaj din 2023 al Societății pentru Managementul Resurselor Umane a constatat că 76% dintre managerii de angajare consideră certificările din industrie echivalente sau mai valoroase decât diplomele tradiționale pentru angajările de la mijlocul carierei.', 'Programele de tip bootcamp în dezvoltare software, știința datelor și design UX promit competențe pregătite pentru carieră în 12 până la 24 de săptămâni. Ratele de finalizare variază considerabil, de la 50% la 92%, iar salariile medii de start pentru absolvenți variază de la 55.000 la 85.000 de dolari, în funcție de domeniu.'] },
+          { id: 'challenges', heading: 'Bariere în Calea Schimbării de Carieră', paragraphs: ['Constrângerile financiare sunt bariera principală pentru tranzițiile de carieră. Costul de oportunitate al recalificării — venituri reduse în perioadele de studiu — descurajează mulți profesioniști de la mijlocul carierei, în special pe cei cu ipoteci, familii și obligații financiare.', 'Discriminarea pe bază de vârstă în angajare rămâne o provocare documentată. Cercetările publicate în Journal of Applied Psychology au constatat că candidații la locuri de muncă peste 40 de ani au primit cu 40% mai puține răspunsuri decât candidații mai tineri cu calificări identice. Această prejudecată este deosebit de acută în domeniile orientate spre tehnologie.', 'Sindromul impostorului însoțește frecvent tranzițiile de carieră. Psihologii notează că profesioniștii realizați care intră într-un domeniu nou experimentează adesea îndoieli de sine sporite, deoarece expertiza acumulată nu se transferă direct și trebuie să adopte o mentalitate de începător.'] },
+          { id: 'strategies', heading: 'Strategii pentru Tranziții de Succes', paragraphs: ['Rolurile de punte — poziții care combină expertiza existentă cu competențe noi — oferă o cale de tranziție cu risc mai scăzut. De exemplu, un profesionist în marketing care se orientează spre știința datelor ar putea ocupa mai întâi un rol de marketing axat pe analiză înainte de a urmări o poziție complet tehnică.', 'Rețeaua profesională rămâne cea mai eficientă strategie de căutare a unui loc de muncă pentru cei care schimbă cariera. Datele LinkedIn arată că 85% din poziții sunt ocupate prin networking, iar cei care schimbă cariera și care realizează interviuri informaționale cu cel puțin 10 profesioniști din domeniul țintă au de două ori mai multe șanse să obțină un rol în șase luni.', 'Construirea unui portofoliu de proiecte relevante, chiar înainte de obținerea unei poziții plătite, demonstrează capabilitatea potențialilor angajatori. Contribuția la proiecte open-source, finalizarea studiilor de caz sau freelancing-ul în noul domeniu oferă dovezi tangibile ale dezvoltării competențelor.'] },
+          { id: 'future-outlook', heading: 'Viitorul Dezvoltării Carierei', paragraphs: ['Platformele de coaching de carieră bazate pe IA apar, analizând competențele, experiența și interesele unui profesionist pentru a recomanda căi de tranziție personalizate. Aceste sisteme pot identifica competențe transferabile pe care indivizii s-ar putea să nu le recunoască în ei înșiși.', 'Programele de recalificare finanțate de angajatori se extind rapid. Amazon s-a angajat la 1,2 miliarde de dolari pentru perfecționarea a 300.000 de angajați până în 2025, în timp ce PwC a investit 3 miliarde de dolari în formarea competențelor digitale. Companiile consideră din ce în ce mai mult recalificarea internă mai rentabilă decât angajarea externă.', 'Ascensiunea carierelor de portofoliu — în care indivizii mențin mai multe roluri part-time, proiecte de freelancing și surse de venit — provoacă modelul tradițional al schimbărilor secvențiale de carieră. Această abordare oferă diversificare și reziliență, dar necesită abilități puternice de auto-management.'] },
+        ],
+      },
+      {
+        id: 'preventive-healthcare',
+        title: 'Sănătate Preventivă și Wellness',
+        sections: [
+          { id: 'intro', heading: 'Argumentul pentru Prevenție', paragraphs: ['Sănătatea preventivă s-a transformat de la controale medicale periodice la o abordare cuprinzătoare care include screening-uri regulate, optimizarea stilului de viață și intervenție timpurie. Centrele pentru Controlul și Prevenirea Bolilor estimează că îngrijirea preventivă ar putea preveni 100.000 de decese anual doar în Statele Unite.', 'Pentru adulții de la mijlocul patruzecii până la mijlocul cincizecii de ani, măsurile preventive devin deosebit de critice. Multe afecțiuni cronice — bolile cardiovasculare, diabetul de tip 2 și anumite tipuri de cancer — se dezvoltă silențios în acest deceniu, făcând detectarea timpurie prin screening potențial salvatoare de vieți.'] },
+          { id: 'current-landscape', heading: 'Screening-uri Esențiale de Sănătate', paragraphs: ['Monitorizarea tensiunii arteriale este recomandată cel puțin anual pentru adulții peste 40 de ani. Asociația Americană a Inimii raportează că 47% dintre adulții cu hipertensiune nu cunosc starea lor. Hipertensiunea necontrolată dublează riscul de atac de cord și crește de patru ori riscul de accident vascular cerebral.', 'Screening-ul pentru cancerul colorectal, recomandat acum începând cu vârsta de 45 de ani de Societatea Americană de Cancer, a redus mortalitatea cu 68% în rândul celor care primesc screening-uri regulate. Opțiunile variază de la teste anuale pe bază de scaun la colonoscopie la fiecare 10 ani.', 'Screening-urile densității osoase și evaluările riscului de diabet devin din ce în ce mai importante în această perioadă de vârstă. Detectarea timpurie a prediabetului, care afectează 96 de milioane de adulți americani, permite intervenții de stil de viață care pot preveni progresia către diabetul de tip 2 în 58% din cazuri.'] },
+          { id: 'challenges', heading: 'Știința Nutriției și Dieta', paragraphs: ['Schimbările metabolice de la mijlocul vieții înseamnă că adulții de patruzeci și cincizeci de ani au nevoie de obicei de 200 de calorii mai puțin zilnic decât aveau la douăzeci de ani, în timp ce cerințele nutriționale pentru calciu, vitamina D și fibre cresc. Aceasta creează o fereastră nutrițională mai îngustă care necesită o alimentație mai intenționată.', 'Dieta mediteraneană, clasată în mod constant ca cel mai bun model alimentar de către cercetătorii medicali, s-a dovedit a reduce evenimentele cardiovasculare cu 30% la adulții cu risc ridicat. Componentele cheie includ uleiul de măsline, peștele, cerealele integrale, leguminoasele și legumele abundente.', 'Cercetarea microbiomului intestinal a dezvăluit că aportul de fibre alimentare se corelează direct cu diversitatea microbiană, care la rândul ei influențează funcția imunitară, nivelurile de inflamație și chiar sănătatea mintală. Adulții care consumă cel puțin 30 de grame de fibre zilnic prezintă rate măsurabil mai scăzute ale markerilor inflamatori.'] },
+          { id: 'strategies', heading: 'Exerciții pentru Longevitate', paragraphs: ['Organizația Mondială a Sănătății recomandă ca adulții cu vârste între 18 și 64 de ani să efectueze cel puțin 150 de minute de activitate aerobică moderată sau 75 de minute de activitate viguroasă pe săptămână. Cu toate acestea, cercetările publicate în JAMA au constatat că adulții care se antrenau de două până la patru ori peste recomandarea minimă aveau rate de mortalitate cu 26 până la 31% mai scăzute.', 'Antrenamentul de rezistență devine din ce în ce mai critic odată cu vârsta. Adulții pierd 3 până la 8% din masa musculară pe deceniu după vârsta de 30 de ani, un proces numit sarcopenie care se accelerează după 50. Antrenamentul regulat de forță de două până la trei ori pe săptămână poate inversa acest declin și îmbunătăți densitatea osoasă.', 'Exercițiile de flexibilitate și echilibru, adesea neglijate, sunt esențiale pentru prevenirea accidentărilor. Căderile sunt principala cauză de deces legat de accidentări pentru adulții peste 65 de ani, iar antrenamentul de echilibru început la vârsta mijlocie reduce riscul de cădere cu până la 40%.'] },
+          { id: 'future-outlook', heading: 'Viitorul Medicinei Preventive', paragraphs: ['Tehnologia portabilă de sănătate a trecut dincolo de numărarea pașilor la monitorizarea continuă a ritmului cardiac, oxigenului din sânge, arhitecturii somnului și chiar a activității electrodermale. Apple Watch a detectat fibrilația atrială la utilizatori care nu erau conștienți de afecțiune, determinând intervenții medicale salvatoare de vieți.', 'Medicina personalizată bazată pe profilarea genetică devine din ce în ce mai accesibilă. Companii precum 23andMe și Color oferă evaluări ale riscului genetic pentru cancere ereditare, afecțiuni cardiovasculare și farmacogenomică — modul în care indivizii metabolizează medicamente specifice.', 'Coaching-ul de sănătate preventivă livrat prin aplicații bazate pe IA oferă planuri nutriționale personalizate, programe de exerciții și îndemnuri comportamentale la o fracțiune din costul coaching-ului tradițional de sănătate. Aceste platforme analizează datele de la dispozitivele portabile pentru a oferi recomandări în timp real.'] },
+        ],
+      },
+      {
+        id: 'sandwich-generation',
+        title: 'Generația Sandwich',
+        sections: [
+          { id: 'intro', heading: 'Prinși Între Două Generații', paragraphs: ['Termenul „generația sandwich" descrie adulții care au grijă simultan de părinții în vârstă și își susțin proprii copii. Conform Pew Research Center, aproximativ 23% dintre adulții din Statele Unite — aproximativ 50 de milioane de oameni — fac parte din generația sandwich, cu cea mai mare concentrare între cei cu vârste de 45 și 54 de ani.', 'Cerințele emoționale și financiare ale îngrijirii duale pot fi copleșitoare. Un studiu al Alianței Naționale pentru Îngrijire a constatat că îngrijitorii din generația sandwich petrec în medie 21 de ore pe săptămână pentru sarcini de îngrijire doar pentru părinții lor, pe lângă responsabilitățile obișnuite de muncă și parenting.'] },
+          { id: 'current-landscape', heading: 'Peisajul Îngrijirii', paragraphs: ['Costurile de îngrijire a persoanelor în vârstă din Statele Unite au o medie de 5.148 de dolari pe lună pentru asistență la domiciliu și 9.034 de dolari pe lună pentru o cameră privată într-un cămin de îngrijire, conform sondajului Genworth privind Costul Îngrijirii. Aceste cheltuieli, adesea neacoperite integral de asigurare, pot epuiza rapid economiile familiei.', 'Simultan, costul creșterii unui copil de la naștere până la 18 ani a ajuns la aproximativ 310.605 dolari, conform Instituției Brookings. Când se combină cu cheltuielile de îngrijire a bătrânilor, familiile din generația sandwich se confruntă cu presiuni financiare care pot totaliza 15.000 până la 25.000 de dolari anual peste bugetele normale ale gospodăriei.', 'Dispersia geografică a familiilor moderne adaugă complexitate. Copiii adulți pot locui la sute sau mii de kilometri de părinții în vârstă, necesitând coordonarea îngrijirii de la distanță. Îngrijirea la distanță, deși facilitată de tehnologie, introduce propriile provocări de monitorizare și răspuns în timp util.'] },
+          { id: 'challenges', heading: 'Impactul Emoțional și Fizic', paragraphs: ['Epuizarea îngrijitorului afectează aproximativ 40% dintre adulții din generația sandwich. Simptomele includ oboseală cronică, anxietate, depresie și un sistem imunitar slăbit. Asociația Americană de Psihologie raportează că îngrijitorii sunt de două ori mai predispuși să dezvolte depresie comparativ cu cei care nu sunt îngrijitori.', 'Inversarea rolurilor — a deveni părinte pentru propriul părinte — este unul dintre cele mai provocatoare aspecte psihologice ale îngrijirii. Adulții se pot lupta cu pierderea independenței părintelui, declinul cognitiv sau schimbările de personalitate cauzate de afecțiuni precum demența.', 'Consecințele la locul de muncă sunt substanțiale. Aproape 60% dintre îngrijitorii din generația sandwich raportează că responsabilitățile de îngrijire le-au afectat negativ carierele, inclusiv promovări ratate, ore reduse sau părăsirea completă a forței de muncă. Femeile suportă o parte disproporționată a acestei poveri.'] },
+          { id: 'strategies', heading: 'Gestionarea Responsabilităților Duale', paragraphs: ['Platformele de coordonare a îngrijirii precum CareZone, Lotsa Helping Hands și CaringBridge ajută familiile să organizeze medicamentele, programările și programele de îngrijire. Aceste instrumente permit mai multor membri ai familiei să împartă responsabilitățile și să rămână informați despre starea unui părinte.', 'Specialiștii în planificare financiară recomandă ca familiile din generația sandwich să stabilească fonduri de urgență separate pentru îngrijirea bătrânilor, să inițieze conversații despre resursele financiare ale părinților în vârstă din timp și să exploreze opțiunile de asigurare de îngrijire pe termen lung înainte de a fi necesare.', 'Beneficiile oferite de angajatori se extind lent pentru a sprijini îngrijitorii. Companii precum Deloitte, Google și Bank of America oferă acum concediu plătit pentru îngrijitori, servicii de urgență pentru îngrijirea bătrânilor și programe de asistență pentru angajați proiectate special pentru îngrijitorii duali.'] },
+          { id: 'future-outlook', heading: 'Sisteme de Sprijin Viitoare', paragraphs: ['Tehnologia casei inteligente pentru îmbătrânirea la domiciliu — inclusiv senzorii de detectare a căderilor, dispensoarele de medicamente cu memento-uri și sistemele de monitorizare video — permite adulților în vârstă să își mențină independența mai mult timp, oferind în același timp copiilor adulți liniște sufletească.', 'Propunerile de politici pentru programe federale de asigurare de îngrijire pe termen lung câștigă impuls politic. Legea CARE, propusă în Congresul SUA, ar stabili un beneficiu public de îngrijire pe termen lung finanțat prin contribuții la salariu, similar cu Securitatea Socială.', 'Aranjamentele de locuire intergenerațională cunosc o renaștere. Locuințele multi-generaționale, care au scăzut de-a lungul secolului al XX-lea, sunt acum tipul de gospodărie cu cea mai rapidă creștere în SUA. Designurile construite special cu intrări separate, bucătărioare și spații de locuit oferă atât proximitate, cât și intimitate.'] },
+        ],
+      },
+      {
+        id: 'retirement-planning',
+        title: 'Planificarea Pensionării și Securitatea Financiară',
+        sections: [
+          { id: 'intro', heading: 'Planificarea pentru o Pensionare Sigură', paragraphs: ['Planificarea pensionării devine din ce în ce mai urgentă pentru adulții cu vârste între 55 și 64 de ani, deoarece acest deceniu reprezintă ultima oportunitate de a face ajustări semnificative la strategiile de economisire și investiții. Institutul de Cercetare a Beneficiilor Angajaților raportează că 40% dintre lucrătorii din această grupă de vârstă au economisit mai puțin de 100.000 de dolari pentru pensionare.', 'Peisajul pensionării s-a schimbat fundamental în ultima generație. Trecerea de la pensii cu beneficii definite la planuri cu contribuții definite precum 401(k) a transferat riscul investițional de la angajatori la indivizi, făcând alfabetizarea financiară mai importantă ca niciodată.'] },
+          { id: 'current-landscape', heading: 'Vehicule de Economisire pentru Pensionare', paragraphs: ['Lucrătorii cu vârsta de 50 de ani și peste pot face contribuții de recuperare la conturile de pensionare: 7.500 de dolari suplimentari anual la planurile 401(k) (pentru un total de 30.500 de dolari în 2024) și 1.000 de dolari suplimentari la Conturile Individuale de Pensionare. Aceste prevederi de recuperare sunt concepute special pentru a ajuta economisitorii întârziați să-și accelereze pregătirea.', 'Beneficiile de Securitate Socială pot fi revendicate începând de la vârsta de 62 de ani, dar fiecare an de amânare până la 70 de ani crește beneficiul lunar cu aproximativ 8%. Pentru un lucrător cu vârsta completă de pensionare de 67 de ani, așteptarea până la 70 rezultă într-un beneficiu lunar cu 24% mai mare decât revendicarea la 67 și cu 77% mai mare decât revendicarea la 62.', 'Conturile de Economii pentru Sănătate (HSA), disponibile celor cu planuri de sănătate cu deductibilitate ridicată, oferă triplu avantaj fiscal: contribuții deductibile fiscal, creștere fără impozit și retrageri fără impozit pentru cheltuieli medicale. După vârsta de 65 de ani, fondurile HSA pot fi utilizate în orice scop fără penalizare, funcționând ca un IRA tradițional.'] },
+          { id: 'challenges', heading: 'Provocări Comune în Planificare', paragraphs: ['Costurile medicale reprezintă cea mai mare incertitudine de cheltuieli în pensionare. Fidelity estimează că un cuplu de 65 de ani care se pensionează în 2024 va avea nevoie de aproximativ 315.000 de dolari pentru a acoperi cheltuielile medicale pe parcursul pensionării, excluzând îngrijirea pe termen lung.', 'Riscul de longevitate — posibilitatea de a supraviețui economiilor — este o preocupare crescândă pe măsură ce speranțele de viață cresc. O persoană de 65 de ani astăzi are o șansă de 50% de a trăi până la 85 de ani și o șansă de 25% de a ajunge la 92. Planificarea pentru o pensionare de 30 de ani a devenit recomandarea standard.', 'Inflația erodează puterea de cumpărare în timp. Chiar și la o rată anuală moderată de inflație de 3%, prețurile se dublează la fiecare 24 de ani. Un venit de pensionare care se simte confortabil la 65 de ani se poate dovedi inadecvat la 80 de ani fără surse de venit ajustate la inflație.'] },
+          { id: 'strategies', heading: 'Strategii pentru Ultimul Deceniu', paragraphs: ['Reechilibrarea portofoliului către o alocare de active mai conservatoare este sfatul tradițional, dar planificatorii financiari recomandă din ce în ce mai mult menținerea unei anumite expuneri la acțiuni pe parcursul pensionării pentru a combate inflația. „Strategia găleților" împarte economiile în alocări pe termen scurt (numerar, obligațiuni), termen mediu și termen lung (acțiuni).', 'Eliminarea datoriilor înainte de pensionare reduce semnificativ cheltuielile lunare. Achitarea ipotecii, a cardurilor de credit și a împrumuturilor auto în timp ce încă se câștigă un salariu creează o bază mai scăzută a venitului necesar la pensionare. Consilierii financiari sugerează țintirea statutului fără datorii până la vârsta de 62 de ani.', 'Pensionarea de probă — luarea unui concediu extins sau a unui sabatical — permite lucrătorilor să-și testeze stilul de viață și bugetul de pensionare înainte de a se angaja. Această practică ajută la identificarea dacă venitul proiectat la pensionare corespunde tiparelor reale de cheltuieli și dezvăluie potențialele probleme de plictiseală sau lipsa unui scop.'] },
+          { id: 'future-outlook', heading: 'Noua Față a Pensionării', paragraphs: ['Modelul tradițional de pensionare completă la 65 de ani cedează locul tranzițiilor treptate. Programele de pensionare în etape, în care lucrătorii reduc orele pe parcursul mai multor ani, sunt oferite de 14% dintre angajatorii mari și ajută la atenuarea ajustării atât financiare, cât și psihologice.', 'Carierele encore — munca cu scop în sectoarele nonprofit, educație sau impact social — atrag pensionarii care caută sens alături de venituri. Organizații precum Encore.org conectează profesioniștii experimentați cu organizații comunitare care beneficiază de expertiza lor.', 'Platformele de tehnologie financiară fac instrumentele sofisticate de planificare a pensionării disponibile pentru toți. Robo-consilierii precum Betterment și Wealthfront oferă gestionare automată a portofoliului de pensionare la comisioane de 0,25% anual, comparativ cu 1% sau mai mult perceput de consilierii financiari tradiționali.'] },
+        ],
+      },
+      {
+        id: 'travel-cultural-exploration',
+        title: 'Călătorii și Explorare Culturală',
+        sections: [
+          { id: 'intro', heading: 'Epoca de Aur a Călătoriilor', paragraphs: ['Adulții cu vârste între 55 și 64 de ani reprezintă segmentul cu cea mai rapidă creștere din industria turismului. Cu copiii din ce în ce mai independenți și anii de venituri maxime oferind flexibilitate financiară, această categorie demografică a cheltuit în medie 6.600 de dolari pe călătorii de agrement în 2023 — cu 35% mai mult decât media generală a adulților.', 'Preferințele de călătorie în această grupă de vârstă se orientează spre experiențe semnificative în detrimentul vacanțelor la resort. Un sondaj din 2024 realizat de AARP a constatat că 85% dintre călătorii din această categorie demografică prioritizează imersiunea culturală, bucătăria locală și întâlnirile autentice în detrimentul cazării de lux.'] },
+          { id: 'current-landscape', heading: 'Călătorii Lente și Experiențe Imersive', paragraphs: ['Călătoria lentă — petrecerea săptămânilor sau lunilor într-o singură destinație în loc de a trece în grabă prin mai multe orașe — a câștigat popularitate în rândul călătorilor experimentați. Această abordare permite o înțelegere culturală mai profundă, reduce impactul asupra mediului și costă adesea mai puțin decât turismul tradițional datorită tarifelor de închiriere pe termen lung.', 'Turismul culinar a devenit un motivator principal pentru selectarea destinației. Asociația Mondială de Turism Alimentar raportează că 53% dintre călătorii de agrement sunt „călători culinari" care participă la tururi gastronomice, cursuri de gătit sau vizite la piețe ca parte esențială a călătoriei lor.', 'Volunturismul, sau turismul de voluntariat, atrage călătorii care doresc să contribuie la comunitățile pe care le vizitează. Organizații precum Habitat for Humanity Global Village și Earthwatch oferă programe structurate în care călătorii participă la proiecte de conservare, construcție sau educație.'] },
+          { id: 'challenges', heading: 'Considerații de Sănătate și Siguranță', paragraphs: ['Asigurarea de călătorie devine din ce în ce mai importantă odată cu vârsta. O analiză din 2023 de Squaremouth a constatat că călătorii cu vârste între 55 și 64 de ani depun cereri de despăgubire la un ritm dublu față de călătorii mai tineri, în principal pentru anularea călătoriei din cauza bolii și îngrijire medicală de urgență. Acoperirea cuprinzătoare costă de obicei între 5 și 8% din costul călătoriei.', 'Gestionarea afecțiunilor cronice de sănătate în timpul călătoriilor necesită planificare în avans. Asociația Internațională pentru Asistență Medicală a Călătorilor menține un director de medici vorbitori de engleză în 90 de țări, iar mulți călători poartă rezumate medicale detaliate și liste de medicamente în limba locală.', 'Recuperarea după jetlag durează mai mult odată cu vârsta, deoarece ritmul circadian al corpului devine mai puțin adaptabil. Cercetătorii somnului recomandă ajustarea programului de somn cu o oră pe zi înainte de călătorie și prioritizarea expunerii la lumina dimineții la destinație pentru a accelera resincronizarea ceasului biologic.'] },
+          { id: 'strategies', heading: 'Planificarea și Bugetarea Călătoriilor', paragraphs: ['Platformele de house-sitting și schimb de locuințe precum TrustedHousesitters și HomeExchange oferă cazare gratuită în schimbul îngrijirii animalelor de companie sau acces reciproc la locuință. Aceste aranjamente pot reduce costurile de călătorie cu 30 până la 50%, oferind în același timp experiențe autentice de cartier.', 'Călătoria în extrasezon — vizitarea destinațiilor chiar înainte sau după perioadele de vârf turistic — oferă economii semnificative și mai puțină aglomerație. Destinațiile europene oferă de obicei prețuri cu 20 până la 40% mai mici în aprilie-mai și septembrie-octombrie comparativ cu lunile de vară.', 'Cardurile de credit cu recompense de călătorie optimizate pentru utilizare internațională pot oferi valoare substanțială. Cardurile fără comisioane de tranzacție în străinătate, acces la lounge-uri de aeroport și beneficii de asigurare de călătorie pot economisi călătorilor experimentați între 1.000 și 3.000 de dolari anual atunci când sunt utilizate strategic.'] },
+          { id: 'future-outlook', heading: 'Viitorul Călătoriilor', paragraphs: ['Certificările de turism sustenabil devin un factor cheie în selecția destinației și a cazării. Programul de certificare al Consiliului Global pentru Turism Sustenabil ajută călătorii să identifice hoteluri și operatori de tururi care îndeplinesc standardele de responsabilitate ecologică și socială.', 'Infrastructura pentru nomazi digitali — spații de co-working, internet fiabil și comunități de expați — face șederea internațională extinsă mai practică. Țări precum Portugalia, Spania și Thailanda au dezvoltat ecosisteme care se adresează specific vizitatorilor pe termen lung care îmbină călătoria cu munca la distanță sau proiecte de pasiune.', 'Ghidurile de călătorie cu realitate augmentată transformă explorarea culturală. Aplicațiile care suprapun imagini istorice, traduceri și informații contextuale pe vederi din lumea reală prin camerele telefoanelor inteligente fac explorarea culturală independentă mai accesibilă și informativă decât tururile ghidate tradiționale.'] },
+        ],
+      },
+      {
+        id: 'staying-connected-tech',
+        title: 'Conectarea prin Tehnologie',
+        sections: [
+          { id: 'intro', heading: 'Tehnologia ca Punte', paragraphs: ['Adoptarea tehnologiei în rândul adulților cu vârsta de 65 de ani și peste s-a accelerat dramatic. Pew Research Center raportează că 75% dintre adulții peste 65 de ani folosesc acum internetul, în creștere de la doar 14% în 2000. Deținerea de smartphone-uri în această categorie demografică a atins 61%, permițând noi forme de comunicare și conexiune socială.', 'Pandemia de COVID-19 a servit drept catalizator pentru adoptarea tehnologiei în rândul adulților mai în vârstă. Vizitele de telemedicină ale seniorilor au crescut cu 340% în 2020, iar platformele de apeluri video precum Zoom au devenit instrumente esențiale pentru menținerea conexiunilor familiale în timpul izolării.'] },
+          { id: 'current-landscape', heading: 'Instrumente și Platforme de Comunicare', paragraphs: ['Apelurile video au devenit metoda preferată de comunicare familială la distanță pentru adulții mai în vârstă. FaceTime, WhatsApp Video și Zoom permit bunicilor să participe la momentele zilnice — ajutor la teme, povești de seară și sărbători — indiferent de distanța geografică.', 'Adoptarea rețelelor sociale în rândul seniorilor este în creștere, Facebook fiind cea mai populară platformă: 50% dintre adulții peste 65 de ani mențin conturi active. Aceste platforme ajută la reducerea izolării, permițând conexiuni cu foști colegi, prieteni din copilărie și grupuri comunitare.', 'Aplicațiile de mesagerie au înlocuit apelurile telefonice tradiționale pentru multe comunicări zilnice. Simplitatea trimiterii de fotografii, mesaje vocale și texte scurte prin WhatsApp sau iMessage a făcut comunicarea asincronă accesibilă utilizatorilor care pot găsi conversațiile telefonice obositoare.'] },
+          { id: 'challenges', heading: 'Bariere în Adoptarea Tehnologiei', paragraphs: ['Provocările fizice, inclusiv acuitatea vizuală redusă, controlul motor fin diminuat și deficiențele de auz, pot face dispozitivele standard dificil de utilizat. Textul de pe ecran prea mic, butoanele care necesită atingere precisă și audio-ul care interferează cu feedback-ul aparatelor auditive sunt frustrări comune.', 'Lacunele de alfabetizare digitală creează vulnerabilitate la escrocherii și dezinformare. Comisia Federală de Comerț raportează că adulții peste 60 de ani au pierdut 3,4 miliarde de dolari din cauza fraudelor în 2023, escrocheriile facilitate de tehnologie — e-mailuri de phishing, apeluri false de suport tehnic și frauda pe rețelele sociale — reprezentând majoritatea cazurilor.', 'Anxietatea tehnologică — teama de a face greșeli ireversibile sau de a „strica" un dispozitiv — împiedică mulți adulți mai în vârstă să exploreze funcții noi. Cercetările arată că 42% dintre seniori evită anumite activități digitale din cauza îngrijorărilor legate de ștergerea accidentală a fișierelor, partajarea informațiilor private sau imposibilitatea de a anula acțiunile.'] },
+          { id: 'strategies', heading: 'Accesibilizarea Tehnologiei', paragraphs: ['Funcțiile de accesibilitate integrate în dispozitivele moderne pot îmbunătăți dramatic utilizabilitatea. iOS și Android oferă mărirea textului, moduri de contrast ridicat, control vocal și ecrane principale simplificate. Activarea acestor funcții transformă un smartphone standard într-un dispozitiv prietenos pentru seniori fără a necesita hardware specializat.', 'Programele comunitare de instruire tehnologică, oferite prin biblioteci, centre pentru seniori și organizații precum OATS (Older Adults Technology Services), oferă instrucțiuni practice într-un mediu de sprijin. Aceste programe obțin evaluări de îmbunătățire a încrederii de 85% în rândul participanților.', 'Protocoalele de suport tehnic familial — desemnarea unui membru al familiei ca „persoana de contact pentru tehnologie" și programarea regulată a apelurilor video pentru rezolvarea problemelor — ajută la eliminarea decalajului de suport. Asistența răbdătoare, fără judecată, încurajează explorarea și construiește încrederea.'] },
+          { id: 'future-outlook', heading: 'Viitorul Tehnologiei pentru Seniori', paragraphs: ['Interfețele bazate pe voce precum Amazon Alexa și Google Home sunt deosebit de promițătoare pentru adulții mai în vârstă. Aceste dispozitive permit comunicare hands-free, memento-uri pentru medicamente, divertisment și controlul casei inteligente prin vorbire naturală, ocolind provocările ecranelor mici și interfețelor tactile.', 'Tabletele simplificate proiectate special pentru seniori, precum GrandPad și Claris Companion, oferă experiențe curate cu butoane mari, contacte familiale preconfigurate și suport tehnic integrat. Aceste dispozitive reduc complexitatea menținând în același timp funcțiile esențiale de conectivitate.', 'Companionii robotici care combină interacțiunea socială cu monitorizarea sănătății intră pe piața de consum. Dispozitive precum ElliQ angajează utilizatorii în conversație, sugerează activități, facilitează apelurile video și urmăresc tiparele de wellness, abordând atât izolarea socială, cât și nevoile de gestionare a sănătății.'] },
+        ],
+      },
+      {
+        id: 'brain-health-active-aging',
+        title: 'Sănătatea Creierului și Îmbătrânirea Activă',
+        sections: [
+          { id: 'intro', heading: 'Înțelegerea Sănătății Creierului', paragraphs: ['Știința sănătății creierului a avansat dramatic în ultimele decenii. Cercetările publicate în Comisia Lancet privind Demența au constatat că până la 40% din cazurile de demență ar putea fi prevenite sau întârziate prin abordarea a 12 factori de risc modificabili pe parcursul vieții, inclusiv pierderea auzului, izolarea socială, inactivitatea fizică și hipertensiunea.', 'Neuroplasticitatea — capacitatea creierului de a forma noi conexiuni neuronale pe parcursul vieții — contrazice credința depășită că declinul cognitiv este inevitabil odată cu vârsta. Studiile de la Harvard Medical School demonstrează că creierul poate genera noi neuroni în hipocamp, regiunea critică pentru memorie, până în deceniul opt și nouă de viață.'] },
+          { id: 'current-landscape', heading: 'Exercițiu Cognitiv și Stimulare Mintală', paragraphs: ['Programele structurate de antrenament cognitiv au arătat beneficii măsurabile. Studiul ACTIVE, finanțat de Institutul Național pentru Îmbătrânire, a constatat că adulții mai în vârstă care au completat antrenamentul cognitiv au menținut raționament îmbunătățit și viteză de procesare pentru până la 10 ani după intervenție.', 'Învățarea de noi competențe oferă beneficii cognitive mai robuste decât repetarea activităților familiare. Începerea unui instrument muzical, studierea unei limbi străine sau învățarea picturii angajează simultan mai multe rețele cerebrale. Cercetările de la Universitatea din Texas au constatat că adulții cu vârste între 60 și 90 de ani care au învățat fotografia digitală și quilting-ul au arătat îmbunătățiri semnificative ale memoriei.', 'Implicarea socială este un protector cognitiv puternic. Proiectul Rush pentru Memorie și Îmbătrânire a constatat că seniorii activi social au experimentat declin cognitiv la doar un sfert din rata colegilor lor izolați. Participarea regulată la activități de grup — cluburi de carte, organizații de voluntariat, comunități religioase — oferă stimulare mintală continuă.'] },
+          { id: 'challenges', heading: 'Nutriția pentru Sănătatea Creierului', paragraphs: ['Dieta MIND, combinând elemente ale dietelor mediteraneană și DASH, a fost proiectată special pentru a susține sănătatea creierului. Cercetările de la Centrul Medical al Universității Rush au constatat că aderența strictă la dieta MIND a redus riscul de Alzheimer cu 53%, în timp ce chiar și aderența moderată a redus riscul cu 35%.', 'Nutrienții cheie pentru susținerea creierului includ acizii grași omega-3 găsiți în peștele gras, antioxidanții din fructele de pădure și legumele cu frunze verzi, și flavonoidele din ciocolata neagră și ceaiul verde. Creierul consumă 20% din energia corpului deși reprezintă doar 2% din greutatea corporală, făcând calitatea nutrițională deosebit de importantă.', 'Hidratarea este adesea neglijată în discuțiile despre sănătatea creierului. Chiar și deshidratarea ușoară — o scădere de 1 până la 2% a apei corporale — poate afecta atenția, memoria și dispoziția. Adulții mai în vârstă sunt mai susceptibili la deshidratare din cauza senzației diminuate de sete, făcând aportul intențional de lichide esențial.'] },
+          { id: 'strategies', heading: 'Activitatea Fizică și Funcția Cerebrală', paragraphs: ['Exercițiul aerobic crește fluxul sanguin către creier și promovează eliberarea factorului neurotrofic derivat din creier (BDNF), o proteină care susține supraviețuirea și creșterea neuronilor. Un studiu din Proceedings of the National Academy of Sciences a constatat că adulții care au mers pe jos 40 de minute de trei ori pe săptămână timp de un an au crescut volumul hipocampului cu 2%, inversând efectiv unul până la doi ani de declin legat de vârstă.', 'Exercițiile minte-corp, inclusiv tai chi, yoga și qigong, combină mișcarea fizică cu atenția concentrată și respirația. O meta-analiză a 20 de studii a constatat că practicanții de tai chi au arătat o funcție cognitivă semnificativ mai bună, în special în funcția executivă și memorie, comparativ cu non-practicanții.', 'Beneficiile antrenamentului de forță se extind dincolo de mușchi la creier. Un studiu din British Journal of Sports Medicine a constatat că exercițiile de rezistență de două până la trei ori pe săptămână au îmbunătățit atenția, memoria și rezolvarea conflictelor la adulții peste 65 de ani. Beneficiile cognitive au fost proporționale cu câștigurile de forță.'] },
+          { id: 'future-outlook', heading: 'Viitorul Îmbătrânirii Active', paragraphs: ['Instrumentele digitale de evaluare cognitivă permit detectarea mai timpurie a schimbărilor cognitive. Testele pe smartphone care măsoară timpul de reacție, memoria și raționamentul spațial pot detecta schimbări subtile cu ani înainte de apariția simptomelor clinice, permițând intervenția mai timpurie.', 'Stimularea magnetică transcraniană (TMS) și stimularea transcraniană cu curent direct (tDCS) sunt investigate ca metode non-invazive de îmbunătățire a funcției cognitive la adulții mai în vârstă. Studiile clinice timpurii arată îmbunătățiri promițătoare ale memoriei și atenției, deși validarea la scară largă este în curs.', 'Designul comunitar prietenos cu vârsta câștigă impuls la nivel mondial. Rețeaua Globală OMS pentru Orașe și Comunități Prietenoase cu Vârsta include peste 1.400 de membri din 51 de țări. Aceste comunități prioritizează străzi accesibile pietonilor, transport public accesibil, spații de socializare și proximitatea serviciilor medicale — factori de mediu care susțin atât sănătatea fizică, cât și cea cognitivă.'] },
         ],
       },
     ],
   },
 
   taskData: {
-    'climate-technology': [
-      {
-        id: 'ct-find',
-        title: 'Găsiți Informația',
-        instruction:
-          'În ce secțiune este discutată instalația Orca din Islanda? Scrieți titlul secțiunii.',
-      },
-      {
-        id: 'ct-form',
-        title: 'Completați Formularul',
-        instruction:
-          'Pe baza articolului, completați următoarele detalii despre tehnologia climatică.',
-        fields: [
-          { id: 'solar_reduction', label: 'Reducerea costurilor fotovoltaice solare din 2010 (%)' },
-          { id: 'ev_sales', label: 'Vânzări globale de vehicule electrice în 2023 (milioane)' },
-          {
-            id: 'co2_removal',
-            label: 'Eliminarea CO2 necesară până în 2050 (gigatone/an, ex. „6-10")',
-          },
-        ],
-      },
-      {
-        id: 'ct-nav',
-        title: 'Navigați și Interacționați',
-        instruction:
-          'Derulați la secțiunea „Perspective și Provocări Viitoare" și faceți click pe orice buton din zona de test.',
-      },
+    'social-media-mental-health': [
+      { id: 'smh-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutat conceptul de „doomscrolling"? Scrieți titlul secțiunii.' },
+      { id: 'smh-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre rețelele sociale și sănătatea mintală.', fields: [{ id: 'daily_hours', label: 'Ore medii zilnice petrecute de tinerii adulți pe rețelele sociale' }, { id: 'body_image', label: 'Procentul fetelor adolescente care se simt mai rău cu privire la imaginea corporală pe Instagram' }, { id: 'detox_duration', label: 'Durata studiului de detoxifiere de la Universitatea din Bath (săptămâni)' }] },
+      { id: 'smh-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Direcții Viitoare și Politici" și faceți clic pe orice buton din zona de test de interacțiune.' },
     ],
-    'digital-accessibility': [
-      {
-        id: 'da-find',
-        title: 'Găsiți Informația',
-        instruction:
-          "În ce secțiune este menționat cazul Robles vs. Domino's Pizza? Scrieți titlul secțiunii.",
-      },
-      {
-        id: 'da-form',
-        title: 'Completați Formularul',
-        instruction:
-          'Pe baza articolului, completați următoarele detalii de accesibilitate.',
-        fields: [
-          { id: 'wcag_year', label: 'Anul publicării WCAG 2.0' },
-          { id: 'conformance', label: 'Nivelul de conformitate cel mai frecvent cerut' },
-          { id: 'wcag21_criteria', label: 'Numărul de criterii noi în WCAG 2.1' },
-        ],
-      },
-      {
-        id: 'da-nav',
-        title: 'Navigați și Interacționați',
-        instruction:
-          'Derulați la secțiunea „Direcții Viitoare în Accesibilitate" și faceți click pe orice buton din zona de test.',
-      },
+    'gig-economy-freelancing': [
+      { id: 'gef-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este menționată Propoziția 22? Scrieți titlul secțiunii.' },
+      { id: 'gef-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre economia gig.', fields: [{ id: 'freelancer_count', label: 'Freelanceri înregistrați pe Upwork (milioane)' }, { id: 'independent_pct', label: 'Procentul americanilor care se identifică drept lucrători independenți (2024)' }, { id: 'earnings_boost', label: 'Câștiguri suplimentare (%) pentru freelancerii care investesc în certificări' }] },
+      { id: 'gef-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Provocări cu Care Se Confruntă Lucrătorii Gig" și faceți clic pe orice buton din zona de test de interacțiune.' },
     ],
-    'hci-methods': [
-      {
-        id: 'hci-find',
-        title: 'Găsiți Informația',
-        instruction:
-          'În ce secțiune este discutată Legea Hick-Hyman? Scrieți titlul secțiunii.',
-      },
-      {
-        id: 'hci-form',
-        title: 'Completați Formularul',
-        instruction: 'Pe baza articolului, completați următoarele detalii HCI.',
-        fields: [
-          { id: 'sus_items', label: 'Numărul de întrebări din chestionarul SUS' },
-          { id: 'nasa_dimensions', label: 'Numărul de dimensiuni NASA-TLX' },
-          {
-            id: 'evaluators',
-            label: 'Evaluatori recomandați pentru evaluarea euristică (ex. „3-5")',
-          },
-        ],
-      },
-      {
-        id: 'hci-nav',
-        title: 'Navigați și Interacționați',
-        instruction:
-          'Derulați la secțiunea „Provocări Moderne în HCI" și faceți click pe orice buton din zona de test.',
-      },
+    'remote-work-balance': [
+      { id: 'rwb-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutată „părtinirea proximității"? Scrieți titlul secțiunii.' },
+      { id: 'rwb-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre munca la distanță.', fields: [{ id: 'remote_pct', label: 'Procentul zilelor de lucru din SUA efectuate la distanță (2024)' }, { id: 'productivity_gain', label: 'Creșterea productivității angajaților la distanță (studiul Stanford, %)' }, { id: 'want_remote', label: 'Procentul lucrătorilor la distanță care doresc să continue munca la distanță' }] },
+      { id: 'rwb-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Muncii la Distanță" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'sustainable-living-budget': [
+      { id: 'slb-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este menționată aplicația Too Good To Go? Scrieți titlul secțiunii.' },
+      { id: 'slb-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre viața sustenabilă.', fields: [{ id: 'textile_waste', label: 'Deșeuri textile anuale produse de industria modei (milioane tone)' }, { id: 'led_savings', label: 'Economii anuale din trecerea la becuri LED ($)' }, { id: 'food_waste_cost', label: 'Costul mediu anual al risipei alimentare pe familie ($)' }] },
+      { id: 'slb-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Vieții Sustenabile" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'parenting-digital-age': [
+      { id: 'pda-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutată COPPA (Legea privind Protecția Confidențialității Online a Copiilor)? Scrieți titlul secțiunii.' },
+      { id: 'pda-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre parentingul digital.', fields: [{ id: 'teen_screen', label: 'Ore medii zilnice de ecran pentru adolescenți' }, { id: 'cyberbully_pct', label: 'Procentul elevilor cu vârste 12-17 afectați de cyberbullying' }, { id: 'guidelines_pct', label: 'Procentul familiilor care respectă ghidurile OMS privind timpul de ecran' }] },
+      { id: 'pda-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Parentingului Digital" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'career-transitions-learning': [
+      { id: 'ctl-find', title: 'Găsiți Informația', instruction: 'În ce secțiune sunt discutate „rolurile de punte"? Scrieți titlul secțiunii.' },
+      { id: 'ctl-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre tranzițiile de carieră.', fields: [{ id: 'job_changes', label: 'Numărul mediu de schimbări de loc de muncă într-o carieră' }, { id: 'skills_change', label: 'Procentul competențelor lucrătorilor care se vor schimba până în 2027 (FEM)' }, { id: 'networking_pct', label: 'Procentul pozițiilor ocupate prin networking (LinkedIn)' }] },
+      { id: 'ctl-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Dezvoltării Carierei" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'preventive-healthcare': [
+      { id: 'phw-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutată sarcopenia? Scrieți titlul secțiunii.' },
+      { id: 'phw-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre sănătatea preventivă.', fields: [{ id: 'hypertension_pct', label: 'Procentul adulților cu hipertensiune nedetectată' }, { id: 'cvd_reduction', label: 'Reducerea evenimentelor cardiovasculare prin dieta mediteraneană (%)' }, { id: 'colorectal_age', label: 'Vârsta recomandată pentru începerea screening-ului de cancer colorectal' }] },
+      { id: 'phw-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Medicinei Preventive" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'sandwich-generation': [
+      { id: 'sg-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este menționată Legea CARE? Scrieți titlul secțiunii.' },
+      { id: 'sg-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre generația sandwich.', fields: [{ id: 'sandwich_pct', label: 'Procentul adulților din SUA în generația sandwich' }, { id: 'care_hours', label: 'Ore medii săptămânale petrecute pentru îngrijirea părinților' }, { id: 'nursing_cost', label: 'Costul lunar al unei camere private într-un cămin de îngrijire ($)' }] },
+      { id: 'sg-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Gestionarea Responsabilităților Duale" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'retirement-planning': [
+      { id: 'rp-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutată „strategia găleților"? Scrieți titlul secțiunii.' },
+      { id: 'rp-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre planificarea pensionării.', fields: [{ id: 'healthcare_cost', label: 'Costurile estimate de sănătate pentru un cuplu care se pensionează ($)' }, { id: 'ss_increase', label: 'Creșterea anuală a beneficiului de Securitate Socială per an de amânare (%)' }, { id: 'catchup_401k', label: 'Contribuția anuală suplimentară de recuperare pentru 401(k) ($)' }] },
+      { id: 'rp-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Noua Față a Pensionării" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'travel-cultural-exploration': [
+      { id: 'tce-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutat „volunturismul"? Scrieți titlul secțiunii.' },
+      { id: 'tce-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre călătorii.', fields: [{ id: 'travel_spend', label: 'Cheltuieli medii de călătorie de agrement pentru această grupă de vârstă ($)' }, { id: 'culinary_pct', label: 'Procentul călătorilor de agrement care sunt „călători culinari"' }, { id: 'insurance_cost', label: 'Costul tipic al asigurării de călătorie ca procent din costul călătoriei' }] },
+      { id: 'tce-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Călătoriilor" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'staying-connected-tech': [
+      { id: 'sct-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutată anxietatea tehnologică? Scrieți titlul secțiunii.' },
+      { id: 'sct-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre seniori și tehnologie.', fields: [{ id: 'internet_pct', label: 'Procentul adulților peste 65 de ani care folosesc internetul' }, { id: 'fraud_loss', label: 'Suma pierdută din cauza fraudelor de adulții peste 60 de ani în 2023 ($ miliarde)' }, { id: 'telehealth_increase', label: 'Creșterea vizitelor de telemedicină în rândul seniorilor în 2020 (%)' }] },
+      { id: 'sct-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Tehnologiei pentru Seniori" și faceți clic pe orice buton din zona de test de interacțiune.' },
+    ],
+    'brain-health-active-aging': [
+      { id: 'bha-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutată dieta MIND? Scrieți titlul secțiunii.' },
+      { id: 'bha-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre sănătatea creierului.', fields: [{ id: 'dementia_pct', label: 'Procentul cazurilor de demență prevenibile prin abordarea factorilor de risc' }, { id: 'mind_diet_reduction', label: 'Reducerea riscului de Alzheimer cu aderență strictă la dieta MIND (%)' }, { id: 'walking_volume', label: 'Creșterea volumului hipocampului din programul de mers pe jos (%)' }] },
+      { id: 'bha-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Viitorul Îmbătrânirii Active" și faceți clic pe orice buton din zona de test de interacțiune.' },
     ],
   },
 };
