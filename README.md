@@ -1,6 +1,6 @@
 # Adaptive Accessibility System
 
-**Status:** ✅ Complete - Production Ready
+**Status:** Complete - Production Ready
 
 A React + NestJS web application for a Software Engineering Master's thesis investigating whether behaviour-based UI adaptation can improve usability.
 
