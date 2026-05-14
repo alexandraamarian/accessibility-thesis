@@ -334,6 +334,7 @@ export const en = {
         mouseHesitationScore: 'Cursor Hesitation',
         idleSeconds: 'Idle Time',
         readingSpeed: 'Reading Speed',
+        keyboardNavCount: 'Keyboard Navigation',
       },
       signalTooltips: {
         zoomCount: 'Number of Ctrl+Scroll or pinch-to-zoom events in the last 60s. High values suggest the user is struggling to read the text at its current size.',
@@ -345,6 +346,7 @@ export const en = {
         mouseHesitationScore: 'Count of times the cursor paused 3+ seconds over an interactive element in the last 10s. Suggests uncertainty or difficulty deciding.',
         idleSeconds: 'Seconds since the last mouse, keyboard, or scroll interaction. High values mean the user stopped interacting.',
         readingSpeed: 'Estimated words per minute based on visible section time and character count over the last 90s. Low values may indicate reading difficulty.',
+        keyboardNavCount: 'Total Arrow Up/Down, Page Up/Down, Home/End key presses. Indicates keyboard-based navigation preference or reliance.',
       },
     },
     comparison: {

@@ -41,6 +41,9 @@ export interface SignalSnapshot {
   /** Total scroll direction changes */
   totalScrollChanges: number;
 
+  /** Keyboard navigation events (arrow keys, Page Up/Down, Home/End) */
+  keyboardNavCount: number;
+
   /** Unix timestamp when snapshot was computed */
   timestamp: number;
 }
@@ -140,5 +143,6 @@ export const EMPTY_SNAPSHOT: SignalSnapshot = {
   readingSpeed: 0,
   totalTaps: 0,
   totalScrollChanges: 0,
+  keyboardNavCount: 0,
   timestamp: Date.now(),
 };

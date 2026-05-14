@@ -16,6 +16,7 @@ describe('Adaptation Rules', () => {
     readingSpeed: 0,
     totalTaps: 0,
     totalScrollChanges: 0,
+    keyboardNavCount: 0,
     timestamp: Date.now(),
     ...overrides,
   });

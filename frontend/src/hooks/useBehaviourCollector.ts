@@ -88,6 +88,7 @@ export function useBehaviourCollector(
     readingDwellWindow.current.clear();
     dwellSessions.current.clear();
     lastInteraction.current = Date.now();
+    keyboardNavCount.current = 0;
     sectionCharCounts.current = {};
     setSignals(EMPTY_SNAPSHOT);
   }, [sessionId]);
@@ -304,12 +305,19 @@ export function useBehaviourCollector(
     };
   }, [enabled]);
 
-  // 8. KEYBOARD INTERACTION TRACKING (for idle)
+  // 8. KEYBOARD INTERACTION TRACKING (idle + navigation keys)
+  const keyboardNavCount = useRef(0);
+
   useEffect(() => {
     if (!enabled) return;
 
-    const handleKeyDown = () => {
+    const NAV_KEYS = new Set(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End']);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
       lastInteraction.current = Date.now();
+      if (NAV_KEYS.has(e.key)) {
+        keyboardNavCount.current += 1;
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown, { passive: true });
@@ -348,6 +356,7 @@ export function useBehaviourCollector(
         readingSpeed: computeReadingSpeed(readingDwells, sectionCharCounts.current),
         totalTaps: taps.length,
         totalScrollChanges: scrolls.length,
+        keyboardNavCount: keyboardNavCount.current,
         timestamp: now,
       };
 

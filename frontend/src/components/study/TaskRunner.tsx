@@ -64,8 +64,12 @@ export function TaskRunner() {
       />
 
       <div className="mt-8 space-y-8">
-        <Article sections={translatedArticleSet.sections} />
-        <InteractionTestZone />
+        <Article
+          sections={translatedArticleSet.sections}
+          insertAfterSectionId={currentTask.targetSectionId}
+          renderAfterSection={<InteractionTestZone />}
+        />
+        {!currentTask.targetSectionId && <InteractionTestZone />}
       </div>
     </div>
   );

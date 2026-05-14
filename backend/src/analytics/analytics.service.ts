@@ -59,22 +59,37 @@ export class AnalyticsService {
 
       const taskEvents = session.events.filter((e) => e.eventType === 'task_completed');
 
-      // Calculate averages from signal snapshots
-      const avgZoomCount = this.average(signalSnapshots.map((s) => s.zoomCount || 0));
-      const avgMissedTapRate = this.average(signalSnapshots.map((s) => s.missedTapRate || 0));
-      const avgDwellSeconds = this.average(signalSnapshots.map((s) => s.avgDwellSeconds || 0));
-      const avgScrollReversalRate = this.average(
-        signalSnapshots.map((s) => s.scrollReversalRate || 0)
-      );
-      const avgTremorScore = this.average(signalSnapshots.map((s) => s.tremorScore || 0));
-      const avgRageClickCount = this.average(signalSnapshots.map((s) => s.rageClickCount || 0));
-      const avgMouseHesitationScore = this.average(signalSnapshots.map((s) => s.mouseHesitationScore || 0));
-      const avgIdleSeconds = this.average(signalSnapshots.map((s) => s.idleSeconds || 0));
-      const avgReadingSpeed = this.average(signalSnapshots.map((s) => s.readingSpeed || 0));
+      // Calculate averages and maxes from signal snapshots
+      const avg = (arr: number[]) => this.average(arr);
+      const max = (arr: number[]) => arr.length > 0 ? Math.max(...arr) : 0;
+      const last = (arr: number[]) => arr.length > 0 ? arr[arr.length - 1] : 0;
 
-      // Calculate task metrics
-      const avgTaskDuration = this.average(taskEvents.map((e) => e.payload.duration || 0));
+      const zoomCounts = signalSnapshots.map((s) => s.zoomCount || 0);
+      const missedTapRates = signalSnapshots.map((s) => s.missedTapRate || 0);
+      const dwellSecs = signalSnapshots.map((s) => s.avgDwellSeconds || 0);
+      const scrollRevRates = signalSnapshots.map((s) => s.scrollReversalRate || 0);
+      const tremorScores = signalSnapshots.map((s) => s.tremorScore || 0);
+      const rageClicks = signalSnapshots.map((s) => s.rageClickCount || 0);
+      const hesitations = signalSnapshots.map((s) => s.mouseHesitationScore || 0);
+      const idles = signalSnapshots.map((s) => s.idleSeconds || 0);
+      const readingSpeeds = signalSnapshots.map((s) => s.readingSpeed || 0);
+      const keyboardNavCounts = signalSnapshots.map((s) => s.keyboardNavCount || 0);
+      const totalTaps = signalSnapshots.map((s) => s.totalTaps || 0);
+      const totalScrollChanges = signalSnapshots.map((s) => s.totalScrollChanges || 0);
+
+      // Calculate task metrics — overall and per type
+      const avgTaskDuration = avg(taskEvents.map((e) => e.payload.duration || 0));
       const totalErrors = taskEvents.reduce((sum, e) => sum + (e.payload.errors || 0), 0);
+
+      const tasksByType = (type: string) => taskEvents.filter((e) => (e.payload.taskType || e.payload.type) === type);
+      const findTasks = tasksByType('find_answer');
+      const formTasks = tasksByType('form_completion');
+      const navTasks = tasksByType('navigation');
+
+      // Session total duration in seconds
+      const sessionDurationSeconds = session.endedAt
+        ? (new Date(session.endedAt).getTime() - new Date(session.startedAt).getTime()) / 1000
+        : null;
 
       // First adaptation timing
       const firstAdaptation = session.adaptations.length > 0 ? session.adaptations[0] : null;
@@ -116,19 +131,45 @@ export class AnalyticsService {
         nasa_tlx_performance: this.normalizeNasa(session.nasaTlx?.performance, true),
         nasa_tlx_effort: this.normalizeNasa(session.nasaTlx?.effort),
         nasa_tlx_frustration: this.normalizeNasa(session.nasaTlx?.frustration),
+        session_duration_seconds: sessionDurationSeconds,
         adaptation_count: session.adaptations.length,
+        adaptation_rules: session.adaptations.map((a) => a.ruleId).join(';') || null,
         first_adaptation_time: firstAdaptationTime,
-        zoom_count_avg: avgZoomCount,
-        missed_tap_rate_avg: avgMissedTapRate,
-        dwell_seconds_avg: avgDwellSeconds,
-        scroll_reversal_rate_avg: avgScrollReversalRate,
-        tremor_score_avg: avgTremorScore,
-        rage_click_count_avg: avgRageClickCount,
-        mouse_hesitation_score_avg: avgMouseHesitationScore,
-        idle_seconds_avg: avgIdleSeconds,
-        reading_speed_avg: avgReadingSpeed,
+        signal_snapshot_count: signalSnapshots.length,
+        // Signal averages
+        zoom_count_avg: avg(zoomCounts),
+        missed_tap_rate_avg: avg(missedTapRates),
+        dwell_seconds_avg: avg(dwellSecs),
+        scroll_reversal_rate_avg: avg(scrollRevRates),
+        tremor_score_avg: avg(tremorScores),
+        rage_click_count_avg: avg(rageClicks),
+        mouse_hesitation_score_avg: avg(hesitations),
+        idle_seconds_avg: avg(idles),
+        reading_speed_avg: avg(readingSpeeds),
+        keyboard_nav_count_avg: avg(keyboardNavCounts),
+        // Signal maximums (peak difficulty moments)
+        zoom_count_max: max(zoomCounts),
+        missed_tap_rate_max: max(missedTapRates),
+        dwell_seconds_max: max(dwellSecs),
+        scroll_reversal_rate_max: max(scrollRevRates),
+        tremor_score_max: max(tremorScores),
+        rage_click_count_max: max(rageClicks),
+        mouse_hesitation_score_max: max(hesitations),
+        idle_seconds_max: max(idles),
+        reading_speed_min: readingSpeeds.length > 0 ? Math.min(...readingSpeeds.filter((v) => v > 0)) || 0 : 0,
+        // Totals (last snapshot holds cumulative values)
+        total_taps: last(totalTaps),
+        total_scroll_changes: last(totalScrollChanges),
+        keyboard_nav_count_total: last(keyboardNavCounts),
+        // Per-task-type breakdown
         task_duration_avg: avgTaskDuration,
         task_errors_total: totalErrors,
+        find_answer_duration: avg(findTasks.map((e) => e.payload.duration || 0)) || null,
+        find_answer_errors: findTasks.reduce((s, e) => s + (e.payload.errors || 0), 0),
+        form_completion_duration: avg(formTasks.map((e) => e.payload.duration || 0)) || null,
+        form_completion_errors: formTasks.reduce((s, e) => s + (e.payload.errors || 0), 0),
+        navigation_duration: avg(navTasks.map((e) => e.payload.duration || 0)) || null,
+        navigation_errors: navTasks.reduce((s, e) => s + (e.payload.errors || 0), 0),
       };
     });
 

@@ -334,6 +334,7 @@ export const ro = {
         mouseHesitationScore: 'Ezitare Cursor',
         idleSeconds: 'Timp Inactiv',
         readingSpeed: 'Viteză de Citire',
+        keyboardNavCount: 'Navigare cu Tastatura',
       },
       signalTooltips: {
         zoomCount: 'Numărul de evenimente Ctrl+Scroll sau zoom cu degetele în ultimele 60s. Valorile mari sugerează că utilizatorul are dificultăți în a citi textul la dimensiunea curentă.',
@@ -345,6 +346,7 @@ export const ro = {
         mouseHesitationScore: 'De câte ori cursorul a staționat 3+ secunde pe un element interactiv în ultimele 10s. Sugerează incertitudine sau dificultăți de decizie.',
         idleSeconds: 'Secunde de la ultima interacțiune (mouse, tastatură sau derulare). Valorile mari înseamnă că utilizatorul a încetat să interacționeze.',
         readingSpeed: 'Estimare de cuvinte pe minut bazată pe timpul de vizibilitate al secțiunilor și numărul de caractere în ultimele 90s. Valorile scăzute pot indica dificultăți de citire.',
+        keyboardNavCount: 'Total apăsări de taste Arrow Up/Down, Page Up/Down, Home/End. Indică preferința sau dependența de navigarea cu tastatura.',
       },
     },
     comparison: {
@@ -514,7 +516,7 @@ export const ro = {
   taskData: {
     'social-media-mental-health': [
       { id: 'smh-find', title: 'Găsiți Informația', instruction: 'În ce secțiune este discutat conceptul de „doomscrolling"? Scrieți titlul secțiunii.' },
-      { id: 'smh-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre rețelele sociale și sănătatea mintală.', fields: [{ id: 'daily_hours', label: 'Ore medii zilnice petrecute de tinerii adulți pe rețelele sociale' }, { id: 'body_image', label: 'Procentul fetelor adolescente care se simt mai rău cu privire la imaginea corporală pe Instagram' }, { id: 'detox_duration', label: 'Durata studiului de detoxifiere de la Universitatea din Bath (săptămâni)' }] },
+      { id: 'smh-form', title: 'Completați Formularul', instruction: 'Pe baza articolului, completați următoarele detalii despre rețelele sociale și sănătatea mintală.', fields: [{ id: 'daily_hours', label: 'Ore medii zilnice petrecute de tinerii adulți pe rețelele sociale' }, { id: 'body_image', label: 'Procentul fetelor adolescente care se simt mai rău cu privire la imaginea corporală pe Instagram' }, { id: 'detox_duration', label: 'Durata pauzei de la rețelele sociale în studiul Universității din Bath (săptămâni)' }] },
       { id: 'smh-nav', title: 'Navigați și Interacționați', instruction: 'Derulați la secțiunea „Direcții Viitoare și Politici" și faceți clic pe orice buton din zona de test de interacțiune.' },
     ],
     'gig-economy-freelancing': [

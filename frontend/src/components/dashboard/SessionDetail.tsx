@@ -41,6 +41,7 @@ export function SessionDetail({ sessionId, onBack }: SessionDetailProps) {
     { key: 'mouseHesitationScore', label: t('dashboard.sessionDetail.signalLabels.mouseHesitationScore'), tooltip: t('dashboard.sessionDetail.signalTooltips.mouseHesitationScore'), threshold: THRESHOLDS.mouseHesitationScore },
     { key: 'idleSeconds', label: t('dashboard.sessionDetail.signalLabels.idleSeconds'), tooltip: t('dashboard.sessionDetail.signalTooltips.idleSeconds'), threshold: THRESHOLDS.idleSeconds },
     { key: 'readingSpeed', label: t('dashboard.sessionDetail.signalLabels.readingSpeed'), tooltip: t('dashboard.sessionDetail.signalTooltips.readingSpeed'), threshold: THRESHOLDS.readingSpeed },
+    { key: 'keyboardNavCount', label: t('dashboard.sessionDetail.signalLabels.keyboardNavCount'), tooltip: t('dashboard.sessionDetail.signalTooltips.keyboardNavCount'), threshold: 0 },
   ];
 
   return (
