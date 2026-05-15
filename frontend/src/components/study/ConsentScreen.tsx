@@ -84,6 +84,9 @@ export function ConsentScreen() {
 
       dispatch({ type: 'SET_PARTICIPANT', payload: { participantId: trimmedEmail, condition } });
       dispatch({ type: 'SET_SESSION_ID', payload: session.id });
+      if (session.sessionIndex != null) {
+        dispatch({ type: 'SET_SESSION_INDEX', payload: session.sessionIndex });
+      }
       dispatch({ type: 'GIVE_CONSENT' });
       dispatch({ type: 'SET_STEP', payload: 'demographics' });
     } catch {

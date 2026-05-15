@@ -12,16 +12,11 @@ export function SessionSummary() {
   const [checkingNext, setCheckingNext] = useState(true);
   const [startingNext, setStartingNext] = useState(false);
 
-  // End current session and check if next session is available
+  // Session is already ended after NASA-TLX. Just check if next session is available.
   useEffect(() => {
     if (state.sessionId && !ending) {
       setEnding(true);
-      fetch(`/api/sessions/${state.sessionId}/end`, { method: 'PATCH' })
-        .then(() => {
-          studyLogger.log('study_phase_changed', { phase: 'complete' });
-          studyLogger.destroy();
-        })
-        .catch(console.error);
+      studyLogger.destroy();
 
       // Check if this participant can do a second session
       fetch(`/api/sessions?participantId=${encodeURIComponent(state.participantId)}`)

@@ -51,11 +51,15 @@ export function SUSQuestionnaire() {
 
     try {
       if (state.sessionId) {
-        await fetch(`/api/sessions/${state.sessionId}`, {
+        const saveRes = await fetch(`/api/sessions/${state.sessionId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ susScore: score }),
         });
+
+        if (!saveRes.ok) {
+          throw new Error('Failed to save SUS score');
+        }
       }
 
       studyLogger.log('questionnaire_completed', {

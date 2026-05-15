@@ -43,17 +43,26 @@ export function NASATLXQuestionnaire() {
 
     try {
       if (state.sessionId) {
-        await fetch(`/api/sessions/${state.sessionId}`, {
+        const saveRes = await fetch(`/api/sessions/${state.sessionId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nasaTlx }),
         });
+
+        if (!saveRes.ok) {
+          throw new Error('Failed to save NASA-TLX');
+        }
+
+        // End session immediately — all critical data (tasks, SUS, NASA-TLX) is saved.
+        // Feedback is optional; if the user closes before submitting it, we still have complete data.
+        await fetch(`/api/sessions/${state.sessionId}/end`, { method: 'PATCH' });
       }
 
       studyLogger.log('questionnaire_completed', {
         type: 'NASA-TLX',
         responses: nasaTlx,
       });
+      studyLogger.log('study_phase_changed', { phase: 'complete' });
 
       dispatch({ type: 'SET_NASA_TLX', payload: nasaTlx });
       dispatch({ type: 'SET_STEP', payload: 'feedback' });

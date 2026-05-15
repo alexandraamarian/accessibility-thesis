@@ -55,6 +55,7 @@ type StudyAction =
   | { type: 'SET_SUS_RESPONSES'; payload: number[] }
   | { type: 'SET_NASA_TLX'; payload: NasaTlxResponses }
   | { type: 'SET_AGE_GROUP'; payload: AgeGroup }
+  | { type: 'SET_SESSION_INDEX'; payload: 0 | 1 }
   | { type: 'START_NEXT_SESSION'; payload: { sessionId: string; condition: 'adaptive' | 'control' } }
   | { type: 'RESET' };
 
@@ -96,6 +97,8 @@ function studyReducer(state: StudyState, action: StudyAction): StudyState {
       return { ...state, nasaTlxResponses: action.payload };
     case 'SET_AGE_GROUP':
       return { ...state, ageGroup: action.payload };
+    case 'SET_SESSION_INDEX':
+      return { ...state, sessionIndex: action.payload };
     case 'START_NEXT_SESSION':
       return {
         ...initialState,
