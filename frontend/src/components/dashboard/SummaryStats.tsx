@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell, LabelList } from 'recharts';
 
@@ -17,10 +18,46 @@ interface SummaryStatsProps {
 
 export function SummaryStats({ sessions }: SummaryStatsProps) {
   const { t } = useTranslation();
-  const adaptive = sessions.filter((s) => s.condition === 'adaptive');
-  const control = sessions.filter((s) => s.condition === 'control');
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  // Categorize participants
+  const byParticipant = new Map<string, Session[]>();
+  for (const s of sessions) {
+    if (!byParticipant.has(s.participantId)) byParticipant.set(s.participantId, []);
+    byParticipant.get(s.participantId)!.push(s);
+  }
+
+  const completedBothEmails: string[] = [];
+  const incompleteEmails: string[] = [];
+
+  for (const [pid, pSessions] of byParticipant) {
+    const conditions = new Set<string>();
+    let allComplete = true;
+    for (const s of pSessions) {
+      if (s.endedAt && s.susScore != null && s.nasaTlx != null) {
+        conditions.add(s.condition);
+      } else {
+        allComplete = false;
+      }
+    }
+    if (conditions.has('adaptive') && conditions.has('control') && allComplete) {
+      completedBothEmails.push(pid);
+    } else {
+      incompleteEmails.push(pid);
+    }
+  }
+
+  // Only use sessions from participants who completed both for graphs
+  const pairedSessions = sessions.filter((s) => completedBothEmails.includes(s.participantId));
+  const adaptive = pairedSessions.filter((s) => s.condition === 'adaptive');
+  const control = pairedSessions.filter((s) => s.condition === 'control');
 
   const avg = (arr: number[]) => arr.length > 0 ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+  const std = (arr: number[]) => {
+    if (arr.length < 2) return 0;
+    const m = avg(arr);
+    return Math.sqrt(arr.reduce((s, v) => s + (v - m) ** 2, 0) / (arr.length - 1));
+  };
 
   const adaptiveSUS = adaptive.map((s) => s.susScore).filter((v): v is number => v !== null);
   const controlSUS = control.map((s) => s.susScore).filter((v): v is number => v !== null);
@@ -31,9 +68,6 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
   ];
   const SUS_COLORS = ['#38bdf8', '#6b7280'];
 
-  // Normalize NASA-TLX values: old sessions used 0-100, new ones use 1-10.
-  // Values > 10 are from the old scale and are converted to the 1-10 range.
-  // Performance is reverse-scored so that higher = more workload (consistent with other dimensions).
   const normalizeNasa = (v: number, dim?: string) => {
     const normalized = v > 10 ? Math.round(v / 10) : v;
     return dim === 'performance' ? 10 - normalized : normalized;
@@ -56,6 +90,27 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
     };
   });
 
+  // Paired delta per participant (within-subjects)
+  const pairedSusDelta: number[] = [];
+  const pairedNasaDelta: Record<string, number[]> = {};
+  nasaDimensions.forEach((d) => { pairedNasaDelta[d] = []; });
+
+  for (const pid of completedBothEmails) {
+    const pSessions = byParticipant.get(pid)!;
+    const a = pSessions.find((s) => s.condition === 'adaptive');
+    const c = pSessions.find((s) => s.condition === 'control');
+    if (a?.susScore != null && c?.susScore != null) {
+      pairedSusDelta.push(a.susScore - c.susScore);
+    }
+    for (const dim of nasaDimensions) {
+      const aVal = a?.nasaTlx?.[dim];
+      const cVal = c?.nasaTlx?.[dim];
+      if (aVal != null && cVal != null) {
+        pairedNasaDelta[dim].push(normalizeNasa(aVal, dim) - normalizeNasa(cVal, dim));
+      }
+    }
+  }
+
   const handleExportCSV = async () => {
     try {
       const res = await fetch('/api/analytics/export');
@@ -72,6 +127,12 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
     }
   };
 
+  const copyEmails = (emails: string[], key: string) => {
+    navigator.clipboard.writeText(emails.join('\n'));
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2000);
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -84,26 +145,48 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      {/* Overview counts */}
+      <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
           <div className="text-xs opacity-60">{t('dashboard.summaryStats.totalSessions')}</div>
           <div className="text-2xl font-bold text-accent">{sessions.length}</div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">{t('common.adaptive')}</div>
-          <div className="text-2xl font-bold text-accent">{adaptive.length}</div>
+          <div className="text-xs opacity-60">{t('dashboard.summaryStats.uniqueParticipants')}</div>
+          <div className="text-2xl font-bold text-accent">{byParticipant.size}</div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">{t('common.control')}</div>
-          <div className="text-2xl font-bold text-accent">{control.length}</div>
+          <div className="text-xs opacity-60">{t('dashboard.summaryStats.completedBoth')}</div>
+          <div className="text-2xl font-bold text-green-400">{completedBothEmails.length}</div>
         </div>
         <div className="border border-accent border-opacity-20 rounded p-3 text-center">
-          <div className="text-xs opacity-60">{t('dashboard.summaryStats.completed')}</div>
-          <div className="text-2xl font-bold text-accent">
-            {sessions.filter((s) => s.endedAt).length}
-          </div>
+          <div className="text-xs opacity-60">{t('dashboard.summaryStats.incomplete')}</div>
+          <div className="text-2xl font-bold text-yellow-400">{incompleteEmails.length}</div>
         </div>
       </div>
+
+      {/* Copy email buttons */}
+      <div className="flex flex-wrap gap-3 mb-8">
+        <button
+          onClick={() => copyEmails(completedBothEmails, 'completed')}
+          className="px-3 py-2 rounded border border-green-600 text-green-400 text-sm hover:bg-green-900 hover:bg-opacity-20 transition-colors"
+        >
+          {copiedKey === 'completed' ? t('common.copied') : t('dashboard.summaryStats.copyCompleted', { count: completedBothEmails.length })}
+        </button>
+        <button
+          onClick={() => copyEmails(incompleteEmails, 'incomplete')}
+          className="px-3 py-2 rounded border border-yellow-600 text-yellow-400 text-sm hover:bg-yellow-900 hover:bg-opacity-20 transition-colors"
+        >
+          {copiedKey === 'incomplete' ? t('common.copied') : t('dashboard.summaryStats.copyIncomplete', { count: incompleteEmails.length })}
+        </button>
+      </div>
+
+      {/* Note about paired data */}
+      {completedBothEmails.length > 0 && (
+        <p className="text-xs opacity-50 mb-6">
+          {t('dashboard.summaryStats.pairedNote', { count: completedBothEmails.length })}
+        </p>
+      )}
 
       {/* SUS Scores */}
       <div className="mb-8">
@@ -112,7 +195,6 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
           <p className="opacity-50 text-sm">{t('dashboard.summaryStats.noSusScores')}</p>
         ) : (
           <div className="flex gap-8 items-end">
-            {/* Chart */}
             <div style={{ flex: '1 1 auto', height: 280 }}>
               <ResponsiveContainer>
                 <BarChart data={susData} margin={{ top: 30, right: 30, left: 0, bottom: 0 }} barSize={80}>
@@ -132,21 +214,23 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            {/* Side stats */}
             <div className="flex-shrink-0 space-y-3 pb-4">
-              <div className="border border-accent border-opacity-20 rounded-lg p-3 text-center min-w-[120px]">
+              <div className="border border-accent border-opacity-20 rounded-lg p-3 text-center min-w-[140px]">
                 <div className="text-xs opacity-50 mb-1">Adaptive (n={adaptiveSUS.length})</div>
                 <div className="text-2xl font-bold text-accent">{avg(adaptiveSUS).toFixed(1)}</div>
+                <div className="text-xs opacity-40">SD: {std(adaptiveSUS).toFixed(1)}</div>
               </div>
-              <div className="border border-gray-600 border-opacity-30 rounded-lg p-3 text-center min-w-[120px]">
+              <div className="border border-gray-600 border-opacity-30 rounded-lg p-3 text-center min-w-[140px]">
                 <div className="text-xs opacity-50 mb-1">Control (n={controlSUS.length})</div>
                 <div className="text-2xl font-bold text-gray-400">{avg(controlSUS).toFixed(1)}</div>
+                <div className="text-xs opacity-40">SD: {std(controlSUS).toFixed(1)}</div>
               </div>
-              <div className="border border-yellow-600 border-opacity-30 rounded-lg p-3 text-center min-w-[120px] bg-yellow-900 bg-opacity-10">
-                <div className="text-xs opacity-50 mb-1">Delta</div>
-                <div className={`text-lg font-bold ${avg(adaptiveSUS) - avg(controlSUS) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                  {avg(adaptiveSUS) - avg(controlSUS) >= 0 ? '+' : ''}{(avg(adaptiveSUS) - avg(controlSUS)).toFixed(1)}
+              <div className="border border-yellow-600 border-opacity-30 rounded-lg p-3 text-center min-w-[140px] bg-yellow-900 bg-opacity-10">
+                <div className="text-xs opacity-50 mb-1">{t('dashboard.summaryStats.pairedDelta')}</div>
+                <div className={`text-lg font-bold ${avg(pairedSusDelta) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {avg(pairedSusDelta) >= 0 ? '+' : ''}{avg(pairedSusDelta).toFixed(1)}
                 </div>
+                <div className="text-xs opacity-40">SD: {std(pairedSusDelta).toFixed(1)}</div>
               </div>
             </div>
           </div>
@@ -181,6 +265,54 @@ export function SummaryStats({ sessions }: SummaryStatsProps) {
           </div>
         )}
       </div>
+
+      {/* Paired NASA-TLX delta table */}
+      {pairedSusDelta.length > 0 && (
+        <div className="mb-8">
+          <h3 className="font-semibold text-accent mb-3">{t('dashboard.summaryStats.pairedNasaDelta')}</h3>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-accent border-opacity-30">
+                <th className="text-left p-2">{t('dashboard.summaryStats.dimension')}</th>
+                <th className="text-right p-2">Adaptive</th>
+                <th className="text-right p-2">Control</th>
+                <th className="text-right p-2">Delta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {nasaDimensions.map((dim) => {
+                const aVals = adaptive
+                  .map((s) => s.nasaTlx?.[dim])
+                  .filter((v): v is number => v != null)
+                  .map((v) => normalizeNasa(v, dim));
+                const cVals = control
+                  .map((s) => s.nasaTlx?.[dim])
+                  .filter((v): v is number => v != null)
+                  .map((v) => normalizeNasa(v, dim));
+                const d = avg(pairedNasaDelta[dim]);
+                return (
+                  <tr key={dim} className="border-b border-gray-800">
+                    <td className="p-2 capitalize">{dim}</td>
+                    <td className="p-2 text-right font-mono text-accent">{avg(aVals).toFixed(1)}</td>
+                    <td className="p-2 text-right font-mono text-gray-400">{avg(cVals).toFixed(1)}</td>
+                    <td className={`p-2 text-right font-mono ${d < 0 ? 'text-green-400' : d > 0 ? 'text-red-400' : ''}`}>
+                      {d >= 0 ? '+' : ''}{d.toFixed(1)}
+                    </td>
+                  </tr>
+                );
+              })}
+              <tr className="border-t-2 border-accent border-opacity-30">
+                <td className="p-2 font-semibold">SUS</td>
+                <td className="p-2 text-right font-mono text-accent">{avg(adaptiveSUS).toFixed(1)}</td>
+                <td className="p-2 text-right font-mono text-gray-400">{avg(controlSUS).toFixed(1)}</td>
+                <td className={`p-2 text-right font-mono font-semibold ${avg(pairedSusDelta) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {avg(pairedSusDelta) >= 0 ? '+' : ''}{avg(pairedSusDelta).toFixed(1)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
