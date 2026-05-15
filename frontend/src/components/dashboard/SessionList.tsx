@@ -35,8 +35,50 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
   const [proficiencyFilter, setProficiencyFilter] = useState('');
   const [sortField, setSortField] = useState<SortField>('startedAt');
   const [sortAsc, setSortAsc] = useState(false);
+  const [completedBothOnly, setCompletedBothOnly] = useState(false);
+  const [incompleteOnly, setIncompleteOnly] = useState(false);
+
+  // Build set of participant IDs who completed both conditions with SUS + NASA-TLX
+  const completedBothParticipants = (() => {
+    const byParticipant = new Map<string, Set<string>>();
+    for (const s of sessions) {
+      if (s.susScore != null && s.nasaTlx != null && s.endedAt) {
+        if (!byParticipant.has(s.participantId)) byParticipant.set(s.participantId, new Set());
+        byParticipant.get(s.participantId)!.add(s.condition);
+      }
+    }
+    const ids = new Set<string>();
+    for (const [pid, conditions] of byParticipant) {
+      if (conditions.has('adaptive') && conditions.has('control')) ids.add(pid);
+    }
+    return ids;
+  })();
+
+  // Build set of participant IDs with incomplete data (only one session, no SUS, or no NASA-TLX)
+  const incompleteParticipants = (() => {
+    const byParticipant = new Map<string, { conditions: Set<string>; allHaveScores: boolean }>();
+    for (const s of sessions) {
+      if (!byParticipant.has(s.participantId)) {
+        byParticipant.set(s.participantId, { conditions: new Set(), allHaveScores: true });
+      }
+      const entry = byParticipant.get(s.participantId)!;
+      entry.conditions.add(s.condition);
+      if (s.susScore == null || s.nasaTlx == null || !s.endedAt) {
+        entry.allHaveScores = false;
+      }
+    }
+    const ids = new Set<string>();
+    for (const [pid, { conditions, allHaveScores }] of byParticipant) {
+      if (!conditions.has('adaptive') || !conditions.has('control') || !allHaveScores) {
+        ids.add(pid);
+      }
+    }
+    return ids;
+  })();
 
   const filtered = sessions.filter((s) => {
+    if (completedBothOnly && !completedBothParticipants.has(s.participantId)) return false;
+    if (incompleteOnly && !incompleteParticipants.has(s.participantId)) return false;
     if (filter && !s.participantId.toLowerCase().includes(filter.toLowerCase())) return false;
     if (conditionFilter && s.condition !== conditionFilter) return false;
     if (ageFilter && s.metadata?.demographics?.ageRange !== ageFilter) return false;
@@ -78,6 +120,26 @@ export function SessionList({ sessions, onSelect }: SessionListProps) {
       <h2 className="text-xl font-bold text-accent mb-4">{t('dashboard.sessionList.heading', { count: sessions.length })}</h2>
 
       <div className="flex flex-wrap gap-4 mb-4">
+        <button
+          onClick={() => { setCompletedBothOnly(!completedBothOnly); setIncompleteOnly(false); }}
+          className={`px-3 py-2 rounded border text-sm font-medium transition-colors ${
+            completedBothOnly
+              ? 'border-accent bg-accent bg-opacity-20 text-accent'
+              : 'border-gray-600 bg-transparent text-inherit opacity-75 hover:opacity-100'
+          }`}
+        >
+          {t('dashboard.sessionList.completedBoth', { count: completedBothParticipants.size })}
+        </button>
+        <button
+          onClick={() => { setIncompleteOnly(!incompleteOnly); setCompletedBothOnly(false); }}
+          className={`px-3 py-2 rounded border text-sm font-medium transition-colors ${
+            incompleteOnly
+              ? 'border-yellow-400 bg-yellow-400 bg-opacity-20 text-yellow-400'
+              : 'border-gray-600 bg-transparent text-inherit opacity-75 hover:opacity-100'
+          }`}
+        >
+          {t('dashboard.sessionList.incomplete', { count: incompleteParticipants.size })}
+        </button>
         <input
           type="text"
           placeholder={t('dashboard.sessionList.filterPlaceholder')}

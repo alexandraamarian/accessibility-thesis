@@ -2,6 +2,8 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Session } from './session.entity';
+import { Event } from '../events/event.entity';
+import { Adaptation } from '../adaptations/adaptation.entity';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 
@@ -9,7 +11,11 @@ import { UpdateSessionDto } from './dto/update-session.dto';
 export class SessionsService {
   constructor(
     @InjectRepository(Session)
-    private sessionsRepository: Repository<Session>
+    private sessionsRepository: Repository<Session>,
+    @InjectRepository(Event)
+    private eventsRepository: Repository<Event>,
+    @InjectRepository(Adaptation)
+    private adaptationsRepository: Repository<Adaptation>,
   ) {}
 
   async create(createSessionDto: CreateSessionDto): Promise<Session> {
@@ -21,7 +27,26 @@ export class SessionsService {
       order: { startedAt: 'ASC' },
     });
 
-    // Enforce max 2 sessions per participant (one per condition)
+    // Check for an incomplete session (no endedAt, or missing SUS/NASA-TLX)
+    const incompleteSession = existingSessions.find(
+      (s) => !s.endedAt || s.susScore == null || s.nasaTlx == null,
+    );
+
+    if (incompleteSession) {
+      // Reset the incomplete session so the participant can redo it
+      await this.eventsRepository.delete({ sessionId: incompleteSession.id });
+      await this.adaptationsRepository.delete({ sessionId: incompleteSession.id });
+
+      incompleteSession.startedAt = new Date();
+      incompleteSession.endedAt = null;
+      incompleteSession.susScore = null;
+      incompleteSession.nasaTlx = null;
+      incompleteSession.metadata = null;
+
+      return this.sessionsRepository.save(incompleteSession);
+    }
+
+    // All existing sessions are complete — enforce max 2
     if (existingSessions.length >= 2) {
       throw new ConflictException(
         'This email has already completed both study sessions. Each participant may only participate twice (once per condition).'
@@ -36,12 +61,13 @@ export class SessionsService {
     const orderGroup = isAdaptiveFirst ? 'adaptive_first' : 'control_first';
 
     // First session gets the first condition, second session gets the other
+    const completedSessions = existingSessions.filter((s) => s.endedAt);
     let condition: 'adaptive' | 'control';
-    if (existingSessions.length === 0) {
+    if (completedSessions.length === 0) {
       condition = isAdaptiveFirst ? 'adaptive' : 'control';
     } else {
-      // Give them the opposite condition from their first session
-      const firstCondition = existingSessions[0].condition;
+      // Give them the opposite condition from their first completed session
+      const firstCondition = completedSessions[0].condition;
       condition = firstCondition === 'adaptive' ? 'control' : 'adaptive';
     }
 

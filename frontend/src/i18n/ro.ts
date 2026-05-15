@@ -297,6 +297,8 @@ export const ro = {
       allAgeRanges: 'Toate grupele de vârstă',
       allDisabilities: 'Toate dizabilitățile',
       allProficiencies: 'Toate nivelurile',
+      completedBoth: 'Ambele completate ({{count}})',
+      incomplete: 'Incomplete ({{count}})',
       noSessions: 'Nu s-au găsit sesiuni.',
     },
     sessionDetail: {

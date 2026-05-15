@@ -105,10 +105,10 @@ function StudyFlowContent() {
       </div>
 
       <header className="max-w-4xl mx-auto px-4 mb-4">
-        <div className="flex items-center justify-between">
-          <div className="flex-1" />
+        <div className="flex items-center justify-between gap-2">
+          <div className="hidden sm:block flex-1" />
           <h1
-            className="font-bold mb-2 text-center adaptive-transition flex-1 whitespace-nowrap"
+            className="font-bold mb-2 text-center adaptive-transition flex-1 min-w-0"
             style={{
               fontSize: 'calc(var(--font-size-base) * 1.75)',
               lineHeight: 'var(--line-height)',
@@ -116,7 +116,7 @@ function StudyFlowContent() {
           >
             {t('study.title')}
           </h1>
-          <div className="flex-1 flex justify-end">
+          <div className="flex-shrink-0 flex justify-end">
             <LanguageSelector />
           </div>
         </div>

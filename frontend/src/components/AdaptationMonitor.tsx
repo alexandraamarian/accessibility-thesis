@@ -63,7 +63,7 @@ export function AdaptationMonitor({ signals, uiState, sessionId }: AdaptationMon
     return (
       <button
         onClick={() => setExpanded(true)}
-        className="fixed bottom-4 right-4 bg-accent text-bg px-4 py-3 rounded-lg shadow-lg hover:opacity-90 transition-opacity font-semibold"
+        className="hidden sm:block fixed bottom-4 right-4 bg-accent text-bg px-4 py-3 rounded-lg shadow-lg hover:opacity-90 transition-opacity font-semibold"
         style={{ padding: 'calc(var(--button-padding) * 0.75)' }}
         aria-label="Open debug panel"
       >

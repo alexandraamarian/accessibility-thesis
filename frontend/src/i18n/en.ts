@@ -297,6 +297,8 @@ export const en = {
       allAgeRanges: 'All age ranges',
       allDisabilities: 'All disabilities',
       allProficiencies: 'All proficiencies',
+      completedBoth: 'Completed both ({{count}})',
+      incomplete: 'Incomplete ({{count}})',
       noSessions: 'No sessions found.',
     },
     sessionDetail: {
